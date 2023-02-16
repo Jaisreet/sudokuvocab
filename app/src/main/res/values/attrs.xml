@@ -2,7 +2,10 @@
 <resources>
     <declare-styleable name="SudokuBoard">
         <attr name="boardColor" format ="color"/>
-
+        <attr name="cellFilledColor" format ="color"/>
+        <attr name="cellHightlightColor" format ="color"/>
+        <attr name="letterColor" format ="color"/>
+        <attr name="letterColorSolve" format ="color"/>
     </declare-styleable>
 
 </resources>

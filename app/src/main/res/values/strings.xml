@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">sudokuapp</string>
+
+    <string name="One">un    </string>
+    <string name="Two">deux  </string>
+    <string name="Three">trois </string>
+    <string name="Four">quatre</string>
+    <string name="Five">cinq  </string>
+    <string name="Six">six   </string>
+    <string name="Seven">sept  </string>
+    <string name="Eight">huit  </string>
+    <string name="Nine">neuf  </string>
+
+
 </resources>
