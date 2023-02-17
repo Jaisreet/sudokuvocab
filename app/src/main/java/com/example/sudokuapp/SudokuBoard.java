@@ -135,20 +135,21 @@ public class SudokuBoard extends View {
         letterPaint.setColor(letterColorSolve);
 
         for(ArrayList<Object> letter : boardFill.getEmptyBoxIndex()){
+
             int r = (int)letter.get(0);
             int c = (int)letter.get(1);
+            if(boardFill.getBoard()[r][c] != 0) {
+                String text = Integer.toString(boardFill.getBoard()[r][c]);
+                float width, height;
 
-            String text = Integer.toString(boardFill.getBoard()[r][c]);
-            float width, height;
+                letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
+                width = letterPaint.measureText(text);
+                height = letterPaintBounds.height();
 
-            letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
-            width = letterPaint.measureText(text);
-            height = letterPaintBounds.height();
-
-            canvas.drawText(text, (c*cellsize)+ ((cellsize-width)/2) ,
-                    (r*cellsize+cellsize) - ((cellsize-height)/2),
-                    letterPaint);
-
+                canvas.drawText(text, (c * cellsize) + ((cellsize - width) / 2),
+                        (r * cellsize + cellsize) - ((cellsize - height) / 2),
+                        letterPaint);
+            }
         }
     }
 

@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoardFill = gameBoard.getBoardFill();
+        gameBoardFill.getEmptyBoxIndexs();
     }
 
     public void BTNOnePress(View view){

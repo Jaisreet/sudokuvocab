@@ -19,7 +19,7 @@
         custom:cellFilledColor="#674ea7"
         custom:cellHightlightColor = "#d9d2e9"
         custom:letterColor="#000000"
-        custom:letterColorSolve="#000000"
+        custom:letterColorSolve="#8fce00"
         custom:layout_constraintHorizontal_bias="0.0"
         custom:layout_constraintStart_toStartOf="parent">
 

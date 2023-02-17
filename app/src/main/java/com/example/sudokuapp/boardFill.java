@@ -33,7 +33,7 @@ public class boardFill {
         emptyBoxIndex = new ArrayList<>();
     }
 
-    private void getEmptyBoxIndexs(){
+    public void getEmptyBoxIndexs(){
         for(int r=0; r<9; r++){
             for(int c= 0; c<9; c++){
                 if(this.board[r][c]==0){
@@ -53,6 +53,11 @@ public class boardFill {
             else{
             }
         }
+    }
+
+
+    public int getNum(){
+        return this.board[this.selected_row-1][this.selected_column-1];
     }
 
     public int[][] getBoard(){
