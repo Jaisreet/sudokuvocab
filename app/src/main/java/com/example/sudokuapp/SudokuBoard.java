@@ -54,11 +54,11 @@ public class SudokuBoard extends View {
 
     @Override
     protected void onMeasure(int width, int height) {
-        super.onMeasure(width, height);
+        super.onMeasure(width, width);
 
         // set the dimension to the min of the height and width
-        int dimension = Math.min(this.getMeasuredWidth(), this.getMeasuredHeight());
-        //int dimension = getMeasuredWidth();
+        //int dimension = Math.min(this.getWidth(), this.getHeight());
+        int dimension = getMeasuredWidth();
 
         cellsize = dimension / 9;
 
@@ -89,7 +89,7 @@ public class SudokuBoard extends View {
 
         colorCell(canvas, boardFill.getSelected_row(), boardFill.getSelected_column());
 
-        canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), boardColorPaint);
+        canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredWidth(), boardColorPaint);
         drawBoard(canvas);
         drawNumbers(canvas);
 
@@ -210,6 +210,5 @@ public class SudokuBoard extends View {
     public boardFill getBoardFill(){
         return this.boardFill;
     }
-
 
 }

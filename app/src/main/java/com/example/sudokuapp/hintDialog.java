@@ -13,9 +13,9 @@ public class hintDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Hint")
                 .setMessage("The translation is:" +
-                        " \n Un is 1 " +
+                        "\n Un is 1 " +
                         "\n Deux is 2 " +
-                        "\n  Trois is Three " +
+                        "\n Trois is Three " +
                         "\n Quatre is 4 " +
                         "\n Cinq is 5" +
                         "\n Six is 6" +
