@@ -139,7 +139,7 @@
         - Visible state: The user is presented with bigger words and the app screen fits the tablet screen.
     <br>
     <img src = "https://i.imgur.com/K08qanI.png" title = "mockup10: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/OepHnYd.png" title = "mockup10: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/kNNiC2O.png" title = "mockup10: imgur.com" height="400"/>
     <br>
 11. As a vocabulary learner taking the bus, I want to use my phone in landscape mode for Sudoku vocabulary practice.
     - TDD Example:
@@ -151,9 +151,9 @@
             - System response: The game is saved and the user can continue playing in landscape mode. They are presented with a bigger font than when they are in portrait mode.
     <br>
     <img src = "https://i.imgur.com/FiSOJ2b.png" title = "mockup11: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/WeP2kkU.png" title = "mockup11: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/dZSB3i7.png" title = "mockup11: imgur.com" height="400"/>
     <br>
-12. As a teacher of elementary and junior high school children, I want scaled versions of Sudoku that use 4x4 nd 6x6 grids.
+12. As a teacher of elementary and junior high school children, I want scaled versions of Sudoku that use 4x4 and 6x6 grids.
     - TDD Example:
         - Visible state: The user is presented with 4 options for the size of the grid: 9x9 (default), 4x4, 6x6, and 12x12 in the settings.
         - User action: The user choose 1 option.
@@ -166,9 +166,9 @@
                 - The application releases a new game, the overall grid should be divided into rectangles of six cells each (2x3).
     <br>
     <img src = "https://i.imgur.com/7fJDQmp.png" title = "mockup12: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/Dy2OhV4.png" title = "mockup12: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/4ytVDaC.png" title = "mockup12: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/bUCH4Ac.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/wlpcHpT.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/NBac6qW.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/zKfcuZi.png" title = "mockup12: imgur.com" height="400"/>
     <br>
 13. AS a vocabulary learner who wants extra challenging mode, I want a 12x12 version of Sudoku to play on my tablet.
     - TDD Example:
@@ -179,7 +179,8 @@
         - System response: The application releases a new game, the overall grid will be divided into rectanglesof 12 cells each (3x4).
     <br>
     <img src = "https://i.imgur.com/7fJDQmp.png" title = "mockup13: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/k0ZDN0j.png" title = "mockup13: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/LraCeFq.png" title = "mockup13: imgur.com" height="400"/>
+    <br>
 
 
 
