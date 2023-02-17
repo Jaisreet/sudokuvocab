@@ -11,5 +11,7 @@
     <string name="Eight">huit  </string>
     <string name="Nine">neuf  </string>
 
+    <string name="name">Sudoku Vocabulary</string>
+
 
 </resources>
