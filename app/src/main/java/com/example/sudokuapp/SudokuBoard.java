@@ -159,7 +159,6 @@ public class SudokuBoard extends View {
     }
 
     private void colorCell(Canvas canvas, int r, int c){
-        if(boardFill.getSelected_column() != -1 && boardFill.getSelected_row() != -1){
             canvas.drawRect((c-1)*cellsize, 0, c*cellsize , cellsize*9,
                     cellHightlightColorPaint );
 
@@ -168,8 +167,6 @@ public class SudokuBoard extends View {
 
             canvas.drawRect((c-1)*cellsize, (r-1)*cellsize, c*cellsize , r*cellsize,
                     cellFillColorPaint );
-
-        }
 
         invalidate();
     }

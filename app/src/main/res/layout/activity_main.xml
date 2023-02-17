@@ -171,6 +171,15 @@
         custom:layout_constraintTop_toBottomOf="@+id/gridLayout2">
 
         <Button
+            android:id="@+id/backbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:insetRight="2dp"
+            android:text="back"
+            custom:layout_constraintBottom_toBottomOf="parent"
+            custom:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
             android:id="@+id/erase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -197,14 +206,6 @@
 
             android:insetRight="2dp"
             android:text="Settings"
-            custom:layout_constraintBottom_toBottomOf="parent"
-            custom:layout_constraintEnd_toEndOf="parent" />
-        <Button
-            android:id="@+id/backbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:insetRight="2dp"
-            android:text="back"
             custom:layout_constraintBottom_toBottomOf="parent"
             custom:layout_constraintEnd_toEndOf="parent" />
 
