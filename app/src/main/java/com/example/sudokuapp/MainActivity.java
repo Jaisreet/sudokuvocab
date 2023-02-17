@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoardFill = gameBoard.getBoardFill();
+        gameBoardFill.getEmptyBoxIndexs();
 
         hint = (Button) findViewById(R.id.hint);
         hint.setOnClickListener(new View.OnClickListener() {
