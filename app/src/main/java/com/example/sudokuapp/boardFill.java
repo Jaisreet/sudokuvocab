@@ -11,6 +11,7 @@ public class boardFill {
     int selected_row;
     int selected_column;
     int[][] input;
+    int [][] flag;
 
     boardFill(){
         selected_column = -1;
@@ -26,8 +27,17 @@ public class boardFill {
                 {9, 0, 8, 0, 0, 7, 0, 5, 3}};
 
         board = new int[9][9];
+        flag = new int[9][9];
         for(int r=0; r<9; r++) {
-            arraycopy(input[r], 0, board[r], 0, 9);
+            for(int c=0;c<9;c++) {
+                board[r][c] = input[r][c];
+                if(board[r][c] != 0){
+                    flag[r][c] = 1;
+                }
+                else{
+                    flag[r][c]=0;
+                }
+            }
         }
 
         emptyBoxIndex = new ArrayList<>();
@@ -47,8 +57,8 @@ public class boardFill {
 
     public void setNumberPos(int num){
         if(this.selected_row != -1 && this.selected_column != -1){
-            if(this.board[this.selected_row-1][this.selected_column-1]== 0){
-                this.board[this.selected_row-1][this.selected_column-1] = num;
+            if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
+                    this.board[this.selected_row - 1][this.selected_column - 1] = num;
             }
             else{
             }
