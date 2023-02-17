@@ -65,7 +65,7 @@ public class boardFill {
 
     public void eraseNumber() {
         if(this.selected_row != -1 && this.selected_column != -1){
-            if(this.board[this.selected_row-1][this.selected_column-1]!= 0){
+            if(this.board[this.selected_row-1][this.selected_column-1]!= 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
                 this.board[this.selected_row-1][this.selected_column-1] = 0;
             }
         }
