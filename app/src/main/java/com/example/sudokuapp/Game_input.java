@@ -11,7 +11,7 @@ public class Game_input {
 
 
 
-    Game_input(){
+    public Game_input(){
         input = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -195,4 +195,5 @@ public class Game_input {
     public int[][] getInput(){
         return this.input;
     }
+
 }
