@@ -1,9 +1,12 @@
 package com.example.sudokuapp;
 
+import java.util.ArrayList;
+
 public class Game_input {
     int[][] input;
+    ArrayList<ArrayList<Object>> emptyBoxIndex;
 
-    Game_input(){
+    public Game_input(){
         input = new int[][]{
                 {0, 0, 1, 7, 0, 0, 5, 0, 9},
                 {5,7,3, 0, 2, 4, 1, 0, 6},
@@ -19,4 +22,5 @@ public class Game_input {
     public int[][] getInput(){
         return this.input;
     }
+
 }

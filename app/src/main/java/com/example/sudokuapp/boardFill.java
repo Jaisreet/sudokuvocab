@@ -5,6 +5,7 @@ import static java.lang.System.*;
 import java.util.ArrayList;
 
 public class boardFill {
+
     int[][] board;
     Game_input input = new Game_input();
     ArrayList<ArrayList<Object>> emptyBoxIndex;
@@ -12,7 +13,7 @@ public class boardFill {
     int selected_column;
     int [][] flag;
 
-    boardFill(){
+    public boardFill(){
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
         selected_row = -1;
@@ -41,13 +42,12 @@ public class boardFill {
         emptyBoxIndex = new ArrayList<>();
     }
 
+    //getting indexes of boxes with 0 (empty boxes)
     public void getEmptyBoxIndexs(){
         for(int r=0; r<9; r++){
             for(int c= 0; c<9; c++){
                 if(this.board[r][c]==0){
-
                     this.emptyBoxIndex.add(new ArrayList<>());
-
                     this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(r);
                     this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(c);
                 }
