@@ -133,8 +133,54 @@
     <img src="https://i.imgur.com/SMzJ2Gm.png" title="mockup9: imgur.com" height="400"/>
     <img src="https://i.imgur.com/wpx8KnS.png" title="mockup9: imgur.com" height="400"/>
     <br>
+10. As a vocabulary learner practicing at home, I want to use my tablet for Sudoku vocabulary practice.
+    - TDD Example:
 
-
+        - Visible state: The user is presented with bigger words and the app screen fits the tablet screen.
+    <br>
+    <img src = "https://i.imgur.com/K08qanI.png" title = "mockup10: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/kNNiC2O.png" title = "mockup10: imgur.com" height="400"/>
+    <br>
+11. As a vocabulary learner taking the bus, I want to use my phone in landscape mode for Sudoku vocabulary practice.
+    - TDD Example:
+        - Scenario 1:
+            - Visible state: The user is presented with a bigger font when they open the app in landscape mode than when their phone is in portrait mode.
+        - Scenario 2:
+            - Visible state: When the user open the app with their phone in portrait mode, they are presented with standard mode of Sudoku.
+            - User action: The user changes to landscape mode.
+            - System response: The game is saved and the user can continue playing in landscape mode. They are presented with a bigger font than when they are in portrait mode.
+    <br>
+    <img src = "https://i.imgur.com/FiSOJ2b.png" title = "mockup11: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/dZSB3i7.png" title = "mockup11: imgur.com" height="400"/>
+    <br>
+12. As a teacher of elementary and junior high school children, I want scaled versions of Sudoku that use 4x4 and 6x6 grids.
+    - TDD Example:
+        - Visible state: The user is presented with 4 options for the size of the grid: 9x9 (default), 4x4, 6x6, and 12x12 in the settings.
+        - User action: The user choose 1 option.
+        - System response: The chosen box next to chosen mode is filled with black and the next game the user starts will have the selected mode applied.
+        - User action: The user starts a new game.
+        - System response: 
+            - Scenario 1: The user chose 4x4 grid.
+                - The application releases a new game, the overall grid id divided into squares of 4 cells each
+            - Scenario 2: The user chose 6x6 grid.
+                - The application releases a new game, the overall grid should be divided into rectangles of six cells each (2x3).
+    <br>
+    <img src = "https://i.imgur.com/7fJDQmp.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/wlpcHpT.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/NBac6qW.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/zKfcuZi.png" title = "mockup12: imgur.com" height="400"/>
+    <br>
+13. AS a vocabulary learner who wants extra challenging mode, I want a 12x12 version of Sudoku to play on my tablet.
+    - TDD Example:
+        - Visible state: The user is presented with 4 options for the size of the grid: 9x9 (default), 4x4, 6x6, and 12x12 in the settings.
+        - User action: The user choose 12x12.
+        - System response: The chosen box next to chosen mode is filled with black and the next game the user starts will have the selected mode applied.
+        - User action: The user starts a new game.
+        - System response: The application releases a new game, the overall grid will be divided into rectanglesof 12 cells each (3x4).
+    <br>
+    <img src = "https://i.imgur.com/7fJDQmp.png" title = "mockup13: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/LraCeFq.png" title = "mockup13: imgur.com" height="400"/>
+    <br>
 
 
 
