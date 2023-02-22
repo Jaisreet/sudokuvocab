@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,13 +11,13 @@
         id="@+id/SudokuBoard"
         android:layout_width="394dp"
         android:layout_height="564dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="116dp"
         android:visibility="visible"
         custom:boardColor="#000000"
         custom:cellFilledColor="#674ea7"
         custom:cellHightlightColor="#d9d2e9"
         custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintHorizontal_bias="0.47"
+        custom:layout_constraintHorizontal_bias="0.0"
         custom:layout_constraintStart_toStartOf="parent"
         custom:layout_constraintTop_toTopOf="parent"
         custom:letterColor="#000000"
@@ -37,7 +36,6 @@
         custom:layout_constraintEnd_toEndOf="parent"
         custom:layout_constraintStart_toStartOf="parent"
         custom:layout_constraintTop_toBottomOf="@+id/sudokuBoard">
-
 
         <Button
             android:id="@+id/button7"
@@ -63,8 +61,7 @@
             android:textSize="20sp"
             custom:layout_constraintBottom_toBottomOf="parent"
             custom:layout_constraintEnd_toEndOf="parent"
-            custom:layout_constraintTop_toBottomOf="@+id/button6"
-            />
+            custom:layout_constraintTop_toBottomOf="@+id/button6" />
 
         <Button
             android:id="@+id/button"
@@ -162,6 +159,7 @@
 
 
     <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:columnCount="4"
@@ -177,6 +175,7 @@
             android:insetLeft="2dp"
             android:insetRight="2dp"
             android:text="Erase"
+            android:drawableLeft="@drawable/erase"
             custom:layout_constraintBottom_toBottomOf="parent"
 
             custom:layout_constraintEnd_toStartOf="@+id/hint" />
@@ -185,38 +184,43 @@
             android:id="@+id/hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
             android:insetRight="2dp"
             android:text="Hint"
+            android:drawableLeft="@drawable/hint"
             custom:layout_constraintBottom_toBottomOf="parent"
             custom:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/settingsbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:insetRight="2dp"
-            android:onClick="settingPage"
-            android:text="Settings"
-            custom:layout_constraintBottom_toBottomOf="parent"
-            custom:layout_constraintEnd_toEndOf="parent" />
-
-
-        <Button
-            android:id="@+id/backbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:insetRight="2dp"
-            android:onClick="backToMain"
-            android:text="back"
-            custom:layout_constraintBottom_toBottomOf="parent"
-            custom:layout_constraintEnd_toEndOf="parent" />
-
 
 
     </GridLayout>
 
+    <ImageView
+        android:id="@+id/settingsbtn"
+        android:layout_width="64dp"
+        android:layout_height="63dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="44dp"
+        android:onClick="settingPage"
+        android:src="@drawable/settings"
+        android:contentDescription="@string/Settings"
+        custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
+        custom:layout_constraintEnd_toEndOf="parent"
+        custom:layout_constraintTop_toTopOf="parent"
+        custom:layout_constraintVertical_bias="1.0" />
 
-
+    <ImageView
+        android:id="@+id/resetbtn"
+        android:layout_width="64dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="52dp"
+        android:onClick="reset"
+        android:src="@drawable/reset"
+        android:contentDescription="Reset"
+        custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
+        custom:layout_constraintEnd_toStartOf="@+id/settingsbtn"
+        custom:layout_constraintHorizontal_bias="0.0"
+        custom:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
