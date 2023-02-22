@@ -2,6 +2,7 @@ package com.example.sudokuapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
                 eraseText();
             }
         });
+    }
+    public void backToMain(View view){
+        Intent intent = new Intent(this, First_page.class);
+        this.startActivity(intent);
+    }
+
+    public void settingPage(View view){
+        Intent intent = new Intent(this, setting_page.class);
+        this.startActivity(intent);
     }
 
     public void BTNOnePress(View view) {
