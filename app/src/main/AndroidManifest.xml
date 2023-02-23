@@ -12,9 +12,6 @@
         android:theme="@style/Theme.Sudokuapp"
         tools:targetApi="31">
         <activity
-            android:name=".setting_page"
-            android:exported="false" />
-        <activity
             android:name=".First_page"
             android:exported="true">
             <intent-filter>

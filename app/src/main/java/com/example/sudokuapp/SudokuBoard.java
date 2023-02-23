@@ -205,6 +205,7 @@ public class SudokuBoard extends View {
     }
 
     public boardFill getBoardFill(){
+
         return this.boardFill;
     }
 
