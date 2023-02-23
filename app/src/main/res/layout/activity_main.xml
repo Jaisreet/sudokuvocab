@@ -196,12 +196,12 @@
     </GridLayout>
 
     <ImageView
-        android:id="@+id/settingsbtn"
+        android:id="@+id/settingsDialog"
         android:layout_width="64dp"
         android:layout_height="63dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="44dp"
-        android:onClick="settingPage"
+        android:onClick="settingDialog"
         android:src="@drawable/settings"
         android:contentDescription="@string/Settings"
         custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"

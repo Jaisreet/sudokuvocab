@@ -2,11 +2,12 @@ package com.example.sudokuapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,8 +21,14 @@ public class MainActivity extends AppCompatActivity {
     private Button erase;
 
     private ImageView reset;
+    private ImageView settingsDialog;
 
-    private ImageButton settings;
+    private settingsDialog dialog;
+
+    private Button resume;
+    private Button settings;
+    private Button newGame;
+    private Button quitGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 openDialog();
             }
         });
+
         erase = (Button) findViewById(R.id.erase);
         erase.setOnClickListener(new View.OnClickListener() {
 
@@ -54,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 reset();
+            }
+        });
+
+
+        settingsDialog = (ImageView) findViewById(R.id.settingsDialog);
+        settingsDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               openSettingDialog();
+               System.out.println("Hello from dialog");
             }
         });
     }
@@ -119,5 +137,10 @@ public class MainActivity extends AppCompatActivity {
     public void openDialog() {
         hintDialog hint = new hintDialog();
         hint.show(getSupportFragmentManager(), "hintDialog");
+    }
+
+    public void openSettingDialog() {
+        settingsDialog settings = new settingsDialog();
+        settings.show(getSupportFragmentManager(), "Settings");
     }
 }
