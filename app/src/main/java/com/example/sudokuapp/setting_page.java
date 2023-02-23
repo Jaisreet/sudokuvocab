@@ -14,6 +14,7 @@ public class setting_page extends AppCompatActivity {
         setContentView(R.layout.activity_setting_page2);
     }
 
+    //go back to the last activity from where setting button was clicked
     public void backToMain(View view) {
         finish();
     }

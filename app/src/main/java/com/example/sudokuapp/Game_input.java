@@ -7,23 +7,14 @@ public class Game_input {
     int[][] solution;
     int N = 9; // length and width of the grid
     int SQRT = 3; // length and width of the diagonal sub-grids
-    int K =  40; // number of elements to be removed
+    int K =  20; // number of elements to be removed
 
 
 
     public Game_input(){
-        input = new int[][]{
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
         solution = new int[9][9];
+        input = new int[9][9];
 
         // 1. Fill the diagonal sub-matrices
         fillDiagonal(input);
@@ -32,7 +23,13 @@ public class Game_input {
         fillRemaining(0, SQRT);
 
         // 3. copy the grid to the solution board before we remove elements
-        gridCopy(input, solution, N);
+        //gridCopy(solution, input, N);
+
+        for(int r =0; r<N;r++){
+            for (int c =0; c<N;c++){
+                solution[r][c] = input[r][c];
+            }
+        }
 
         // 4.
         removeKDigits(input, N, K);

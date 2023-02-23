@@ -20,8 +20,6 @@ public class SudokuBoard extends View {
     private final int cellHightlightColor;
     private final int letterColor;
     private final int letterColorSolve;
-
-    private final int wrongAns;
     private final Paint boardColorPaint = new Paint();
     private final Paint cellFillColorPaint = new Paint();
     private final Paint cellHightlightColorPaint = new Paint();
@@ -29,9 +27,8 @@ public class SudokuBoard extends View {
     private final Rect letterPaintBounds = new Rect();
     private int cellsize;
 
+    Canvas canvas;
     private final boardFill boardFill = new boardFill();
-
-    private final Game_input game_input = new Game_input();
 
     public SudokuBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -41,11 +38,14 @@ public class SudokuBoard extends View {
         try {
             // extract board color from typed array
             boardColor = a.getInteger(R.styleable.SudokuBoard_boardColor, 0);
+            //color for selected cell
             cellFillColor = a.getInteger(R.styleable.SudokuBoard_cellFilledColor, 0);
+            //color for row and column of selected cell
             cellHightlightColor = a.getInteger(R.styleable.SudokuBoard_cellHightlightColor, 0);
+            //color of given board values
             letterColor= a.getInteger(R.styleable.SudokuBoard_letterColor,0 );
+            //colour of user input values
             letterColorSolve = a.getInteger(R.styleable.SudokuBoard_letterColorSolve,0);
-            wrongAns = a.getInteger(R.styleable.SudokuBoard_wrongAns,0);
 
         } finally {
             a.recycle();
@@ -94,6 +94,7 @@ public class SudokuBoard extends View {
         drawNumbers(canvas);
 
     }
+    //checking which cell is clicked/touched
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent (MotionEvent event){
@@ -117,8 +118,9 @@ public class SudokuBoard extends View {
 
     }
 
+    //writing on cell
     private void drawNumbers(Canvas canvas){
-
+        //setting letter size to cell size
         letterPaint.setTextSize(cellsize);
 
         for(int r=0; r<9;r++){
@@ -137,8 +139,9 @@ public class SudokuBoard extends View {
                 }
             }
         }
+        //painting letter to the selected color
         letterPaint.setColor(letterColorSolve);
-
+        //for user input values and user can only input values at indexes stored in emptyboxIndex array
         for(ArrayList<Object> letter : boardFill.getEmptyBoxIndex()){
 
             int r = (int)letter.get(0);
@@ -160,7 +163,7 @@ public class SudokuBoard extends View {
 
 
     }
-
+    //highlight the selected cell and corresponding row and column
     private void colorCell(Canvas canvas, int r, int c){
             canvas.drawRect((c-1)*cellsize, 0, c*cellsize , cellsize*9,
                     cellHightlightColorPaint );
@@ -173,18 +176,20 @@ public class SudokuBoard extends View {
 
         invalidate();
     }
+    //outer thick lines of the sudoku board
     private void DrawThickLine() {
         boardColorPaint.setStyle(Paint.Style.STROKE);
         boardColorPaint.setStrokeWidth(10);
         boardColorPaint.setColor(boardColor);
     }
-
+    //inner thin lines
     private void DrawThinLine() {
         boardColorPaint.setStyle(Paint.Style.STROKE);
         boardColorPaint.setStrokeWidth(5);
         boardColorPaint.setColor(boardColor);
     }
 
+    //drawing sudoku board
     private void drawBoard(Canvas canvas){
         for (int col = 0; col < 10; col++ ) {
             if (col%3 == 0) {

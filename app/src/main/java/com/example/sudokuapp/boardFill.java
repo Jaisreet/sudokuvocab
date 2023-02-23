@@ -13,21 +13,25 @@ public class boardFill {
     int selected_column;
     int [][] flag;
 
+    int[][] solution;
+
     public boardFill(){
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
         selected_row = -1;
         board = new int[9][9];  // main working board
         flag = new int[9][9];   // flag to keep track of pre-filled squares
-
+        solution = new int[9][9];
         // algorithm to move generated board set up into main board
 
         // for every row
         for(int r=0; r<9; r++) {
             // for every colomn
             for(int c=0;c<9;c++) {
+                //copying input to board
                 board[r][c] = input.getInput()[r][c];
-
+                //copying solution of input to solution
+                solution[r][c]=input.getSolution()[r][c];
                 // if the board at that spot is not empty, set the flag to one
                 if(board[r][c] != 0){
                     flag[r][c] = 1;
@@ -54,7 +58,7 @@ public class boardFill {
             }
         }
     }
-
+    //putting the given value (num) to selected cell
     public void setNumberPos(int num){
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
@@ -62,7 +66,7 @@ public class boardFill {
             }
         }
     }
-
+    //erasing the value from the selected cell
     public void eraseNumber() {
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]!= 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
@@ -70,33 +74,42 @@ public class boardFill {
             }
         }
     }
-
+    //returning value at given cell
     public int getNum(){
         return this.board[this.selected_row-1][this.selected_column-1];
     }
 
+    //return the whole board
     public int[][] getBoard(){
         return this.board;
     }
 
+    //returning array with indexes whose value is 0
     public ArrayList<ArrayList<Object>> getEmptyBoxIndex() {
         return this.emptyBoxIndex;
     }
 
+    //returning selected row
     public int getSelected_row(){
         return selected_row;
     }
 
+    //returning selected column
     public int getSelected_column(){
         return selected_column;
     }
 
+    //setting selected row to given value r
     public void setSelected_row(int r){
         selected_row = r;
     }
 
+    //setting selected column to given value c
     public void setSelected_column(int c){
         selected_column = c;
     }
+
+    //returning solution of board
+    public int[][] getSolution(){return this.solution;}
 
 }
