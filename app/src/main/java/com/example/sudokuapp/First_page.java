@@ -19,7 +19,9 @@ public class First_page extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void setting(View view) {
+    public void settingPage(View view) {
+        Intent intent = new Intent(this, setting_page.class);
+        this.startActivity(intent);
 
     }
 

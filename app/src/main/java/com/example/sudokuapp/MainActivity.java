@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import android.graphics.Canvas;
 public class MainActivity extends AppCompatActivity {
 
     private SudokuBoard gameBoard;
@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
         gameBoard.invalidate();
     }
 
+    public void checkSol(View view){
+
+    }
+
     public void eraseText() {
         gameBoardFill.eraseNumber();
     }
@@ -159,32 +163,47 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        /*newgame.setOnClickListener(new View.OnClickListener() {
+
+        newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //do something more here
+                startNewGame();
+
             }
-        }); */
+        });
 
         quitgame.setOnClickListener(new View.OnClickListener() {
             @Override
 
-
             public void onClick(View v) {
                 quit();
+
             }
         });
 
-        /*settings.setOnClickListener(new View.OnClickListener() {
+        settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //do something more here
+                settingPage();
             }
         });
-*/
+
     }
+
+    public void startNewGame(){
+        Intent intent = new Intent(this, MainActivity.class);
+        this.startActivity(intent);
+    }
+
+    public void settingPage() {
+        Intent intent = new Intent(this, setting_page.class);
+        this.startActivity(intent);
+
+    }
+
 
     public void quit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -202,4 +221,5 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
 }

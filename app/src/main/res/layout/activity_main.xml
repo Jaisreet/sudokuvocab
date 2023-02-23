@@ -21,6 +21,7 @@
         custom:layout_constraintStart_toStartOf="parent"
         custom:layout_constraintTop_toTopOf="parent"
         custom:letterColor="#000000"
+        custom:wrongAns="#Ff0000"
         custom:letterColorSolve="#8fce00">
 
     </com.example.sudokuapp.SudokuBoard>
@@ -191,6 +192,13 @@
             android:drawableLeft="@drawable/hint"
             custom:layout_constraintBottom_toBottomOf="parent"
             custom:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkSol"
+            android:text="Check" />
 
 
     </GridLayout>
