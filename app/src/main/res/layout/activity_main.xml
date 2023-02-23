@@ -231,5 +231,15 @@
         custom:layout_constraintHorizontal_bias="0.0"
         custom:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Easy"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        custom:layout_constraintEnd_toStartOf="@+id/settingsDialog"
+        custom:layout_constraintStart_toEndOf="@+id/resetbtn"
+        custom:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
