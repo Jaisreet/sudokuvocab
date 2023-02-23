@@ -13,6 +13,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.graphics.Canvas;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private SudokuBoard gameBoard;
@@ -123,17 +126,20 @@ public class MainActivity extends AppCompatActivity {
         gameBoard.invalidate();
     }
 
-    public void checkSol(View view){
-
-    }
 
     public void eraseText() {
         gameBoardFill.eraseNumber();
     }
 
     public void reset() {
-       boardFill board= new boardFill();
+        for(ArrayList<Object> letter : gameBoardFill.getEmptyBoxIndex()) {
 
+            int r = (int) letter.get(0);
+            int c = (int) letter.get(1);
+            if (gameBoardFill.getBoard()[r][c] != 0) {
+                gameBoardFill.getBoard()[r][c] = 0;
+                }
+        }
     }
     public void openDialog() {
         hintDialog hint = new hintDialog();

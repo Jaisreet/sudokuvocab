@@ -99,10 +99,4 @@ public class boardFill {
         selected_column = c;
     }
 
-    public int checkSol(int r, int c){
-        if(this.board[r][c] != input.getSolution()[r][c]) {
-            return 1;
-        }
-        return 0;
-    }
 }
