@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView reset;
     private ImageView settingsDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,9 +176,10 @@ public class MainActivity extends AppCompatActivity {
 
         quitgame.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
                 quit();
-                //do something more here
+
             }
         });
 
@@ -192,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void startNewGame(){
         Intent intent = new Intent(this, MainActivity.class);
         this.startActivity(intent);
@@ -202,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
 
     }
+
 
     public void quit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
