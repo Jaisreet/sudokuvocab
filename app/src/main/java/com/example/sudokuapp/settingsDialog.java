@@ -3,8 +3,10 @@ package com.example.sudokuapp;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -19,5 +21,7 @@ public class settingsDialog extends AppCompatDialogFragment {
 
         return builder.create();
     }
+
+
 
 }

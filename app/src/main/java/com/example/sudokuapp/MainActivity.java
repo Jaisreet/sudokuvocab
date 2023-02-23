@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import android.graphics.Canvas;
 public class MainActivity extends AppCompatActivity {
 
     private SudokuBoard gameBoard;
@@ -126,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
         gameBoard.invalidate();
     }
 
+    public void checkSol(View view){
+
+    }
+
     public void eraseText() {
         gameBoardFill.eraseNumber();
     }
@@ -143,4 +147,5 @@ public class MainActivity extends AppCompatActivity {
         settingsDialog settings = new settingsDialog();
         settings.show(getSupportFragmentManager(), "Settings");
     }
+
 }

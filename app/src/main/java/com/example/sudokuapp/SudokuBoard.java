@@ -1,21 +1,16 @@
 package com.example.sudokuapp;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 
@@ -25,6 +20,8 @@ public class SudokuBoard extends View {
     private final int cellHightlightColor;
     private final int letterColor;
     private final int letterColorSolve;
+
+    private final int wrongAns;
     private final Paint boardColorPaint = new Paint();
     private final Paint cellFillColorPaint = new Paint();
     private final Paint cellHightlightColorPaint = new Paint();
@@ -48,6 +45,7 @@ public class SudokuBoard extends View {
             cellHightlightColor = a.getInteger(R.styleable.SudokuBoard_cellHightlightColor, 0);
             letterColor= a.getInteger(R.styleable.SudokuBoard_letterColor,0 );
             letterColorSolve = a.getInteger(R.styleable.SudokuBoard_letterColorSolve,0);
+            wrongAns = a.getInteger(R.styleable.SudokuBoard_wrongAns,0);
 
         } finally {
             a.recycle();
@@ -157,7 +155,9 @@ public class SudokuBoard extends View {
                         (r * cellsize + cellsize) - ((cellsize - height) / 2),
                         letterPaint);
             }
+
         }
+
 
     }
 
