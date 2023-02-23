@@ -2,8 +2,10 @@ package com.example.sudokuapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -78,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void backToMain(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+    public void backToMain(){
+        Intent intent = new Intent(this, First_page.class);
         this.startActivity(intent);
     }
 
@@ -179,15 +181,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        /*
+
         quitgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                quit();
                 //do something more here
             }
         });
-*/
+
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,6 +208,23 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, setting_page.class);
         this.startActivity(intent);
 
+    }
+
+    public void quit() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to quit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        backToMain();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 }
