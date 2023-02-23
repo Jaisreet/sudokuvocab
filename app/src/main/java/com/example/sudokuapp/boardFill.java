@@ -71,7 +71,6 @@ public class boardFill {
         }
     }
 
-
     public int getNum(){
         return this.board[this.selected_row-1][this.selected_column-1];
     }

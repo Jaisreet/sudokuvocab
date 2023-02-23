@@ -12,6 +12,7 @@
     <string name="Nine">neuf  </string>
     <string name="Settings">Settings </string>
     <string name="name">Sudoku Vocabulary</string>
-
+    <string name="resume"> Resume</string>
+    <string name="quitgame">Quit Game</string>
 
 </resources>
