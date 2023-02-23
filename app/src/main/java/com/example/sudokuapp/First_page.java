@@ -19,4 +19,8 @@ public class First_page extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    public void setting(View view) {
+
+    }
+
 }

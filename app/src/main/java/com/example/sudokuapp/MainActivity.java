@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.graphics.Canvas;
@@ -74,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                System.out.println("Hello from dialog");
             }
         });
+
+
     }
     public void backToMain(View view){
         Intent intent = new Intent(this, MainActivity.class);
@@ -144,8 +147,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openSettingDialog() {
-        settingsDialog settings = new settingsDialog();
-        settings.show(getSupportFragmentManager(), "Settings");
+        final Dialog dialog = new Dialog(MainActivity.this);
+        // Include dialog.xml file
+        dialog.setContentView(R.layout.settings_dialog);
+        // Set dialog title
+        dialog.setTitle("Settings");
+        // set values for custom dialog components - text, image and button
+        Button resume = (Button) dialog.findViewById(R.id.resume);
+        Button newgame = (Button) dialog.findViewById(R.id.newGameBtn);
+        Button quitgame = (Button) dialog.findViewById(R.id.quitGame);
+        Button settings = (Button) dialog.findViewById(R.id.settingsbtn);
+
+        dialog.show();
+        dialog.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        // if decline button is clicked, close the custom dialog
+        resume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Close dialog
+                dialog.dismiss();
+            }
+        });
+        /*newgame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //do something more here
+            }
+        });
+
+        quitgame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //do something more here
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //do something more here
+            }
+        });
+*/
     }
 
 }
