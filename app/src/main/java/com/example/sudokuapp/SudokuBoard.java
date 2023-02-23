@@ -34,6 +34,8 @@ public class SudokuBoard extends View {
 
     private final boardFill boardFill = new boardFill();
 
+    private final Game_input game_input = new Game_input();
+
     public SudokuBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SudokuBoard,
@@ -156,6 +158,7 @@ public class SudokuBoard extends View {
                         letterPaint);
             }
         }
+
     }
 
     private void colorCell(Canvas canvas, int r, int c){

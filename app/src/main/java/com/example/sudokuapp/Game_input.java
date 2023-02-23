@@ -7,7 +7,7 @@ public class Game_input {
     int[][] solution;
     int N = 9; // length and width of the grid
     int SQRT = 3; // length and width of the diagonal sub-grids
-    int K =  60; // number of elements to be removed
+    int K =  40; // number of elements to be removed
 
 
 
@@ -48,6 +48,10 @@ public class Game_input {
                 arr2[i][j] = arr1[i][j];
             }
         }
+    }
+
+    public int[][] getSolution(){
+        return this.solution;
     }
 
 
