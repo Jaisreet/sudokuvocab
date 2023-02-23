@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         Button resume = (Button) dialog.findViewById(R.id.resume);
         Button newgame = (Button) dialog.findViewById(R.id.newGameBtn);
         Button quitgame = (Button) dialog.findViewById(R.id.quitGame);
-        Button settings = (Button) dialog.findViewById(R.id.settingsbtn);
+        Button settings = (Button) dialog.findViewById(R.id.settingsPage);
 
         dialog.show();
         dialog.getWindow().setSoftInputMode(
@@ -169,14 +169,17 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        /*newgame.setOnClickListener(new View.OnClickListener() {
+
+        newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //do something more here
+                startNewGame();
+
             }
         });
-
+        /*
         quitgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,15 +187,25 @@ public class MainActivity extends AppCompatActivity {
                 //do something more here
             }
         });
-
+*/
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //do something more here
+                settingPage();
             }
         });
-*/
+
+    }
+    public void startNewGame(){
+        Intent intent = new Intent(this, MainActivity.class);
+        this.startActivity(intent);
+    }
+
+    public void settingPage(){
+        Intent intent = new Intent(this, setting_page.class);
+        this.startActivity(intent);
+
     }
 
 }
