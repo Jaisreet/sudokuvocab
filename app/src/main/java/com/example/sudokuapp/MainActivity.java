@@ -2,8 +2,10 @@ package com.example.sudokuapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,13 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView reset;
     private ImageView settingsDialog;
-
-    private settingsDialog dialog;
-
-    private Button resume;
-    private Button settings;
-    private Button newGame;
-    private Button quitGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void backToMain(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+    public void backToMain(){
+        Intent intent = new Intent(this, First_page.class);
         this.startActivity(intent);
     }
 
@@ -152,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         Button resume = (Button) dialog.findViewById(R.id.resume);
         Button newgame = (Button) dialog.findViewById(R.id.newGameBtn);
         Button quitgame = (Button) dialog.findViewById(R.id.quitGame);
-        Button settings = (Button) dialog.findViewById(R.id.settingsbtn);
+        Button settings = (Button) dialog.findViewById(R.id.settingsPage);
 
         dialog.show();
         dialog.getWindow().setSoftInputMode(
@@ -171,17 +166,18 @@ public class MainActivity extends AppCompatActivity {
 
                 //do something more here
             }
-        });
+        }); */
 
         quitgame.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
 
-                //do something more here
+
+            public void onClick(View v) {
+                quit();
             }
         });
 
-        settings.setOnClickListener(new View.OnClickListener() {
+        /*settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -189,5 +185,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
+    }
+
+    public void quit() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to quit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        backToMain();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
