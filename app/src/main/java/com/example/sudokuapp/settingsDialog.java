@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -14,10 +16,10 @@ public class settingsDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-
         builder.setView(inflater.inflate(R.layout.settings_dialog, null));
 
         return builder.create();
     }
+
 
 }
