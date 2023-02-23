@@ -26,12 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView reset;
     private ImageView settingsDialog;
 
-    private settingsDialog dialog;
-
-    private Button resume;
-    private Button settings;
-    private Button newGame;
-    private Button quitGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    public void settingPage(){
+    public void settingPage() {
         Intent intent = new Intent(this, setting_page.class);
         this.startActivity(intent);
 
