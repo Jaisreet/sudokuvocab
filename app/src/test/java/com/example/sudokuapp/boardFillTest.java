@@ -8,52 +8,64 @@ import java.util.ArrayList;
 
 public class boardFillTest {
 
-    boardFill board = new boardFill();
+    boardFill boardFill = new boardFill();
     ArrayList<ArrayList<Object>> emptyBoxIndexBoard;
     ArrayList<ArrayList<Object>> emptyBoxIndexInput;
 
     @Test
-    public void getEmptyBoxIndexs() {
-        emptyBoxIndexBoard = board.emptyBoxIndex;
-        emptyBoxIndexInput = board.emptyBoxIndex;
+    public void getEmptyBoxIndexesTest() {
+        emptyBoxIndexBoard = boardFill.emptyBoxIndex;
+        emptyBoxIndexInput = boardFill.emptyBoxIndex;
 
         assertEquals(emptyBoxIndexBoard, emptyBoxIndexInput);
     }
 
     @Test
-    public void setNumberPos() {
-
+    public void setNumberPosTest() {
+        boardFill.setNumberPos(1);
+        assertEquals(1, boardFill.getBoard()[boardFill.getSelected_row() - 1][boardFill.getSelected_column() - 1]);
     }
 
     @Test
-    public void eraseNumber() {
+    public void eraseNumberTest() {
+        eraseNumberTest();
+        assertEquals(0, boardFill.getBoard()[boardFill.getSelected_row() - 1][boardFill.getSelected_column() - 1]);
     }
 
     @Test
-    public void getNum() {
+    public void getNumTest() {
+        assertEquals(boardFill.getNum(), boardFill.getBoard()[boardFill.getSelected_row() - 1][boardFill.getSelected_column() - 1]);
     }
 
     @Test
-    public void getBoard() {
+    public void getBoardTest() {
+       //assertEquals(boardFill.board, boardFill.getBoard());
     }
 
     @Test
-    public void getEmptyBoxIndex() {
+    public void getEmptyBoxIndexTest() {
+        assertEquals(boardFill.emptyBoxIndex, boardFill.getEmptyBoxIndex());
     }
 
     @Test
-    public void getSelected_row() {
+    public void getSelected_rowTest() {
+        assertEquals(boardFill.selected_row, boardFill.getSelected_row());
     }
 
     @Test
-    public void getSelected_column() {
+    public void getSelected_columnTest() {
+        assertEquals(boardFill.selected_column, boardFill.getSelected_column());
     }
 
     @Test
-    public void setSelected_row() {
+    public void setSelected_rowTest() {
+       boardFill.setSelected_row(1);
+       assertEquals(1, boardFill.getSelected_row());
     }
 
     @Test
-    public void setSelected_column() {
+    public void setSelected_columnTest() {
+        boardFill.setSelected_column(1);
+        assertEquals(1, boardFill.getSelected_column());
     }
 }
