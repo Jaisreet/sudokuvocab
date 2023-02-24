@@ -1,4 +1,4 @@
-package com.example.sudokuapp;
+package Controller;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,7 +12,11 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.example.sudokuapp.R;
+
 import java.util.ArrayList;
+
+import Model.board_GamePlay;
 
 public class drawBoard extends View {
     private final int boardColor;
@@ -29,7 +33,7 @@ public class drawBoard extends View {
     private final Rect letterPaintBounds = new Rect();
     private int cellsize;
 
-    private final board_GamePlay board_GamePlay = new board_GamePlay();
+    private final Model.board_GamePlay board_GamePlay = new board_GamePlay();
 
 
     public drawBoard(Context context, @Nullable AttributeSet attrs) {

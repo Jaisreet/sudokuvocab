@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="View.MainActivity">
 
-    <com.example.sudokuapp.drawBoard
+    <Controller.drawBoard
         android:id="@+id/sudokuBoard"
         id="@+id/SudokuBoard"
         android:layout_width="370dp"
@@ -24,7 +24,7 @@
         custom:letterColorSolve="#8fce00"
         custom:wrongAns="#Ff0000">
 
-    </com.example.sudokuapp.drawBoard>
+    </Controller.drawBoard>
 
     <GridLayout
         android:id="@+id/gridLayout2"

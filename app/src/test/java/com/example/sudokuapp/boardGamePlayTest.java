@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import Model.board_GamePlay;
+
 public class boardGamePlayTest {
 
     board_GamePlay board = new board_GamePlay();

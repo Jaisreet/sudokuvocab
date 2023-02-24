@@ -1,4 +1,4 @@
-package com.example.sudokuapp;
+package View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
@@ -9,7 +9,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.sudokuapp.R;
+
 import java.util.ArrayList;
+
+import Controller.drawBoard;
+import Model.board_GamePlay;
 
 public class MainActivity extends AppCompatActivity {
 

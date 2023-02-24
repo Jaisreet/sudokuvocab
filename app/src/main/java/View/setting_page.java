@@ -1,10 +1,12 @@
-package com.example.sudokuapp;
+package View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.sudokuapp.R;
 
 public class setting_page extends AppCompatActivity {
 

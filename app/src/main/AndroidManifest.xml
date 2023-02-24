@@ -15,10 +15,10 @@
             android:name=".howToPlay"
             android:exported="false" />
         <activity
-            android:name=".setting_page"
+            android:name="View.setting_page"
             android:exported="false" />
         <activity
-            android:name=".First_page"
+            android:name="View.First_page"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="View.MainActivity"
             android:exported="true" />
     </application>
 

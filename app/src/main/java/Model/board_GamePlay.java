@@ -1,4 +1,4 @@
-package com.example.sudokuapp;
+package Model;
 
 import android.content.Context;
 

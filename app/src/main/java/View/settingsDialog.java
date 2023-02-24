@@ -1,4 +1,4 @@
-package com.example.sudokuapp;
+package View;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 
 
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.example.sudokuapp.R;
 
 public class settingsDialog extends AppCompatDialogFragment {
 
