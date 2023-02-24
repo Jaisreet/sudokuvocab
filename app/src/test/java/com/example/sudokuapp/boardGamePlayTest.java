@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class boardFillTest {
+public class boardGamePlayTest {
 
-    boardFill board = new boardFill();
+    board_GamePlay board = new board_GamePlay();
     ArrayList<ArrayList<Object>> emptyBoxIndexBoard;
     ArrayList<ArrayList<Object>> emptyBoxIndexInput;
 

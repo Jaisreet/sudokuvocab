@@ -15,8 +15,11 @@
         android:textStyle="bold"
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button14"
-        tools:layout_editor_absoluteY="3dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="3dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        />
 
     <LinearLayout
         android:id="@+id/SettingsLinear"
@@ -31,29 +34,47 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
+        <!-- to be implemented in iteration 3 -->
         <Switch
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Timer"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            />
 
-        <TextView
+        <!--- commented out for use in iteration 3
+         <TextView
             android:layout_width="match_parent"
             android:layout_height="57dp"
             android:text="@string/howtoplay"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/purple_700"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
 
+           >
+           -->
+
+        <!-- to be implemented in iteration 3 -->
         <TextView
             android:id="@+id/modes"
             android:layout_width="155dp"
             android:layout_height="43dp"
             android:text="@string/modes"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <RadioGroup
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp">
 
             <RadioButton
                 android:id="@+id/english"
@@ -61,26 +82,34 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/english"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                />
 
             <RadioButton
                 android:id="@+id/French"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/french"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                />
         </RadioGroup>
 
+        <!-- to be implemented in iteration 3 -->
         <TextView
             android:id="@+id/levels"
             android:layout_width="388dp"
             android:layout_height="52dp"
             android:text="@string/levels"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
 
         <RadioGroup
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp">
 
             <RadioButton
                 android:id="@+id/easy"
@@ -110,11 +139,14 @@
 
     <Button
         android:id="@+id/button14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:onClick="backToMain"
         android:text="Back"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="3dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

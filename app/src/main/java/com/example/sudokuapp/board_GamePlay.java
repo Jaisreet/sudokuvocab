@@ -1,19 +1,20 @@
 package com.example.sudokuapp;
 
-import static java.lang.System.*;
+import android.content.Context;
 
 import java.util.ArrayList;
 
-public class boardFill {
+public class board_GamePlay {
 
     int[][] board;
-    Game_input input = new Game_input();
+    Board_Generation input = new Board_Generation();
     ArrayList<ArrayList<Object>> emptyBoxIndex;
     int selected_row;
     int selected_column;
     int [][] flag;
+    private Context boardFill;
 
-    public boardFill(){
+    public board_GamePlay(){
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
         selected_row = -1;
@@ -26,7 +27,7 @@ public class boardFill {
         for(int r=0; r<9; r++) {
             // for every colomn
             for(int c=0;c<9;c++) {
-                board[r][c] = input.getInput()[r][c];
+                board[r][c] = input.getArr_gameBoard()[r][c];
 
                 // if the board at that spot is not empty, set the flag to one
                 if(board[r][c] != 0){
@@ -59,8 +60,10 @@ public class boardFill {
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
                     this.board[this.selected_row - 1][this.selected_column - 1] = num;
+
             }
         }
+
     }
 
     public void eraseNumber() {

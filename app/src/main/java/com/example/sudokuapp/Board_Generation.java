@@ -1,18 +1,20 @@
 package com.example.sudokuapp;
 
-import java.util.concurrent.ThreadLocalRandom;
+import android.content.Context;
+import android.widget.Toast;
 
-public class Game_input {
-    int[][] input;
-    int[][] solution;
+public class Board_Generation {
+    private Context Board_Generation;
+    int[][] arr_gameBoard;
+    int[][] arr_solutionBoard;
     int N = 9; // length and width of the grid
     int SQRT = 3; // length and width of the diagonal sub-grids
     int K =  40; // number of elements to be removed
 
 
 
-    public Game_input(){
-        input = new int[][]{
+    public Board_Generation(){
+        arr_gameBoard = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -23,21 +25,36 @@ public class Game_input {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
-        solution = new int[9][9];
+        arr_solutionBoard = new int[9][9];
 
         // 1. Fill the diagonal sub-matrices
-        fillDiagonal(input);
+        fillDiagonal(arr_gameBoard);
 
-        // 2. Fill the remaining cells using reccursion
+        // 2. Fill the remaining cells using recursion
         fillRemaining(0, SQRT);
 
         // 3. copy the grid to the solution board before we remove elements
-        gridCopy(input, solution, N);
+        gridCopy(arr_gameBoard, arr_solutionBoard, N);
 
         // 4.
-        removeKDigits(input, N, K);
+        removeKDigits(arr_gameBoard, N, K);
 
+        // print board
+        printBoard(arr_gameBoard);
+        printBoard(arr_solutionBoard);
 
+    }
+
+    // print board to console
+    void printBoard(int arr[][])
+    {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print("|" + arr[i][j] + "|" );
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
     }
 
     // copy the solution to a separate solution board to check if the user has completed the game
@@ -50,8 +67,8 @@ public class Game_input {
         }
     }
 
-    public int[][] getSolution(){
-        return this.solution;
+    public int[][] getArr_solutionBoard(){
+        return this.arr_solutionBoard;
     }
 
 
@@ -75,7 +92,7 @@ public class Game_input {
     {
         for (int i = 0; i<SQRT; i++)
             for (int j = 0; j<SQRT; j++)
-                if (input[rowStart+i][colStart+j]==num)
+                if (arr_gameBoard[rowStart+i][colStart+j]==num)
                     return false;
 
         return true;
@@ -95,7 +112,7 @@ public class Game_input {
                 }
                 while (!unUsedInBox(row, col, num));
 
-                input[row+i][col+j] = num;
+                arr_gameBoard[row+i][col+j] = num;
             }
         }
     }
@@ -141,11 +158,11 @@ public class Game_input {
         {
             if (CheckIfSafe(i, j, num))
             {
-                input[i][j] = num;
+                arr_gameBoard[i][j] = num;
                 if (fillRemaining(i, j+1))
                     return true;
 
-                input[i][j] = 0;
+                arr_gameBoard[i][j] = 0;
             }
         }
         return false;
@@ -164,7 +181,7 @@ public class Game_input {
     boolean unUsedInRow(int i,int num)
     {
         for (int j = 0; j<N; j++)
-            if (input[i][j] == num)
+            if (arr_gameBoard[i][j] == num)
                 return false;
         return true;
     }
@@ -173,7 +190,7 @@ public class Game_input {
     boolean unUsedInCol(int j,int num)
     {
         for (int i = 0; i<N; i++)
-            if (input[i][j] == num)
+            if (arr_gameBoard[i][j] == num)
                 return false;
         return true;
     }
@@ -196,8 +213,8 @@ public class Game_input {
         }
     }
 
-    public int[][] getInput(){
-        return this.input;
+    public int[][] getArr_gameBoard(){
+        return this.arr_gameBoard;
     }
 
 }

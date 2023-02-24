@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,16 +11,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.graphics.Canvas;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SudokuBoard gameBoard;
-    private boardFill gameBoardFill;
+    private drawBoard gameBoard;
+    private board_GamePlay gameBoardGamePlay;
 
-    private Game_input input;
+    private Board_Generation input;
 
     private Button hint;
     private Button erase;
@@ -35,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gameBoard = findViewById(R.id.sudokuBoard);
-        gameBoardFill = gameBoard.getBoardFill();
-        gameBoardFill.getEmptyBoxIndexs();
+        gameBoardGamePlay = gameBoard.getBoardFill();
+        gameBoardGamePlay.getEmptyBoxIndexs();
 
         hint = (Button) findViewById(R.id.hint);
         hint.setOnClickListener(new View.OnClickListener() {
@@ -82,62 +80,62 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void BTNOnePress(View view) {
-        gameBoardFill.setNumberPos(1);
+        gameBoardGamePlay.setNumberPos(1);
         gameBoard.invalidate();
     }
 
     public void BTNTwoPress(View view) {
-        gameBoardFill.setNumberPos(2);
+        gameBoardGamePlay.setNumberPos(2);
         gameBoard.invalidate();
     }
 
     public void BTNThreePress(View view) {
-        gameBoardFill.setNumberPos(3);
+        gameBoardGamePlay.setNumberPos(3);
         gameBoard.invalidate();
     }
 
     public void BTNFourPress(View view) {
-        gameBoardFill.setNumberPos(4);
+        gameBoardGamePlay.setNumberPos(4);
         gameBoard.invalidate();
     }
 
     public void BTNFivePress(View view) {
-        gameBoardFill.setNumberPos(5);
+        gameBoardGamePlay.setNumberPos(5);
         gameBoard.invalidate();
     }
 
     public void BTNSixPress(View view) {
-        gameBoardFill.setNumberPos(6);
+        gameBoardGamePlay.setNumberPos(6);
         gameBoard.invalidate();
     }
 
     public void BTNSevenPress(View view) {
-        gameBoardFill.setNumberPos(7);
+        gameBoardGamePlay.setNumberPos(7);
         gameBoard.invalidate();
     }
 
     public void BTNEightPress(View view) {
-        gameBoardFill.setNumberPos(8);
+        gameBoardGamePlay.setNumberPos(8);
         gameBoard.invalidate();
     }
 
     public void BTNNinePress(View view) {
-        gameBoardFill.setNumberPos(9);
+        gameBoardGamePlay.setNumberPos(9);
         gameBoard.invalidate();
     }
 
 
     public void eraseText() {
-        gameBoardFill.eraseNumber();
+        gameBoardGamePlay.eraseNumber();
     }
 
     public void reset() {
-        for(ArrayList<Object> letter : gameBoardFill.getEmptyBoxIndex()) {
+        for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
 
             int r = (int) letter.get(0);
             int c = (int) letter.get(1);
-            if (gameBoardFill.getBoard()[r][c] != 0) {
-                gameBoardFill.getBoard()[r][c] = 0;
+            if (gameBoardGamePlay.getBoard()[r][c] != 0) {
+                gameBoardGamePlay.getBoard()[r][c] = 0;
                 }
         }
     }
