@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 public class hintDialog extends AppCompatDialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        //hint dialog box for when hint button is pressed
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Hint")
                 .setMessage("The translation is:" +
