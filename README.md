@@ -72,15 +72,13 @@
     <img src="https://i.imgur.com/WRDY5Iw.png" title="mockup4: imgur.com" height="400"/>
     <br>
     
-5. As an intermediate language learner, I want to know when I have finished the puzzle, if my answer is correct or if I have made any errors so that I can fix my mistakes.
-<br> Status: To Be Implemented ⏩
+5. As an intermediate language learner, I want to know if my answer is correct or if I have made any errors so that I can fix my mistakes.
+<br> Status: Complete ✅
+
     - TDD Example:
-        - Visible state: If the user has completed the game and solved the puzzle correctly:
-            - A screen appears, congratulating the user on completing the puzzle correctly with an "okay" button to exit the game.
-        - If the user has completed the game but made mistakes while solving the puzzle:
-            - No pop up box appears indicating the game is not yet finished.
-        - User action: Click the exit button if there’s a pop up box.
-        - System response: Bring the user back to the main menu. 
+        - Visible state: At the bottom of the game screen there is a check button
+        - User action: Click on the check button.
+        - System response: All the incorrect user inputs are erased from the board, while the correct ones remain on the board. 
     
     <br>
     <img src="https://i.imgur.com/wpx8KnS.png" title="mockup5: imgur.com" height="400"/>
