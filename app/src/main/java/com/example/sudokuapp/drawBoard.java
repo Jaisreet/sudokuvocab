@@ -93,6 +93,8 @@ public class drawBoard extends View {
         drawNumbers(canvas);
 
     }
+
+    //figure out which cell is selected on a click and check if its a valid position or not
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent (MotionEvent event){
@@ -115,9 +117,9 @@ public class drawBoard extends View {
         return isVaild;
 
     }
-
+    //to add numbers to the board
     private void drawNumbers(Canvas canvas){
-
+        //size of numbers are set according to the size of cell
         letterPaint.setTextSize(cellsize);
 
         for(int r=0; r<9;r++){
@@ -136,6 +138,8 @@ public class drawBoard extends View {
                 }
             }
         }
+        //paint the number with different colour to show user input
+        //only paint the numbers written in emptyboxIndex with letterColorSolve
         letterPaint.setColor(letterColorSolve);
 
         for(ArrayList<Object> letter : board_GamePlay.getEmptyBoxIndex()){
@@ -160,45 +164,56 @@ public class drawBoard extends View {
 
     }
 
+    //show the selected cell by highlighting it
     private void colorCell(Canvas canvas, int r, int c){
+            //highlight the row and column of selected cell with cellHightlightcolorpaint
             canvas.drawRect((c-1)*cellsize, 0, c*cellsize , cellsize*9,
                     cellHightlightColorPaint );
 
             canvas.drawRect(0, (r-1)*cellsize, cellsize*9 , r*cellsize,
                     cellHightlightColorPaint );
-
+            //highlight the selected cell with cell fill color paint
             canvas.drawRect((c-1)*cellsize, (r-1)*cellsize, c*cellsize , r*cellsize,
                     cellFillColorPaint );
 
         invalidate();
     }
+
+    //to draw outer think lines of sudoku board
     private void DrawThickLine() {
         boardColorPaint.setStyle(Paint.Style.STROKE);
         boardColorPaint.setStrokeWidth(10);
         boardColorPaint.setColor(boardColor);
     }
 
+    //to draw inner thin lines of sudoku board
     private void DrawThinLine() {
         boardColorPaint.setStyle(Paint.Style.STROKE);
         boardColorPaint.setStrokeWidth(5);
         boardColorPaint.setColor(boardColor);
     }
 
+    //draw the sudoku board
     private void drawBoard(Canvas canvas){
+        //columns of board
         for (int col = 0; col < 10; col++ ) {
             if (col%3 == 0) {
+                //outer think lines
                 DrawThickLine();
             } else {
+                //inner thin lines
                 DrawThinLine();
             }
             canvas.drawLine(cellsize * col, 0, cellsize * col,
                     getWidth(),boardColorPaint);
         }
-
+        //rows of board
         for (int row = 0; row < 10; row++ ) {
             if (row%3 == 0) {
+                //outer thick lines
                 DrawThickLine();
             } else {
+                //inner thin lines
                 DrawThinLine();
             }
             canvas.drawLine(0, cellsize * row,getWidth() ,
@@ -206,6 +221,7 @@ public class drawBoard extends View {
         }
     }
 
+    //return the sudoku board
     public board_GamePlay getBoardFill(){
 
         return this.board_GamePlay;

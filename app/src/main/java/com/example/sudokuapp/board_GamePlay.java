@@ -57,6 +57,7 @@ public class board_GamePlay {
         }
     }
 
+    //set the value of selected column to given value (num)
     public void setNumberPos(int num){
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
@@ -66,7 +67,7 @@ public class board_GamePlay {
         }
 
     }
-
+    //set the value of selected column to 0 which is equal to erase
     public void eraseNumber() {
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]!= 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
@@ -74,33 +75,40 @@ public class board_GamePlay {
             }
         }
     }
-
+    //return value of selected cell
     public int getNum(){
         return this.board[this.selected_row-1][this.selected_column-1];
     }
 
+    //return the game board
     public int[][] getBoard(){
         return this.board;
     }
 
+    //return the solution board
     public int[][] getSolutionBoard(){return this.solutionBoard;}
 
+   //return the array indexes of the board which has value 0, that is equivalent to empty box
     public ArrayList<ArrayList<Object>> getEmptyBoxIndex() {
         return this.emptyBoxIndex;
     }
 
+    //return the selected row
     public int getSelected_row(){
         return selected_row;
     }
 
+    //return the selected column
     public int getSelected_column(){
         return selected_column;
     }
 
+    //set the row to given value r
     public void setSelected_row(int r){
         selected_row = r;
     }
 
+    //set the column to given value c
     public void setSelected_column(int c){
         selected_column = c;
     }
