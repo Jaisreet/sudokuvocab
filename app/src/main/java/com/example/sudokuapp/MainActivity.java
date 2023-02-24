@@ -18,12 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     private drawBoard gameBoard;
     private board_GamePlay gameBoardGamePlay;
-
-    private Board_Generation input;
-
     private Button hint;
     private Button erase;
-
+    private Button check;
     private ImageView reset;
     private ImageView settingsDialog;
 
@@ -62,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        check =(Button) findViewById(R.id.checkBtn);
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                check();
+            }
+        });
 
         settingsDialog = (ImageView) findViewById(R.id.settingsDialog);
         settingsDialog.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, First_page.class);
         this.startActivity(intent);
     }
-
 
     public void BTNOnePress(View view) {
         gameBoardGamePlay.setNumberPos(1);
@@ -137,6 +140,17 @@ public class MainActivity extends AppCompatActivity {
             if (gameBoardGamePlay.getBoard()[r][c] != 0) {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
                 }
+        }
+    }
+
+    public void check(){
+        for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
+
+            int r = (int) letter.get(0);
+            int c = (int) letter.get(1);
+            if (gameBoardGamePlay.getBoard()[r][c] != gameBoardGamePlay.getSolutionBoard()[r][c]) {
+                gameBoardGamePlay.getBoard()[r][c] = 0;
+            }
         }
     }
     public void openDialog() {

@@ -14,6 +14,7 @@ public class Board_Generation {
 
 
     public Board_Generation(){
+        /*
         arr_gameBoard = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -24,7 +25,8 @@ public class Board_Generation {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-
+        */
+        arr_gameBoard = new int[9][9];
         arr_solutionBoard = new int[9][9];
 
         // 1. Fill the diagonal sub-matrices

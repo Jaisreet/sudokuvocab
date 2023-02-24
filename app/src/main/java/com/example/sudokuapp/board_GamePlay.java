@@ -12,6 +12,7 @@ public class board_GamePlay {
     int selected_row;
     int selected_column;
     int [][] flag;
+    int[][] solutionBoard;
     private Context boardFill;
 
     public board_GamePlay(){
@@ -20,7 +21,7 @@ public class board_GamePlay {
         selected_row = -1;
         board = new int[9][9];  // main working board
         flag = new int[9][9];   // flag to keep track of pre-filled squares
-
+        solutionBoard = new int[9][9];
         // algorithm to move generated board set up into main board
 
         // for every row
@@ -28,7 +29,7 @@ public class board_GamePlay {
             // for every colomn
             for(int c=0;c<9;c++) {
                 board[r][c] = input.getArr_gameBoard()[r][c];
-
+                solutionBoard[r][c] = input.getArr_solutionBoard()[r][c];
                 // if the board at that spot is not empty, set the flag to one
                 if(board[r][c] != 0){
                     flag[r][c] = 1;
@@ -81,6 +82,8 @@ public class board_GamePlay {
     public int[][] getBoard(){
         return this.board;
     }
+
+    public int[][] getSolutionBoard(){return this.solutionBoard;}
 
     public ArrayList<ArrayList<Object>> getEmptyBoxIndex() {
         return this.emptyBoxIndex;
