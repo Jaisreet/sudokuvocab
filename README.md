@@ -81,8 +81,7 @@
         - System response: All the incorrect user inputs are erased from the board, while the correct ones remain on the board. 
     
     <br>
-    <img src="https://i.imgur.com/wpx8KnS.png" title="mockup5: imgur.com" height="400"/>
-    <br>
+
 
 
 6. As an expert language learner, I want to have different difficulty levels so that I can choose the one that fits my ability.
