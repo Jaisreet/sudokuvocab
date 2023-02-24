@@ -6,56 +6,66 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import Model.board_GamePlay;
+public class board_GamePlayTest {
 
-public class boardGamePlayTest {
-
-    board_GamePlay board = new board_GamePlay();
+    board_GamePlay board_GamePlay = new board_GamePlay();
     ArrayList<ArrayList<Object>> emptyBoxIndexBoard;
     ArrayList<ArrayList<Object>> emptyBoxIndexInput;
 
     @Test
-    public void getEmptyBoxIndexs() {
-        emptyBoxIndexBoard = board.emptyBoxIndex;
-        emptyBoxIndexInput = board.emptyBoxIndex;
+    public void getEmptyBoxIndexesTest() {
+        emptyBoxIndexBoard = board_GamePlay.emptyBoxIndex;
+        emptyBoxIndexInput = board_GamePlay.emptyBoxIndex;
 
         assertEquals(emptyBoxIndexBoard, emptyBoxIndexInput);
     }
 
     @Test
-    public void setNumberPos() {
-
+    public void setNumberPosTest() {
+        board_GamePlay.setNumberPos(1);
+        assertEquals(1, board_GamePlay.getBoard()[board_GamePlay.getSelected_row() - 1][board_GamePlay.getSelected_column() - 1]);
     }
 
     @Test
-    public void eraseNumber() {
+    public void eraseNumberTest() {
+        eraseNumberTest();
+        assertEquals(0, board_GamePlay.getBoard()[board_GamePlay.getSelected_row() - 1][board_GamePlay.getSelected_column() - 1]);
     }
 
     @Test
-    public void getNum() {
+    public void getNumTest() {
+        assertEquals(board_GamePlay.getNum(), board_GamePlay.getBoard()[board_GamePlay.getSelected_row() - 1][board_GamePlay.getSelected_column() - 1]);
     }
 
     @Test
-    public void getBoard() {
+    public void getBoardTest() {
+        //assertEquals(boardFill.board, boardFill.getBoard());
     }
 
     @Test
-    public void getEmptyBoxIndex() {
+    public void getEmptyBoxIndexTest() {
+        assertEquals(board_GamePlay.emptyBoxIndex, board_GamePlay.getEmptyBoxIndex());
     }
 
     @Test
-    public void getSelected_row() {
+    public void getSelected_rowTest() {
+        assertEquals(board_GamePlay.selected_row, board_GamePlay.getSelected_row());
     }
 
     @Test
-    public void getSelected_column() {
+    public void getSelected_columnTest() {
+        assertEquals(board_GamePlay.selected_column, board_GamePlay.getSelected_column());
     }
 
     @Test
-    public void setSelected_row() {
+    public void setSelected_rowTest() {
+        board_GamePlay.setSelected_row(1);
+        assertEquals(1, board_GamePlay.getSelected_row());
     }
 
     @Test
-    public void setSelected_column() {
+    public void setSelected_columnTest() {
+        board_GamePlay.setSelected_column(1);
+        assertEquals(1, board_GamePlay.getSelected_column());
     }
 }
