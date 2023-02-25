@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +12,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.graphics.Canvas;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private SudokuBoard gameBoard;
-    private boardFill gameBoardFill;
+    private board_GamePlay gameBoardGamePlay;
     private Button hint;
     private Button erase;
     private Button check;
@@ -37,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         gameBoard = findViewById(R.id.sudokuBoard);
-        gameBoardFill = gameBoard.getBoardFill();
-        gameBoardFill.getEmptyBoxIndexs();
+        gameBoardGamePlay = gameBoard.getBoardFill();
+        gameBoardGamePlay.getEmptyBoxIndexs();
 
         //listener for hint button
         hint = (Button) findViewById(R.id.hint);
@@ -96,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
     //if value at given row and column doesn't match with the value of solution at given row and column it is removed
     //otherwise it is kept in the board
     public void check(){
-        for(ArrayList<Object> letter : gameBoardFill.getEmptyBoxIndex()) {
+        for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
             int r = (int) letter.get(0);
             int c = (int) letter.get(1);
-            if (gameBoardFill.getBoard()[r][c] != gameBoardFill.getSolution()[r][c]) {
-                gameBoardFill.getBoard()[r][c] = 0;
+            if (gameBoardGamePlay.getBoard()[r][c] != gameBoardGamePlay.getSolution()[r][c]) {
+                gameBoardGamePlay.getBoard()[r][c] = 0;
             }
         }
     }
@@ -112,71 +110,71 @@ public class MainActivity extends AppCompatActivity {
 
     //setting value to 1 when button one is pressed that is "un"
     public void BTNOnePress(View view) {
-        gameBoardFill.setNumberPos(1);
+        gameBoardGamePlay.setNumberPos(1);
         gameBoard.invalidate();
     }
 
     //setting value to 2 when button two is pressed that is "deux"
     public void BTNTwoPress(View view) {
-        gameBoardFill.setNumberPos(2);
+        gameBoardGamePlay.setNumberPos(2);
         gameBoard.invalidate();
     }
 
     //setting value to 3 when button three is pressed that is "trois"
     public void BTNThreePress(View view) {
-        gameBoardFill.setNumberPos(3);
+        gameBoardGamePlay.setNumberPos(3);
         gameBoard.invalidate();
     }
 
     //setting value to 4 when button four is pressed that is "quatre"
     public void BTNFourPress(View view) {
-        gameBoardFill.setNumberPos(4);
+        gameBoardGamePlay.setNumberPos(4);
         gameBoard.invalidate();
     }
 
     //setting value to 5 when button five is pressed that is "cinq"
     public void BTNFivePress(View view) {
-        gameBoardFill.setNumberPos(5);
+        gameBoardGamePlay.setNumberPos(5);
         gameBoard.invalidate();
     }
 
     //setting value to 6 when button six is pressed that is "six"
     public void BTNSixPress(View view) {
-        gameBoardFill.setNumberPos(6);
+        gameBoardGamePlay.setNumberPos(6);
         gameBoard.invalidate();
     }
 
     //setting value to 7 when button seven is pressed that is "sept"
     public void BTNSevenPress(View view) {
-        gameBoardFill.setNumberPos(7);
+        gameBoardGamePlay.setNumberPos(7);
         gameBoard.invalidate();
     }
 
     //setting value to 8 when button eight is pressed that is "huit"
     public void BTNEightPress(View view) {
-        gameBoardFill.setNumberPos(8);
+        gameBoardGamePlay.setNumberPos(8);
         gameBoard.invalidate();
     }
 
     //setting value to 9 when button nine is pressed that is "neuf"
     public void BTNNinePress(View view) {
-        gameBoardFill.setNumberPos(9);
+        gameBoardGamePlay.setNumberPos(9);
         gameBoard.invalidate();
     }
 
     //calls erase number function in boardfill class that removes the value in the current cell
     public void eraseText() {
-        gameBoardFill.eraseNumber();
+        gameBoardGamePlay.eraseNumber();
     }
 
     //reset the game by removing all the input values by user
     public void reset() {
-        for(ArrayList<Object> letter : gameBoardFill.getEmptyBoxIndex()) {
+        for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
 
             int r = (int) letter.get(0);
             int c = (int) letter.get(1);
-            if (gameBoardFill.getBoard()[r][c] != 0) {
-                gameBoardFill.getBoard()[r][c] = 0;
+            if (gameBoardGamePlay.getBoard()[r][c] != 0) {
+                gameBoardGamePlay.getBoard()[r][c] = 0;
                 }
         }
     }

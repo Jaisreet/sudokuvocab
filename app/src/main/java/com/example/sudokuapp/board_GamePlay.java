@@ -1,13 +1,11 @@
 package com.example.sudokuapp;
 
-import static java.lang.System.*;
-
 import java.util.ArrayList;
 
-public class boardFill {
+public class board_GamePlay {
 
     int[][] board;
-    Game_input input = new Game_input();
+    Board_Generation input = new Board_Generation();
     ArrayList<ArrayList<Object>> emptyBoxIndex;
     int selected_row;
     int selected_column;
@@ -15,7 +13,7 @@ public class boardFill {
 
     int[][] solution;
 
-    public boardFill(){
+    public board_GamePlay(){
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
         selected_row = -1;

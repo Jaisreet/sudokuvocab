@@ -1,8 +1,6 @@
 package com.example.sudokuapp;
 
-import java.util.concurrent.ThreadLocalRandom;
-
-public class Game_input {
+public class Board_Generation {
     int[][] input;
     int[][] solution;
     int N = 9; // length and width of the grid
@@ -11,7 +9,7 @@ public class Game_input {
 
 
 
-    public Game_input(){
+    public Board_Generation(){
 
         solution = new int[9][9];
         input = new int[9][9];

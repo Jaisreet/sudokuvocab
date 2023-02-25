@@ -2,14 +2,13 @@ package com.example.sudokuapp;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import com.example.sudokuapp.Game_input;
 
 import java.util.HashSet;
 import java.util.Set;
 
 
 public class game_inputTest {
-    Game_input gameInput = new Game_input();
+    Board_Generation gameInput = new Board_Generation();
 
     @Test
     public void gridCopyTest() {

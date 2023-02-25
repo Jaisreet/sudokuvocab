@@ -28,7 +28,7 @@ public class SudokuBoard extends View {
     private int cellsize;
 
     Canvas canvas;
-    private final boardFill boardFill = new boardFill();
+    private final board_GamePlay board_GamePlay = new board_GamePlay();
 
     public SudokuBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -87,7 +87,7 @@ public class SudokuBoard extends View {
         letterPaint.setAntiAlias(true);
         letterPaint.setColor(letterColor);
 
-        colorCell(canvas, boardFill.getSelected_row(), boardFill.getSelected_column());
+        colorCell(canvas, board_GamePlay.getSelected_row(), board_GamePlay.getSelected_column());
 
         canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredWidth(), boardColorPaint);
         drawBoard(canvas);
@@ -106,8 +106,8 @@ public class SudokuBoard extends View {
         int action = event.getAction();
 
         if(action == MotionEvent.ACTION_DOWN){
-            boardFill.setSelected_row((int) Math.ceil(y/cellsize));
-            boardFill.setSelected_column((int)Math.ceil(x/cellsize));
+            board_GamePlay.setSelected_row((int) Math.ceil(y/cellsize));
+            board_GamePlay.setSelected_column((int)Math.ceil(x/cellsize));
             isVaild = true;
         }
         else{
@@ -125,8 +125,8 @@ public class SudokuBoard extends View {
 
         for(int r=0; r<9;r++){
             for(int c =0; c<9;c++){
-                if(boardFill.getBoard()[r][c] != 0){
-                    String text = Integer.toString(boardFill.getBoard()[r][c]);
+                if(board_GamePlay.getBoard()[r][c] != 0){
+                    String text = Integer.toString(board_GamePlay.getBoard()[r][c]);
                     float width, height;
 
                     letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
@@ -142,12 +142,12 @@ public class SudokuBoard extends View {
         //painting letter to the selected color
         letterPaint.setColor(letterColorSolve);
         //for user input values and user can only input values at indexes stored in emptyboxIndex array
-        for(ArrayList<Object> letter : boardFill.getEmptyBoxIndex()){
+        for(ArrayList<Object> letter : board_GamePlay.getEmptyBoxIndex()){
 
             int r = (int)letter.get(0);
             int c = (int)letter.get(1);
-            if(boardFill.getBoard()[r][c] != 0) {
-                String text = Integer.toString(boardFill.getBoard()[r][c]);
+            if(board_GamePlay.getBoard()[r][c] != 0) {
+                String text = Integer.toString(board_GamePlay.getBoard()[r][c]);
                 float width, height;
 
                 letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
@@ -212,9 +212,9 @@ public class SudokuBoard extends View {
         }
     }
 
-    public boardFill getBoardFill(){
+    public board_GamePlay getBoardFill(){
 
-        return this.boardFill;
+        return this.board_GamePlay;
     }
 
 }
