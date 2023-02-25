@@ -8,9 +8,9 @@ public class board_GamePlay {
 
     int[][] board;
     Board_Generation input = new Board_Generation();
-    ArrayList<ArrayList<Object>> emptyBoxIndex;
+    public ArrayList<ArrayList<Object>> emptyBoxIndex;
     int selected_row;
-    int selected_column;
+    public int selected_column;
     int [][] flag;
     int[][] solutionBoard;
     private Context boardFill;

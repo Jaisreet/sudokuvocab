@@ -33,7 +33,7 @@ public class Board_Generation {
         fillDiagonal(arr_gameBoard);
 
         // 2. Fill the remaining cells using recursion
-        fillRemaining(0, SQRT);
+        fillRemaining(arr_gameBoard,0, SQRT);
 
         // 3. copy the grid to the solution board before we remove elements
         gridCopy(arr_gameBoard, arr_solutionBoard, N);
@@ -42,12 +42,13 @@ public class Board_Generation {
         removeKDigits(arr_gameBoard, N, K);
 
         // print board
-        printBoard(arr_gameBoard);
-        printBoard(arr_solutionBoard);
+        //printBoard(arr_gameBoard);
+        //printBoard(arr_solutionBoard);
 
     }
 
     // print board to console
+
     void printBoard(int arr[][])
     {
         for (int i = 0; i < 9; i++) {
@@ -59,8 +60,10 @@ public class Board_Generation {
         System.out.print("\n");
     }
 
+
+
     // copy the solution to a separate solution board to check if the user has completed the game
-    void gridCopy(int arr1[][], int arr2[][], int len){
+    public void gridCopy(int arr1[][], int arr2[][], int len){
 
         for (int i = 0; i < len; i++){
             for (int j = 0; j < len; j++) {
@@ -75,33 +78,33 @@ public class Board_Generation {
 
 
     // program to fill the diagonal sub matries first
-    void fillDiagonal(int arr[][]) {
+    public void fillDiagonal(int arr[][]) {
 
         for (int i = 0; i<N; i=i+SQRT)
 
             // for diagonal box, start coordinates->i==j
-            fillBox(i, i);
+            fillBox(arr,i, i);
     }
 
     // return a random number
-    int randomNum(int num)
+    public int randomNum(int num)
     {
         return (int) Math.floor((Math.random()*num+1));
     }
 
     // check if a specific number is used in a row and column
-    boolean unUsedInBox(int rowStart, int colStart, int num)
+    public boolean unUsedInBox(int arr[][],int rowStart, int colStart, int num)
     {
         for (int i = 0; i<SQRT; i++)
             for (int j = 0; j<SQRT; j++)
-                if (arr_gameBoard[rowStart+i][colStart+j]==num)
+                if (arr[rowStart+i][colStart+j]==num)
                     return false;
-
         return true;
+
     }
 
     // Fill the diagonal sub-matrices
-    void fillBox(int row,int col)
+    public void fillBox(int arr[][], int row, int col)
     {
         int num;
         for (int i=0; i<SQRT; i++)
@@ -112,18 +115,18 @@ public class Board_Generation {
                 {
                     num = randomNum(N);
                 }
-                while (!unUsedInBox(row, col, num));
+                while (!unUsedInBox(arr,row, col, num));
 
-                arr_gameBoard[row+i][col+j] = num;
+                arr[row+i][col+j] = num;
             }
         }
     }
 
 
     // recursively fill remaining cells in matrix
-    boolean fillRemaining(int i, int j)
+    public boolean fillRemaining(int arr[][], int i, int j)
     {
-        // if we are at the end of the col, go to begining of the next row
+        // if we are at the end of the col, go to beginning of the next row
         if (j>=N && i<N-1)
         {
             i = i + 1;
@@ -158,13 +161,13 @@ public class Board_Generation {
 
         for (int num = 1; num<=N; num++)
         {
-            if (CheckIfSafe(i, j, num))
+            if (CheckIfSafe(arr,i, j, num))
             {
-                arr_gameBoard[i][j] = num;
-                if (fillRemaining(i, j+1))
+                arr[i][j] = num;
+                if (fillRemaining(arr,i, j+1))
                     return true;
 
-                arr_gameBoard[i][j] = 0;
+                arr[i][j] = 0;
             }
         }
         return false;
@@ -172,27 +175,27 @@ public class Board_Generation {
 
 
     // Check if safe to put in cell
-    boolean CheckIfSafe(int i,int j,int num)
+    public boolean CheckIfSafe(int arr[][], int i, int j, int num)
     {
-        return (unUsedInRow(i, num) &&
-                unUsedInCol(j, num) &&
-                unUsedInBox(i-i%SQRT, j-j%SQRT, num));
+        return (unUsedInRow(arr, i, num) &&
+                unUsedInCol(arr, j, num) &&
+                unUsedInBox(arr,i-i%SQRT, j-j%SQRT, num));
     }
 
     // check in the row for existence
-    boolean unUsedInRow(int i,int num)
+    public boolean unUsedInRow(int arr[][], int i, int num)
     {
         for (int j = 0; j<N; j++)
-            if (arr_gameBoard[i][j] == num)
+            if (arr[i][j] == num)
                 return false;
         return true;
     }
 
     // check in the row for existence
-    boolean unUsedInCol(int j,int num)
+    public boolean unUsedInCol(int arr[][], int j, int num)
     {
         for (int i = 0; i<N; i++)
-            if (arr_gameBoard[i][j] == num)
+            if (arr[i][j] == num)
                 return false;
         return true;
     }

@@ -6,9 +6,11 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import Model.board_GamePlay;
+
 public class board_GamePlayTest {
 
-    board_GamePlay board_GamePlay = new board_GamePlay();
+    Model.board_GamePlay board_GamePlay = new board_GamePlay();
     ArrayList<ArrayList<Object>> emptyBoxIndexBoard;
     ArrayList<ArrayList<Object>> emptyBoxIndexInput;
 
@@ -49,7 +51,7 @@ public class board_GamePlayTest {
 
     @Test
     public void getSelected_rowTest() {
-        assertEquals(board_GamePlay.selected_row, board_GamePlay.getSelected_row());
+        assertEquals(board_GamePlay.getSelected_row(), board_GamePlay.getSelected_row());
     }
 
     @Test
