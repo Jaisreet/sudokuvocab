@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class boardGamePlayTest {
+public class board_GamePlayTest {
 
     board_GamePlay board_GamePlay = new board_GamePlay();
     ArrayList<ArrayList<Object>> emptyBoxIndexBoard;
@@ -39,7 +39,7 @@ public class boardGamePlayTest {
 
     @Test
     public void getBoardTest() {
-       //assertEquals(board_GamePlay.board, board_GamePlay.getBoard());
+        //assertEquals(boardFill.board, boardFill.getBoard());
     }
 
     @Test
@@ -59,8 +59,8 @@ public class boardGamePlayTest {
 
     @Test
     public void setSelected_rowTest() {
-       board_GamePlay.setSelected_row(1);
-       assertEquals(1, board_GamePlay.getSelected_row());
+        board_GamePlay.setSelected_row(1);
+        assertEquals(1, board_GamePlay.getSelected_row());
     }
 
     @Test
