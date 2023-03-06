@@ -207,38 +207,38 @@
 
     <ImageView
         android:id="@+id/settingsDialog"
-        android:layout_width="34dp"
-        android:layout_height="36dp"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
         android:contentDescription="@string/Settings"
-        android:onClick="settingDialog"
         android:src="@drawable/settings"
         custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
         custom:layout_constraintEnd_toEndOf="parent"
         custom:layout_constraintHorizontal_bias="0.952"
-        custom:layout_constraintStart_toEndOf="@+id/resetbtn"
         custom:layout_constraintTop_toTopOf="parent"
-        custom:layout_constraintVertical_bias="0.444" />
+        custom:layout_constraintVertical_bias="0.545" />
 
     <ImageView
         android:id="@+id/resetbtn"
-        android:layout_width="43dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="45dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp"
         android:contentDescription="Reset"
-        android:onClick="reset"
         android:src="@drawable/reset"
         custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
-        custom:layout_constraintEnd_toStartOf="@+id/settingsbtn"
         custom:layout_constraintHorizontal_bias="0.0"
-        custom:layout_constraintStart_toStartOf="parent" />
+        custom:layout_constraintStart_toStartOf="parent"
+        custom:layout_constraintTop_toTopOf="parent"
+        custom:layout_constraintVertical_bias="0.909" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Easy"
+        android:id="@+id/timeView"
+        android:layout_width="200dp"
+        android:layout_height="43dp"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:typeface="normal"
+        custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
         custom:layout_constraintEnd_toStartOf="@+id/settingsDialog"
         custom:layout_constraintStart_toEndOf="@+id/resetbtn"
         custom:layout_constraintTop_toTopOf="parent" />

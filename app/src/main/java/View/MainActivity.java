@@ -5,14 +5,17 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.sudokuapp.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import Controller.drawBoard;
 import Model.board_GamePlay;
@@ -21,6 +24,18 @@ public class MainActivity extends AppCompatActivity {
 
     private drawBoard gameBoard;
     private board_GamePlay gameBoardGamePlay;
+    private setting_page settingsPageClass;
+
+    // Number of seconds displayed
+    // on the stopwatch.
+    private int seconds = 0;
+
+    // Is the stopwatch running?
+    private boolean running;
+
+    private boolean wasRunning;
+
+    public TextView timeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         gameBoardGamePlay.getEmptyBoxIndexs();
 
         //Open the hint dialog box
-        Button hint =findViewById(R.id.hint);
+        Button hint = findViewById(R.id.hint);
         hint.setOnClickListener(view -> openDialog());
 
         //calls the eraseText() function when erase button is clicked
@@ -43,14 +58,147 @@ public class MainActivity extends AppCompatActivity {
         ImageView reset = findViewById(R.id.resetbtn);
         reset.setOnClickListener(view -> reset());
         //calls check() function when check button is clicked
-        Button check =findViewById(R.id.checkBtn);
+        Button check = findViewById(R.id.checkBtn);
         check.setOnClickListener(v -> check());
         //opens the setting dialog box when the setting button is clicked
         ImageView settingsDialog = findViewById(R.id.settingsDialog);
         settingsDialog.setOnClickListener(view -> openSettingDialog());
 
+            
+        timeView = (TextView)findViewById(R.id.timeView);
+
+        if (savedInstanceState != null) {
+
+                // Get the previous state of the stopwatch
+                // if the activity has been
+                // destroyed and recreated.
+                seconds
+                        = savedInstanceState
+                        .getInt("seconds");
+                running
+                        = savedInstanceState
+                        .getBoolean("running");
+                wasRunning
+                        = savedInstanceState
+                        .getBoolean("wasRunning");
+
+        }
+
+        running = true;
+        runTimer();
+
 
     }
+
+    // Save the state of the stopwatch
+    // if it's about to be destroyed.
+     @Override
+    public void onSaveInstanceState(
+            Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState
+                .putInt("seconds", seconds);
+        savedInstanceState
+                .putBoolean("running", running);
+        savedInstanceState
+                .putBoolean("wasRunning", wasRunning);
+    }
+
+    // If the activity is paused,
+    // stop the stopwatch.
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        wasRunning = running;
+        running = false;
+    }
+
+    // If the activity is resumed,
+    // start the stopwatch
+    // again if it was running previously.
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (wasRunning) {
+            running = true;
+        }
+    }
+
+    public void timerOn() {
+        running = true;
+    }
+
+    public void timerOff() {
+        running = false;
+        seconds = 0;
+
+    }
+
+    public void timerStatus() {
+        Boolean state = settingsPageClass.getTimerState();
+        if(state) {
+            running = true;
+        }
+        else {
+            running = false;
+            seconds = 0;
+            timeView.setText("Timer off");
+        }
+    }
+    public void onClickReset()
+    {
+        seconds = 0;
+        running = true;
+    }
+
+    private void runTimer()
+    {
+
+        // Creates a new Handler
+        final Handler handler
+                = new Handler();
+
+        // Call the post() method,
+        // passing in a new Runnable.
+        // The post() method processes
+        // code without a delay,
+        // so the code in the Runnable
+        // will run almost immediately.
+        handler.post(new Runnable() {
+            @Override
+
+            public void run()
+            {
+                int hours = seconds / 3600;
+                int minutes = (seconds % 3600) / 60;
+                int secs = seconds % 60;
+
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                String time
+                        = String
+                        .format(Locale.getDefault(),
+                                "%d:%02d:%02d", hours,
+                                minutes, secs);
+
+                // Set the text view text.
+                timeView.setText(time);
+
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++;
+                }
+
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000);
+            }
+        });
+    }
+
 
     //go back to first page
     public void backToMain(){
@@ -128,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
                 }
         }
+        onClickReset();
     }
 
     //check the user input in emptyboxindex with the solutionBoard
@@ -150,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
 
     //opens the setting dialog box
     public void openSettingDialog() {
+        onPause();
         final Dialog dialog = new Dialog(MainActivity.this);
         // Include dialog.xml file
         dialog.setContentView(R.layout.settings_dialog);
@@ -167,22 +317,29 @@ public class MainActivity extends AppCompatActivity {
         // if decline button is clicked, close the custom dialog
         resume.setOnClickListener(v -> {
             // Close dialog
+            timerOn();
             dialog.dismiss();
         });
 
         newGame.setOnClickListener(v -> {
             //starts the new game by calling startNewGame()
+            onClickReset();
             startNewGame();
-
+            dialog.dismiss();
         });
 
         //open quit dialog box by calling quit function
-        quitGame.setOnClickListener(v -> quit());
+        quitGame.setOnClickListener(v -> {
+            onClickReset();
+            dialog.dismiss();
+            quit();
+        });
 
         //open the setting page
         settings.setOnClickListener(v -> {
-
+            dialog.dismiss();
             settingPage();
+
         });
 
     }
@@ -191,13 +348,13 @@ public class MainActivity extends AppCompatActivity {
     public void startNewGame(){
         Intent intent = new Intent(this, MainActivity.class);
         this.startActivity(intent);
+        onClickReset();
     }
 
     //opens the setting page activity
     public void settingPage() {
         Intent intent = new Intent(this, setting_page.class);
         this.startActivity(intent);
-
     }
 
     //open the quit dialog box
@@ -211,5 +368,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
 
 }
