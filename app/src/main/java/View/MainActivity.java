@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     private drawBoard gameBoard;
     private board_GamePlay gameBoardGamePlay;
-    private setting_page settingsPageClass;
-
     // Number of seconds displayed
     // on the stopwatch.
     private int seconds = 0;
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         gameBoardGamePlay = gameBoard.getBoardFill();
         gameBoardGamePlay.getEmptyBoxIndexs();
 
+
         //Open the hint dialog box
         Button hint = findViewById(R.id.hint);
         hint.setOnClickListener(view -> openDialog());
@@ -59,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
         reset.setOnClickListener(view -> reset());
         //calls check() function when check button is clicked
         Button check = findViewById(R.id.checkBtn);
-        check.setOnClickListener(v -> check());
+        check.setOnClickListener(view -> check());
         //opens the setting dialog box when the setting button is clicked
         ImageView settingsDialog = findViewById(R.id.settingsDialog);
         settingsDialog.setOnClickListener(view -> openSettingDialog());
 
-            
+
         timeView = (TextView)findViewById(R.id.timeView);
 
         if (savedInstanceState != null) {
@@ -136,8 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void timerStatus() {
-        Boolean state = settingsPageClass.getTimerState();
+    public void timerStatus(Boolean state) {
         if(state) {
             running = true;
         }
@@ -330,7 +328,6 @@ public class MainActivity extends AppCompatActivity {
 
         //open quit dialog box by calling quit function
         quitGame.setOnClickListener(v -> {
-            onClickReset();
             dialog.dismiss();
             quit();
         });
@@ -355,6 +352,12 @@ public class MainActivity extends AppCompatActivity {
     public void settingPage() {
         Intent intent = new Intent(this, setting_page.class);
         this.startActivity(intent);
+        // i think we just need to call the getTimerStatus function here
+        // i am doing something wrong
+        // when it first calls this function, apparently it's null but it shouldn't be
+        // because i initialized it onCreate.
+        //timerStatus(getTimerStatus());
+
     }
 
     //open the quit dialog box
@@ -362,9 +365,15 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to quit?")
                 //if yes front page is opened
-                .setPositiveButton("Yes", (dialog, id) -> backToMain())
+                .setPositiveButton("Yes", (dialog, id) -> {
+                    backToMain();
+                    onClickReset();
+                })
                 //if no it goes back to the setting dialog box
-                .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+                .setNegativeButton("No", (dialog, id) -> {
+                    dialog.cancel();
+                    timerOn();
+                });
         AlertDialog alert = builder.create();
         alert.show();
     }

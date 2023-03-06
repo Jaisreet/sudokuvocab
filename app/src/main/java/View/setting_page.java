@@ -25,8 +25,10 @@ public class setting_page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_page2);
 
+        timerState = true;
         simpleSwitch = (Switch) findViewById(R.id.timer);
-
+        save = (Button) findViewById(R.id.save);
+        save.setOnClickListener(view -> save());
     }
 
     //go back to the last activity from where setting button was clicked
@@ -34,8 +36,12 @@ public class setting_page extends AppCompatActivity {
         finish();
     }
 
-    public boolean getTimerState() {
+
+    public void save() {
         timerState = simpleSwitch.isChecked();
+        finish();
+    }
+    public boolean getTimerState() {
         return timerState;
     }
 }
