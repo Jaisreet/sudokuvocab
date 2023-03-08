@@ -13,12 +13,15 @@
         tools:targetApi="31">
         <activity
             android:name=".howToPlay"
+            android:configChanges="screenSize|keyboardHidden"
             android:exported="false" />
         <activity
             android:name="View.setting_page"
+            android:screenOrientation="sensor"
             android:exported="false" />
         <activity
             android:name="View.First_page"
+            android:screenOrientation="sensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +31,7 @@
         </activity>
         <activity
             android:name="View.MainActivity"
+            android:screenOrientation="sensor"
             android:exported="true" />
     </application>
 
