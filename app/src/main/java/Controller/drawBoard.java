@@ -14,11 +14,12 @@ import androidx.annotation.Nullable;
 
 import com.example.sudokuapp.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Model.board_GamePlay;
 
-public class drawBoard extends View {
+public class drawBoard extends View implements Serializable {
     private final int boardColor;
     private final int cellFillColor;
     private final int cellHightlightColor;
@@ -32,7 +33,7 @@ public class drawBoard extends View {
     private final Paint letterPaint = new Paint();
     private final Rect letterPaintBounds = new Rect();
     private int cellsize;
-
+    Context context;
     private final Model.board_GamePlay board_GamePlay = new board_GamePlay();
 
 
@@ -102,7 +103,7 @@ public class drawBoard extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent (MotionEvent event){
-        boolean isVaild;
+        boolean isVaild = false;
 
         float x = event.getX();
         float y = event.getY();
@@ -150,7 +151,7 @@ public class drawBoard extends View {
 
             int r = (int)letter.get(0);
             int c = (int)letter.get(1);
-            if(board_GamePlay.getBoard()[r][c] != 0) {
+            if(board_GamePlay.getBoard()[r][c] != 0 ) {
                 String text = Integer.toString(board_GamePlay.getBoard()[r][c]);
                 float width, height;
 
@@ -164,6 +165,8 @@ public class drawBoard extends View {
             }
 
         }
+        //reset teh color of the letterPaint object to letterColor
+       letterPaint.setColor(letterColor);
 
 
     }

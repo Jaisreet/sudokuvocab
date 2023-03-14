@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             int c = (int) letter.get(1);
             if (gameBoardGamePlay.getBoard()[r][c] != 0) {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
-                }
+            }
         }
     }
 
@@ -222,3 +222,30 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+/*
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        Bundle outState = new Bundle();
+
+        int[][] board = gameBoardGamePlay.getBoard();
+        int[][] solutionBoard = gameBoardGamePlay.getSolutionBoard();
+        outState.putIntArray("sudokuBoardState", gameBoardGamePlay.flattenBoardState(board));
+        outState.putIntArray("SolutionBoard", gameBoardGamePlay.flattenBoardState(solutionBoard));
+        outState.putSerializable("boardState", gameBoard);
+        onSaveInstanceState(outState);
+    }
+
+    // save the state of the board in onSaveInstanceState()
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int[][] board = gameBoardGamePlay.getBoard();
+        int[][] solutionBoard = gameBoardGamePlay.getSolutionBoard();
+        outState.putIntArray("sudokuBoardState", gameBoardGamePlay.flattenBoardState(board));
+        outState.putIntArray("SolutionBoard", gameBoardGamePlay.flattenBoardState(solutionBoard));
+        outState.putSerializable("boardState", gameBoard);
+    }
+
+*/

@@ -61,7 +61,7 @@ public class board_GamePlay {
     public void setNumberPos(int num){
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
-                    this.board[this.selected_row - 1][this.selected_column - 1] = num;
+                this.board[this.selected_row - 1][this.selected_column - 1] = num;
 
             }
         }
@@ -88,7 +88,7 @@ public class board_GamePlay {
     //return the solution board
     public int[][] getSolutionBoard(){return this.solutionBoard;}
 
-   //return the array indexes of the board which has value 0, that is equivalent to empty box
+    //return the array indexes of the board which has value 0, that is equivalent to empty box
     public ArrayList<ArrayList<Object>> getEmptyBoxIndex() {
         return this.emptyBoxIndex;
     }
