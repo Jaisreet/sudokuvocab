@@ -34,9 +34,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <!-- to be implemented in iteration 3 -->
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/timer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Timer"
@@ -45,6 +44,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
+            android:summary="Enable/disable timer"
             />
 
         <!--- commented out for use in iteration 3
@@ -73,6 +73,7 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/languageRadioGroup"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="10dp">
 
@@ -94,7 +95,7 @@
                 />
         </RadioGroup>
 
-        <!-- to be implemented in iteration 3 -->
+
         <TextView
             android:id="@+id/levels"
             android:layout_width="388dp"
@@ -108,11 +109,12 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id = "@+id/difficultyRadioGroup"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="10dp">
 
             <RadioButton
-                android:id="@+id/easy"
+                android:id="@+id/easyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -120,14 +122,14 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <RadioButton
-                android:id="@+id/intermediate"
+                android:id="@+id/mediumButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/intermediate"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <RadioButton
-                android:id="@+id/hard"
+                android:id="@+id/hardButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hard"
@@ -141,12 +143,24 @@
         android:id="@+id/button14"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
         android:onClick="backToMain"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="132dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        />
+        android:text="Save Changes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button14"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

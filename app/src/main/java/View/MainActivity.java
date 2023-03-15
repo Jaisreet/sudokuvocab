@@ -1,23 +1,26 @@
 package View;
 
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import android.widget.TextView;
 import com.example.sudokuapp.R;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-
+import java.util.Locale;
 import Controller.drawBoard;
 import Model.board_GamePlay;
 
@@ -26,13 +29,29 @@ public class MainActivity extends AppCompatActivity {
     private drawBoard gameBoard;
     private board_GamePlay gameBoardGamePlay;
 
-    private static final String GAME_BOARD_KEY = "game_board";
+    private int seconds = 0;
+
+    // Is the stopwatch running?
+    private boolean running;
+
+    private boolean wasRunning;
+
+    public TextView timeView;
+
+    private static final int REQUEST_CODE_SETTING_PAGE = 1;
+
+    private boolean switchState;
+
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         gameBoard = findViewById(R.id.sudokuBoard);
+        timeView = findViewById(R.id.timeView);
+
 
         if (savedInstanceState != null) {
             // Retrieve the stored data from the bundle and restore the state of the drawBoard view
@@ -42,16 +61,20 @@ public class MainActivity extends AppCompatActivity {
             gameBoardGamePlay = new board_GamePlay(board, flag, solution);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
+            seconds = savedInstanceState.getInt("seconds");
+            running = savedInstanceState.getBoolean("running");
+            wasRunning = savedInstanceState.getBoolean("wasRunning");
+            runTimer();
         }
         else{
             gameBoardGamePlay = new board_GamePlay();
             gameBoardGamePlay = gameBoard.getBoardFill();
             gameBoardGamePlay.getEmptyBoxIndexs();
+            running = true;
+            runTimer();
         }
 
-
-
-
+        updateTimerVisibility();
         //Open the hint dialog box
         Button hint =findViewById(R.id.hint);
         hint.setOnClickListener(view -> openDialog());
@@ -73,6 +96,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void updateTimerVisibility(){
+        // Get a reference to the SharedPreferences object
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // Get the value of the switch from the SharedPreferences object
+        switchState = prefs.getBoolean("switch_state", true);
+        if (!switchState) {
+            // If switch is not checked, make TextView disappear
+            timeView.setVisibility(View.GONE);
+        } else {
+            // If switch is checked, make TextView visible
+            timeView.setVisibility(View.VISIBLE);
+        }
+    }
     //go back to first page
     public void backToMain(){
         Intent intent = new Intent(this, First_page.class);
@@ -170,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
     //opens the setting dialog box
     public void openSettingDialog() {
+        onPause();
         final Dialog dialog = new Dialog(MainActivity.this);
         // Include dialog.xml file
         dialog.setContentView(R.layout.settings_dialog);
@@ -186,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         // if decline button is clicked, close the custom dialog
         resume.setOnClickListener(v -> {
+            onResume();
             // Close dialog
             dialog.dismiss();
         });
@@ -200,10 +238,7 @@ public class MainActivity extends AppCompatActivity {
         quitGame.setOnClickListener(v -> quit());
 
         //open the setting page
-        settings.setOnClickListener(v -> {
-
-            settingPage();
-        });
+        settings.setOnClickListener(v -> settingPage());
 
     }
 
@@ -217,8 +252,9 @@ public class MainActivity extends AppCompatActivity {
     public void settingPage() {
         Intent intent = new Intent(this, setting_page.class);
         this.startActivity(intent);
-
     }
+
+
 
     //open the quit dialog box
     public void quit() {
@@ -232,8 +268,117 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
+
+    public void startTimer() {
+        running = true;
+    }
+
+    public void stopTimer() {
+        running = false;
+    }
+
+    // If the activity is paused,
+    // stop the stopwatch.
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    protected void onPause()
+    {
+        super.onPause();
+        wasRunning = running;
+        running = false;
+    }
+
+    // If the activity is resumed,
+    // start the stopwatch
+    // again if it was running previously.
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (wasRunning) {
+            running = true;
+        }
+        updateTimerVisibility();
+
+    }
+
+    public void timerOn() {
+        running = true;
+    }
+
+    public void timerOff() {
+        running = false;
+        seconds = 0;
+
+    }
+
+    public void timerStatus(Boolean state) {
+        if(state) {
+            running = true;
+        }
+        else {
+            running = false;
+            seconds = 0;
+            timeView.setText("Timer off");
+        }
+    }
+    public void onClickReset()
+    {
+        seconds = 0;
+        running = true;
+    }
+
+    private void runTimer()
+    {
+        // Creates a new Handler
+        final Handler handler = new Handler();
+
+        // Call the post() method,
+        // passing in a new Runnable.
+        // The post() method processes
+        // code without a delay,
+        // so the code in the Runnable
+        // will run almost immediately.
+        handler.post(new Runnable() {
+            @Override
+
+            public void run()
+            {
+                int hours = seconds / 3600;
+                int minutes = (seconds % 3600) / 60;
+                int secs = seconds % 60;
+
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                String time = String.format(Locale.getDefault(), "%d:%02d:%02d", hours,
+                                minutes, secs);
+
+
+
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    // Set the text view text.
+                    timeView.setText(time);
+                    seconds++;
+                }
+                else if (!switchState) {
+                    timeView.setVisibility(View.GONE);
+                    return;
+                }
+
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000);
+            }
+        });
+
+    }
+
+
+
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         Bundle outState = new Bundle();
         onSaveInstanceState(outState);
@@ -241,12 +386,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         // Store the data you want to save in the bundle
         outState.putSerializable("board", gameBoard.getBoard());
         outState.putSerializable("flag_state", gameBoardGamePlay.getFlag());
         outState.putSerializable("solution_state", gameBoardGamePlay.getSolutionBoard());
+        outState.putInt("seconds", seconds);
+        outState.putBoolean("running", running);
+        outState.putBoolean("wasRunning", wasRunning);
     }
+
 
 }

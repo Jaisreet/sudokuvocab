@@ -238,6 +238,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:typeface="normal"
+        android:visibility="gone"
         custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
         custom:layout_constraintEnd_toStartOf="@+id/settingsDialog"
         custom:layout_constraintStart_toEndOf="@+id/resetbtn"
