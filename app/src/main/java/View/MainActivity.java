@@ -2,7 +2,6 @@ package View;
 
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
@@ -38,11 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     public TextView timeView;
 
-    private static final int REQUEST_CODE_SETTING_PAGE = 1;
-
     private boolean switchState;
 
-    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -268,14 +264,6 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
-
-    public void startTimer() {
-        running = true;
-    }
-
-    public void stopTimer() {
-        running = false;
-    }
 
     // If the activity is paused,
     // stop the stopwatch.
