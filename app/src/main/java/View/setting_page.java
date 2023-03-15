@@ -13,14 +13,8 @@ import android.widget.Switch;
 import com.example.sudokuapp.R;
 
 public class setting_page extends AppCompatActivity {
-
-    private RadioGroup timer;
-    private RadioButton onOff;
     private Button save;
-
     public String timerState;
-    public static String timerStr;
-
     private Switch simpleSwitch;
 
 

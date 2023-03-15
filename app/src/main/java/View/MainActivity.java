@@ -154,16 +154,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void timerStatus(Boolean state) {
-        if(state) {
-            running = true;
-        }
-        else {
-            running = false;
-            seconds = 0;
-            timeView.setText("TIMER OFFFFF");
-        }
-    }
     public void onClickReset()
     {
         seconds = 0;
@@ -368,30 +358,8 @@ public class MainActivity extends AppCompatActivity {
 
     //opens the setting page activity
     public void settingPage() {
-        Intent intent1 = new Intent(getApplicationContext(), setting_page.class);
-        startActivity(intent1);
-        //Intent intent = getIntent();
-        //String timer = intent.getStringExtra(setting_page.timerStr);
-
-        String timer = getIntent().getStringExtra("timerStr");
-        System.out.println("Printing extras " + timer);
-        if (timer != null) {
-            System.out.println("Main actiivy inside if" + timer);
-            if("true".equalsIgnoreCase(timer)) {
-                running = true;
-                System.out.println("TIMER ONNNNNNNN");
-            }
-            else if("false".equalsIgnoreCase(timer)){
-                System.out.println("Main actiivy inside false " + timer);
-                running = false;
-                seconds = 0;
-                timeView.setText(" TIMER OFFF ");
-                System.out.println("TIMER OFFFFFFFFFFFFF");
-            }
-            //The key argument here must match that used in the other activity
-        }
-        System.out.println("Main actiivy outside if " + timer);
-
+        Intent intent = new Intent(getApplicationContext(), setting_page.class);
+        startActivity(intent);
     }
 
     //open the quit dialog box
