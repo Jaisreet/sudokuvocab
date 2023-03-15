@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean wasRunning;
 
     public TextView timeView;
+    public String timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoardGamePlay = gameBoard.getBoardFill();
         gameBoardGamePlay.getEmptyBoxIndexs();
-
 
         //Open the hint dialog box
         Button hint = findViewById(R.id.hint);
@@ -82,11 +82,24 @@ public class MainActivity extends AppCompatActivity {
                         .getBoolean("wasRunning");
 
         }
+        timer = getIntent().getStringExtra("timerStr");
 
-        running = true;
-        runTimer();
-
-
+        if(timer == null || "true".equalsIgnoreCase(timer)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do want to start the timer now?")
+                    //if yes front page is opened
+                    .setPositiveButton("Yes", (dialog, id) -> {
+                        running = true;
+                        runTimer();
+                    })
+                    //if no it goes back to the setting dialog box
+                    .setNegativeButton("No", (dialog, id) -> {
+                        dialog.cancel();
+                        running = false;
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
     // Save the state of the stopwatch
@@ -101,6 +114,12 @@ public class MainActivity extends AppCompatActivity {
                 .putBoolean("running", running);
         savedInstanceState
                 .putBoolean("wasRunning", wasRunning);
+    }
+
+    @Override
+    protected void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);
+        this.setIntent(intent);
     }
 
     // If the activity is paused,
@@ -142,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             running = false;
             seconds = 0;
-            timeView.setText("Timer off");
+            timeView.setText("TIMER OFFFFF");
         }
     }
     public void onClickReset()
@@ -334,7 +353,6 @@ public class MainActivity extends AppCompatActivity {
 
         //open the setting page
         settings.setOnClickListener(v -> {
-            dialog.dismiss();
             settingPage();
 
         });
@@ -350,13 +368,29 @@ public class MainActivity extends AppCompatActivity {
 
     //opens the setting page activity
     public void settingPage() {
-        Intent intent = new Intent(this, setting_page.class);
-        this.startActivity(intent);
-        // i think we just need to call the getTimerStatus function here
-        // i am doing something wrong
-        // when it first calls this function, apparently it's null but it shouldn't be
-        // because i initialized it onCreate.
-        //timerStatus(getTimerStatus());
+        Intent intent1 = new Intent(getApplicationContext(), setting_page.class);
+        startActivity(intent1);
+        //Intent intent = getIntent();
+        //String timer = intent.getStringExtra(setting_page.timerStr);
+
+        String timer = getIntent().getStringExtra("timerStr");
+        System.out.println("Printing extras " + timer);
+        if (timer != null) {
+            System.out.println("Main actiivy inside if" + timer);
+            if("true".equalsIgnoreCase(timer)) {
+                running = true;
+                System.out.println("TIMER ONNNNNNNN");
+            }
+            else if("false".equalsIgnoreCase(timer)){
+                System.out.println("Main actiivy inside false " + timer);
+                running = false;
+                seconds = 0;
+                timeView.setText(" TIMER OFFF ");
+                System.out.println("TIMER OFFFFFFFFFFFFF");
+            }
+            //The key argument here must match that used in the other activity
+        }
+        System.out.println("Main actiivy outside if " + timer);
 
     }
 
@@ -377,6 +411,4 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-
-
 }
