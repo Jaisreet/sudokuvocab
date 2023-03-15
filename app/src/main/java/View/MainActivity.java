@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         timer = getIntent().getStringExtra("timerStr");
 
         if(timer == null || "true".equalsIgnoreCase(timer)) {
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Do want to start the timer now?")
                     //if yes front page is opened
@@ -148,11 +149,6 @@ public class MainActivity extends AppCompatActivity {
         running = true;
     }
 
-    public void timerOff() {
-        running = false;
-        seconds = 0;
-
-    }
 
     public void onClickReset()
     {
@@ -321,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
         dialog.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        // if decline button is clicked, close the custom dialog
         resume.setOnClickListener(v -> {
             // Close dialog
             timerOn();
