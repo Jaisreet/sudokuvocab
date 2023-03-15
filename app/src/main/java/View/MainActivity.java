@@ -110,10 +110,9 @@ public class MainActivity extends AppCompatActivity {
         //opens the setting dialog box when the setting button is clicked
         ImageView settingsDialog = findViewById(R.id.settingsDialog);
         settingsDialog.setOnClickListener(view -> openSettingDialog());
-
-
-
     }
+
+
 
     @Override
     protected void onNewIntent(final Intent intent) {
@@ -124,8 +123,7 @@ public class MainActivity extends AppCompatActivity {
     // If the activity is paused,
     // stop the stopwatch.
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
         wasRunning = running;
         running = false;
@@ -315,7 +313,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
         dialog.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        // if decline button is clicked, close the custom dialog
         resume.setOnClickListener(v -> {
             onResume();
             // Close dialog
@@ -344,8 +341,8 @@ public class MainActivity extends AppCompatActivity {
 
     //opens the setting page activity
     public void settingPage() {
-        Intent intent = new Intent(this, setting_page.class);
-        this.startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), setting_page.class);
+        startActivity(intent);
     }
 
 

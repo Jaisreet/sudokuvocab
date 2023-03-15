@@ -19,8 +19,8 @@ import android.widget.Switch;
 import com.example.sudokuapp.R;
 
 public class setting_page extends AppCompatActivity {
-
     private Button save;
+    public String timerState;
     private Switch simpleSwitch;
     private RadioButton easyButton;
     private RadioButton mediumButton;
@@ -29,7 +29,6 @@ public class setting_page extends AppCompatActivity {
 
     private String selectedDifficulty;
 
-    public String timerState;
 
 
     @Override
