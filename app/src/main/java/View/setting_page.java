@@ -15,7 +15,6 @@ import com.example.sudokuapp.R;
 public class setting_page extends AppCompatActivity {
 
     private Button save;
-
     private Switch simpleSwitch;
     private Boolean timerState;
 
