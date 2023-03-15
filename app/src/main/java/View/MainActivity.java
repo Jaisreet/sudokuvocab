@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean wasRunning;
 
     public TextView timeView;
+    public String timer;
 
     private static final int REQUEST_CODE_SETTING_PAGE = 1;
 
@@ -94,6 +95,72 @@ public class MainActivity extends AppCompatActivity {
         settingsDialog.setOnClickListener(view -> openSettingDialog());
 
 
+        timeView = (TextView)findViewById(R.id.timeView);
+
+        if (savedInstanceState != null) {
+
+                // Get the previous state of the stopwatch
+                // if the activity has been
+                // destroyed and recreated.
+                seconds
+                        = savedInstanceState
+                        .getInt("seconds");
+                running
+                        = savedInstanceState
+                        .getBoolean("running");
+                wasRunning
+                        = savedInstanceState
+                        .getBoolean("wasRunning");
+
+        }
+        timer = getIntent().getStringExtra("timerStr");
+
+        if(timer == null || "true".equalsIgnoreCase(timer)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do want to start the timer now?")
+                    //if yes front page is opened
+                    .setPositiveButton("Yes", (dialog, id) -> {
+                        running = true;
+                        runTimer();
+                    })
+                    //if no it goes back to the setting dialog box
+                    .setNegativeButton("No", (dialog, id) -> {
+                        dialog.cancel();
+                        running = false;
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+    // Save the state of the stopwatch
+    // if it's about to be destroyed.
+     @Override
+    public void onSaveInstanceState(
+            Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState
+                .putInt("seconds", seconds);
+        savedInstanceState
+                .putBoolean("running", running);
+        savedInstanceState
+                .putBoolean("wasRunning", wasRunning);
+    }
+
+    @Override
+    protected void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);
+        this.setIntent(intent);
+    }
+
+    // If the activity is paused,
+    // stop the stopwatch.
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        wasRunning = running;
+        running = false;
     }
 
     private void updateTimerVisibility(){
@@ -109,6 +176,80 @@ public class MainActivity extends AppCompatActivity {
             timeView.setVisibility(View.VISIBLE);
         }
     }
+
+    public void timerOn() {
+        running = true;
+    }
+
+    public void timerOff() {
+        running = false;
+        seconds = 0;
+
+    }
+
+    public void timerStatus(Boolean state) {
+        if(state) {
+            running = true;
+        }
+        else {
+            running = false;
+            seconds = 0;
+            timeView.setText("TIMER OFFFFF");
+        }
+    }
+    public void onClickReset()
+    {
+        seconds = 0;
+        running = true;
+    }
+
+    private void runTimer()
+    {
+
+        // Creates a new Handler
+        final Handler handler
+                = new Handler();
+
+        // Call the post() method,
+        // passing in a new Runnable.
+        // The post() method processes
+        // code without a delay,
+        // so the code in the Runnable
+        // will run almost immediately.
+        handler.post(new Runnable() {
+            @Override
+
+            public void run()
+            {
+                int hours = seconds / 3600;
+                int minutes = (seconds % 3600) / 60;
+                int secs = seconds % 60;
+
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                String time
+                        = String
+                        .format(Locale.getDefault(),
+                                "%d:%02d:%02d", hours,
+                                minutes, secs);
+
+                // Set the text view text.
+                timeView.setText(time);
+
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++;
+                }
+
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000);
+            }
+        });
+    }
+
+
     //go back to first page
     public void backToMain(){
         Intent intent = new Intent(this, First_page.class);
@@ -238,7 +379,10 @@ public class MainActivity extends AppCompatActivity {
         quitGame.setOnClickListener(v -> quit());
 
         //open the setting page
-        settings.setOnClickListener(v -> settingPage());
+        settings.setOnClickListener(v -> {
+            settingPage();
+
+        });
 
     }
 
@@ -250,8 +394,30 @@ public class MainActivity extends AppCompatActivity {
 
     //opens the setting page activity
     public void settingPage() {
-        Intent intent = new Intent(this, setting_page.class);
-        this.startActivity(intent);
+        Intent intent1 = new Intent(getApplicationContext(), setting_page.class);
+        startActivity(intent1);
+        //Intent intent = getIntent();
+        //String timer = intent.getStringExtra(setting_page.timerStr);
+
+        String timer = getIntent().getStringExtra("timerStr");
+        System.out.println("Printing extras " + timer);
+        if (timer != null) {
+            System.out.println("Main actiivy inside if" + timer);
+            if("true".equalsIgnoreCase(timer)) {
+                running = true;
+                System.out.println("TIMER ONNNNNNNN");
+            }
+            else if("false".equalsIgnoreCase(timer)){
+                System.out.println("Main actiivy inside false " + timer);
+                running = false;
+                seconds = 0;
+                timeView.setText(" TIMER OFFF ");
+                System.out.println("TIMER OFFFFFFFFFFFFF");
+            }
+            //The key argument here must match that used in the other activity
+        }
+        System.out.println("Main actiivy outside if " + timer);
+
     }
 
 
@@ -267,135 +433,4 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-
-
-    public void startTimer() {
-        running = true;
-    }
-
-    public void stopTimer() {
-        running = false;
-    }
-
-    // If the activity is paused,
-    // stop the stopwatch.
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        wasRunning = running;
-        running = false;
-    }
-
-    // If the activity is resumed,
-    // start the stopwatch
-    // again if it was running previously.
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        if (wasRunning) {
-            running = true;
-        }
-        updateTimerVisibility();
-
-    }
-
-    public void timerOn() {
-        running = true;
-    }
-
-    public void timerOff() {
-        running = false;
-        seconds = 0;
-
-    }
-
-    public void timerStatus(Boolean state) {
-        if(state) {
-            running = true;
-        }
-        else {
-            running = false;
-            seconds = 0;
-            timeView.setText("Timer off");
-        }
-    }
-    public void onClickReset()
-    {
-        seconds = 0;
-        running = true;
-    }
-
-    private void runTimer()
-    {
-        // Creates a new Handler
-        final Handler handler = new Handler();
-
-        // Call the post() method,
-        // passing in a new Runnable.
-        // The post() method processes
-        // code without a delay,
-        // so the code in the Runnable
-        // will run almost immediately.
-        handler.post(new Runnable() {
-            @Override
-
-            public void run()
-            {
-                int hours = seconds / 3600;
-                int minutes = (seconds % 3600) / 60;
-                int secs = seconds % 60;
-
-                // Format the seconds into hours, minutes,
-                // and seconds.
-                String time = String.format(Locale.getDefault(), "%d:%02d:%02d", hours,
-                                minutes, secs);
-
-
-
-                // If running is true, increment the
-                // seconds variable.
-                if (running) {
-                    // Set the text view text.
-                    timeView.setText(time);
-                    seconds++;
-                }
-                else if (!switchState) {
-                    timeView.setVisibility(View.GONE);
-                    return;
-                }
-
-                // Post the code again
-                // with a delay of 1 second.
-                handler.postDelayed(this, 1000);
-            }
-        });
-
-    }
-
-
-
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Bundle outState = new Bundle();
-        onSaveInstanceState(outState);
-    }
-
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // Store the data you want to save in the bundle
-        outState.putSerializable("board", gameBoard.getBoard());
-        outState.putSerializable("flag_state", gameBoardGamePlay.getFlag());
-        outState.putSerializable("solution_state", gameBoardGamePlay.getSolutionBoard());
-        outState.putInt("seconds", seconds);
-        outState.putBoolean("running", running);
-        outState.putBoolean("wasRunning", wasRunning);
-    }
-
-
 }
