@@ -44,11 +44,30 @@ public class board_GamePlay {
         emptyBoxIndex = new ArrayList<>();
     }
 
+    public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input){
+        // when the user has not selected a square yet, set selected col and row to -1
+        selected_column = -1;
+        selected_row = -1;
+        board = new int[9][9];  // main working board
+        flag = flag_input;  // flag to keep track of pre-filled squares
+        solutionBoard = solution_input;
+        // algorithm to move generated board set up into main board
+
+        // for every row
+        for(int r=0; r<9; r++) {
+            // for every colomn
+            for(int c=0;c<9;c++) {
+                board[r][c] = input[r][c];
+            }
+        }
+
+        emptyBoxIndex = new ArrayList<>();
+    }
     //getting indexes of boxes with 0 (empty boxes)
     public void getEmptyBoxIndexs(){
         for(int r=0; r<9; r++){
             for(int c= 0; c<9; c++){
-                if(this.board[r][c]==0){
+                if(this.flag[r][c]==0){
                     this.emptyBoxIndex.add(new ArrayList<>());
                     this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(r);
                     this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(c);
@@ -121,4 +140,13 @@ public class board_GamePlay {
     public void setCurrentState(int[][] state) {
         this.board = state;
     }
+
+    public void setBoard(int[][] newBoard) {
+        board = newBoard;
+    }
+
+    public int[][] getFlag(){
+        return this.flag;
+    }
+
 }

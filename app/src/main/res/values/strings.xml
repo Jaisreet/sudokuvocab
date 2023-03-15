@@ -25,5 +25,6 @@
     <string name="easy">Easy</string>
     <string name="intermediate">Intermediate</string>
     <string name="hard">Hard</string>
+    <string name="On">On</string>
 
 </resources>

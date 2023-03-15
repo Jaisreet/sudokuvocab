@@ -1,11 +1,13 @@
 package View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -24,15 +26,31 @@ public class MainActivity extends AppCompatActivity {
     private drawBoard gameBoard;
     private board_GamePlay gameBoardGamePlay;
 
+    private static final String GAME_BOARD_KEY = "game_board";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         gameBoard = findViewById(R.id.sudokuBoard);
-        gameBoardGamePlay = gameBoard.getBoardFill();
-        gameBoardGamePlay.getEmptyBoxIndexs();
+
+        if (savedInstanceState != null) {
+            // Retrieve the stored data from the bundle and restore the state of the drawBoard view
+            int[][] board = (int[][]) savedInstanceState.getSerializable("board");
+            int[][] flag = (int[][]) savedInstanceState.getSerializable("flag_state");
+            int[][] solution = (int[][]) savedInstanceState.getSerializable("solution_state");
+            gameBoardGamePlay = new board_GamePlay(board, flag, solution);
+            gameBoard.setBoardFill(gameBoardGamePlay);
+            gameBoardGamePlay.getEmptyBoxIndexs();
+        }
+        else{
+            gameBoardGamePlay = new board_GamePlay();
+            gameBoardGamePlay = gameBoard.getBoardFill();
+            gameBoardGamePlay.getEmptyBoxIndexs();
+        }
+
+
+
 
         //Open the hint dialog box
         Button hint =findViewById(R.id.hint);
@@ -137,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
     //if solution is correct it stays if wrong the value in that cell is set to 0
     public void check(){
         for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
-
             int r = (int) letter.get(0);
             int c = (int) letter.get(1);
             if (gameBoardGamePlay.getBoard()[r][c] != gameBoardGamePlay.getSolutionBoard()[r][c]) {
@@ -218,34 +235,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-    }
-
-
-}
-/*
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
         Bundle outState = new Bundle();
-
-        int[][] board = gameBoardGamePlay.getBoard();
-        int[][] solutionBoard = gameBoardGamePlay.getSolutionBoard();
-        outState.putIntArray("sudokuBoardState", gameBoardGamePlay.flattenBoardState(board));
-        outState.putIntArray("SolutionBoard", gameBoardGamePlay.flattenBoardState(solutionBoard));
-        outState.putSerializable("boardState", gameBoard);
         onSaveInstanceState(outState);
     }
 
-    // save the state of the board in onSaveInstanceState()
+
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        int[][] board = gameBoardGamePlay.getBoard();
-        int[][] solutionBoard = gameBoardGamePlay.getSolutionBoard();
-        outState.putIntArray("sudokuBoardState", gameBoardGamePlay.flattenBoardState(board));
-        outState.putIntArray("SolutionBoard", gameBoardGamePlay.flattenBoardState(solutionBoard));
-        outState.putSerializable("boardState", gameBoard);
+        // Store the data you want to save in the bundle
+        outState.putSerializable("board", gameBoard.getBoard());
+        outState.putSerializable("flag_state", gameBoardGamePlay.getFlag());
+        outState.putSerializable("solution_state", gameBoardGamePlay.getSolutionBoard());
     }
 
-*/
+}
