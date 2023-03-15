@@ -90,6 +90,63 @@ public class MainActivity extends AppCompatActivity {
         settingsDialog.setOnClickListener(view -> openSettingDialog());
 
 
+        timeView = (TextView)findViewById(R.id.timeView);
+
+        if (savedInstanceState != null) {
+
+                // Get the previous state of the stopwatch
+                // if the activity has been
+                // destroyed and recreated.
+                seconds
+                        = savedInstanceState
+                        .getInt("seconds");
+                running
+                        = savedInstanceState
+                        .getBoolean("running");
+                wasRunning
+                        = savedInstanceState
+                        .getBoolean("wasRunning");
+
+        }
+        timer = getIntent().getStringExtra("timerStr");
+
+        if(timer == null || "true".equalsIgnoreCase(timer)) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do want to start the timer now?")
+                    //if yes front page is opened
+                    .setPositiveButton("Yes", (dialog, id) -> {
+                        running = true;
+                        runTimer();
+                    })
+                    //if no it goes back to the setting dialog box
+                    .setNegativeButton("No", (dialog, id) -> {
+                        dialog.cancel();
+                        running = false;
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+    // Save the state of the stopwatch
+    // if it's about to be destroyed.
+     @Override
+    public void onSaveInstanceState(
+            Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState
+                .putInt("seconds", seconds);
+        savedInstanceState
+                .putBoolean("running", running);
+        savedInstanceState
+                .putBoolean("wasRunning", wasRunning);
+    }
+
+    @Override
+    protected void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);
+        this.setIntent(intent);
     }
 
     private void updateTimerVisibility(){
@@ -110,11 +167,6 @@ public class MainActivity extends AppCompatActivity {
         running = true;
     }
 
-    public void timerOff() {
-        running = false;
-        seconds = 0;
-
-    }
 
     public void onClickReset()
     {
@@ -281,7 +333,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
         dialog.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        // if decline button is clicked, close the custom dialog
         resume.setOnClickListener(v -> {
             onResume();
             // Close dialog
