@@ -105,6 +105,70 @@ public class MainActivity extends AppCompatActivity {
             timeView.setVisibility(View.VISIBLE);
         }
     }
+
+    public void timerOn() {
+        running = true;
+    }
+
+    public void timerOff() {
+        running = false;
+        seconds = 0;
+
+    }
+
+    public void onClickReset()
+    {
+        seconds = 0;
+        running = true;
+    }
+
+    private void runTimer()
+    {
+
+        // Creates a new Handler
+        final Handler handler
+                = new Handler();
+
+        // Call the post() method,
+        // passing in a new Runnable.
+        // The post() method processes
+        // code without a delay,
+        // so the code in the Runnable
+        // will run almost immediately.
+        handler.post(new Runnable() {
+            @Override
+
+            public void run()
+            {
+                int hours = seconds / 3600;
+                int minutes = (seconds % 3600) / 60;
+                int secs = seconds % 60;
+
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                String time
+                        = String
+                        .format(Locale.getDefault(),
+                                "%d:%02d:%02d", hours,
+                                minutes, secs);
+
+                // Set the text view text.
+                timeView.setText(time);
+
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++;
+                }
+
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000);
+            }
+        });
+    }
+
+
     //go back to first page
     public void backToMain(){
         Intent intent = new Intent(this, First_page.class);
@@ -246,8 +310,8 @@ public class MainActivity extends AppCompatActivity {
 
     //opens the setting page activity
     public void settingPage() {
-        Intent intent = new Intent(this, setting_page.class);
-        this.startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), setting_page.class);
+        startActivity(intent);
     }
 
 
