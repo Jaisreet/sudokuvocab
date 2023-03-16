@@ -3,8 +3,6 @@ package View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -27,17 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
     private drawBoard gameBoard;
     private board_GamePlay gameBoardGamePlay;
-
     private int seconds = 0;
-
-    // Is the stopwatch running?
     private boolean running;
-
     private boolean wasRunning;
-
     public TextView timeView;
     public String timer;
-    private boolean switchState;
+    private boolean goneSwitchState;
+    boolean switchResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
         gameBoard = findViewById(R.id.sudokuBoard);
         timeView = findViewById(R.id.timeView);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
+        switchResult = sharedPreferences.getBoolean("result",false);
+
 
         timer = getIntent().getStringExtra("timerStr");
 
@@ -61,37 +59,32 @@ public class MainActivity extends AppCompatActivity {
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
-            running = true;
             runTimer();
+            if(running){
+                timeView.setVisibility(View.VISIBLE);
+            }
+            else{
+                goneSwitchState = true;
+                timeView.setVisibility(View.GONE);
+            }
         }
         else{
             gameBoardGamePlay = new board_GamePlay();
             gameBoardGamePlay = gameBoard.getBoardFill();
             gameBoardGamePlay.getEmptyBoxIndexs();
-            //running = true;
-            //runTimer();
-            timer = getIntent().getStringExtra("timerStr");
-
-            if(timer == null || "true".equalsIgnoreCase(timer)) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Do want to start the timer now?")
-                        //if yes front page is opened
-                        .setPositiveButton("Yes", (dialog, id) -> {
-                            running = true;
-                            runTimer();
-                        })
-                        //if no it goes back to the setting dialog box
-                        .setNegativeButton("No", (dialog, id) -> {
-                            dialog.cancel();
-                            running = false;
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+            if(switchResult){
+                running = true;
+                runTimer();
+                timeView.setVisibility(View.VISIBLE);
             }
-        }
+            else{
+                running = false;
+                goneSwitchState = true;
+                runTimer();
+                timeView.setVisibility(View.GONE);
+            }
 
-        updateTimerVisibility();
+        }
 
         //Open the hint dialog box
         Button hint =findViewById(R.id.hint);
@@ -127,21 +120,9 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         wasRunning = running;
         running = false;
+        goneSwitchState = false;
     }
 
-    private void updateTimerVisibility(){
-        // Get a reference to the SharedPreferences object
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        // Get the value of the switch from the SharedPreferences object
-        switchState = prefs.getBoolean("switch_state", true);
-        if (!switchState) {
-            // If switch is not checked, make TextView disappear
-            timeView.setVisibility(View.GONE);
-        } else {
-            // If switch is checked, make TextView visible
-            timeView.setVisibility(View.VISIBLE);
-        }
-    }
 
     public void timerOn() {
         running = true;
@@ -151,9 +132,43 @@ public class MainActivity extends AppCompatActivity {
     public void onClickReset()
     {
         seconds = 0;
-        running = true;
+        running = false;
+    }
+    // If the activity is resumed,
+    // start the stopwatch
+    // again if it was running previously.
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
+        boolean switchResult = sharedPreferences.getBoolean("result",false);
+        if(switchResult){
+            running = true;
+            timeView.setVisibility(View.VISIBLE);
+        }
+        else{
+            running = false;
+            goneSwitchState = true;
+            timeView.setVisibility(View.GONE);
+        }
+
     }
 
+    public void timerOff() {
+        running = false;
+    }
+
+    public void timerStatus(Boolean state) {
+        if(state) {
+            running = true;
+        }
+        else {
+            running = false;
+            seconds = 0;
+            timeView.setText("Timer off");
+        }
+    }
     private void runTimer()
     {
 
@@ -189,10 +204,9 @@ public class MainActivity extends AppCompatActivity {
 
                 // If running is true, increment the
                 // seconds variable.
-                if (running) {
+                if (running|| goneSwitchState) {
                     seconds++;
                 }
-
                 // Post the code again
                 // with a delay of 1 second.
                 handler.postDelayed(this, 1000);
@@ -359,39 +373,6 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
-
-
-
-    // If the activity is resumed,
-    // start the stopwatch
-    // again if it was running previously.
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        if (wasRunning) {
-            running = true;
-        }
-        updateTimerVisibility();
-
-    }
-
-    public void timerOff() {
-        running = false;
-        seconds = 0;
-
-    }
-
-    public void timerStatus(Boolean state) {
-        if(state) {
-            running = true;
-        }
-        else {
-            running = false;
-            seconds = 0;
-            timeView.setText("Timer off");
-        }
-    }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {

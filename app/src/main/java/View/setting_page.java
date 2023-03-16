@@ -1,13 +1,9 @@
 package View;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +25,7 @@ public class setting_page extends AppCompatActivity {
 
     private String selectedDifficulty;
 
-
+    Boolean result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,26 +34,43 @@ public class setting_page extends AppCompatActivity {
 
         timerState = "true";
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        timerState = String.valueOf(sharedPreferences.getBoolean("switchState", true));
-
         selectedDifficulty = "easy";
 
         simpleSwitch = (Switch) findViewById(R.id.timer);
-        simpleSwitch.setChecked(Boolean.valueOf(timerState));
+        //simpleSwitch.setChecked(Boolean.valueOf(timerState));
         difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
         easyButton = findViewById(R.id.easyButton);
         mediumButton = findViewById(R.id.mediumButton);
         hardButton = findViewById(R.id.hardButton);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
+        result = sharedPreferences.getBoolean("result", false);
+        simpleSwitch.setChecked(result);
         // Set switch listener
         simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    result = true;
+                    SharedPreferences sharedPref = getSharedPreferences("switchResult",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("result", isChecked);
+                    editor.apply();
+                }
+                else{
+                    result = false;
+                    SharedPreferences sharedPref = getSharedPreferences("switchResult",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("result", isChecked);
+                    editor.apply();
+                }
+                /*
                 timerState = String.valueOf(isChecked);
                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("switchState", isChecked);
                 editor.apply();
+                */
+
             }
         });
 
