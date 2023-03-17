@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -364,12 +365,25 @@ public class MainActivity extends AppCompatActivity {
     //open the quit dialog box
     public void quit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to quit?")
+        TextView message = new TextView(this );
+        message.setTextSize(40);
+        message.setText("Are you sure you want to quit?");
+        builder.setView(message)
                 //if yes front page is opened
                 .setPositiveButton("Yes", (dialog, id) -> backToMain())
                 //if no it goes back to the setting dialog box
                 .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+
         AlertDialog alert = builder.create();
+        alert.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button btnPositive = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                btnPositive.setTextSize(30);
+                Button btnNegative = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+                btnNegative.setTextSize(30);
+            }
+        });
         alert.show();
     }
 

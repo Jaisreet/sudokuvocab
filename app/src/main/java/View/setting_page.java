@@ -63,13 +63,6 @@ public class setting_page extends AppCompatActivity {
                     editor.putBoolean("result", isChecked);
                     editor.apply();
                 }
-                /*
-                timerState = String.valueOf(isChecked);
-                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("switchState", isChecked);
-                editor.apply();
-                */
 
             }
         });
@@ -121,16 +114,17 @@ public class setting_page extends AppCompatActivity {
         return selectedDifficulty;
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
     public void save() {
         timerState = String.valueOf(simpleSwitch.isChecked());
         System.out.println("timer: " + timerState);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("timerStr", timerState);
         startActivity(intent);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
 }

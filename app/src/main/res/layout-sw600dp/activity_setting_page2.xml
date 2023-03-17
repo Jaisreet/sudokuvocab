@@ -18,7 +18,8 @@
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="3dp" />
+        tools:layout_editor_absoluteY="3dp"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:id="@+id/SettingsLinear"

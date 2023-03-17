@@ -17,7 +17,8 @@
         <activity
             android:name="View.setting_page"
             android:screenOrientation="sensor"
-            android:exported="false" />
+            android:configChanges="orientation|screenSize"
+            android:exported="true" />
         <activity
             android:name="View.First_page"
             android:screenOrientation="sensor"
