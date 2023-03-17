@@ -9,23 +9,18 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
 import androidx.annotation.Nullable;
-
 import com.example.sudokuapp.R;
-
+import java.io.Serializable;
 import java.util.ArrayList;
-
 import Model.board_GamePlay;
 
-public class drawBoard extends View {
+public class drawBoard extends View implements Serializable {
     private final int boardColor;
     private final int cellFillColor;
     private final int cellHightlightColor;
     private final int letterColor;
     private final int letterColorSolve;
-
-    private final int wrongAns;
     private final Paint boardColorPaint = new Paint();
     private final Paint cellFillColorPaint = new Paint();
     private final Paint cellHightlightColorPaint = new Paint();
@@ -33,7 +28,8 @@ public class drawBoard extends View {
     private final Rect letterPaintBounds = new Rect();
     private int cellsize;
 
-    private final Model.board_GamePlay board_GamePlay = new board_GamePlay();
+    Context context;
+    private Model.board_GamePlay board_GamePlay = new board_GamePlay();
 
 
     public drawBoard(Context context, @Nullable AttributeSet attrs) {
@@ -48,13 +44,31 @@ public class drawBoard extends View {
             cellHightlightColor = a.getInteger(R.styleable.SudokuBoard_cellHightlightColor, 0);
             letterColor= a.getInteger(R.styleable.SudokuBoard_letterColor,0 );
             letterColorSolve = a.getInteger(R.styleable.SudokuBoard_letterColorSolve,0);
-            wrongAns = a.getInteger(R.styleable.SudokuBoard_wrongAns,0);
+            int wrongAns = a.getInteger(R.styleable.SudokuBoard_wrongAns, 0);
 
         } finally {
             a.recycle();
         }
     }
 
+    public drawBoard(Context context, @Nullable AttributeSet attrs, int[][] input) {
+        super(context, attrs);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SudokuBoard,
+                0, 0);
+
+        try {
+            // extract board color from typed array
+            boardColor = a.getInteger(R.styleable.SudokuBoard_boardColor, 0);
+            cellFillColor = a.getInteger(R.styleable.SudokuBoard_cellFilledColor, 0);
+            cellHightlightColor = a.getInteger(R.styleable.SudokuBoard_cellHightlightColor, 0);
+            letterColor= a.getInteger(R.styleable.SudokuBoard_letterColor,0 );
+            letterColorSolve = a.getInteger(R.styleable.SudokuBoard_letterColorSolve,0);
+            int wrongAns = a.getInteger(R.styleable.SudokuBoard_wrongAns, 0);
+
+        } finally {
+            a.recycle();
+        }
+    }
     @Override
     protected void onMeasure(int width, int height) {
         super.onMeasure(width, width);
@@ -102,7 +116,7 @@ public class drawBoard extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent (MotionEvent event){
-        boolean isVaild;
+        boolean isVaild = false;
 
         float x = event.getX();
         float y = event.getY();
@@ -150,7 +164,7 @@ public class drawBoard extends View {
 
             int r = (int)letter.get(0);
             int c = (int)letter.get(1);
-            if(board_GamePlay.getBoard()[r][c] != 0) {
+            if(board_GamePlay.getBoard()[r][c] != 0 ) {
                 String text = Integer.toString(board_GamePlay.getBoard()[r][c]);
                 float width, height;
 
@@ -164,8 +178,9 @@ public class drawBoard extends View {
             }
 
         }
-
-
+        //reset teh color of the letterPaint object to letterColor
+        letterPaint.setColor(letterColor);
+        invalidate();
     }
 
     //show the selected cell by highlighting it
@@ -231,4 +246,17 @@ public class drawBoard extends View {
         return this.board_GamePlay;
     }
 
+    public void setBoard(int[][] board) {
+        board_GamePlay.setBoard(board);
+        invalidate(); // Redraw the view to reflect the new state
+    }
+
+    public int[][] getBoard() {
+        return board_GamePlay.getBoard();
+    }
+
+
+    public void setBoardFill(Model.board_GamePlay gameBoardGamePlay) {
+        board_GamePlay = gameBoardGamePlay;
+    }
 }

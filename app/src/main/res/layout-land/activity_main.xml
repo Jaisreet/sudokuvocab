@@ -9,15 +9,15 @@
     <Controller.drawBoard
         android:id="@+id/sudokuBoard"
         id="@+id/SudokuBoard"
-        android:layout_width="370dp"
-        android:layout_height="370dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="302dp"
+        android:layout_height="279dp"
+        android:layout_marginTop="4dp"
         android:visibility="visible"
         custom:boardColor="#000000"
         custom:cellFilledColor="#674ea7"
         custom:cellHightlightColor="#d9d2e9"
         custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintHorizontal_bias="0.47"
+        custom:layout_constraintHorizontal_bias="0.004"
         custom:layout_constraintStart_toStartOf="parent"
         custom:layout_constraintTop_toTopOf="parent"
         custom:letterColor="#000000"
@@ -28,15 +28,15 @@
 
     <GridLayout
         android:id="@+id/gridLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_width="289dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="60dp"
         android:columnCount="3"
         android:foregroundGravity="center"
         android:rowCount="3"
         custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintStart_toStartOf="parent"
-        custom:layout_constraintTop_toBottomOf="@+id/sudokuBoard">
+        custom:layout_constraintStart_toEndOf="@+id/sudokuBoard"
+        custom:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/button7"
@@ -163,13 +163,13 @@
         android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
         android:columnCount="4"
         android:paddingTop="0dp"
         android:paddingBottom="4dp"
         android:rowCount="1"
+        custom:layout_constraintBottom_toBottomOf="parent"
         custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintStart_toStartOf="parent"
+        custom:layout_constraintStart_toEndOf="@+id/sudokuBoard"
         custom:layout_constraintTop_toBottomOf="@+id/gridLayout2">
 
         <Button
@@ -205,31 +205,32 @@
 
     </GridLayout>
 
-    <ImageView
-        android:id="@+id/settingsDialog"
-        android:layout_width="41dp"
-        android:layout_height="41dp"
-        android:contentDescription="@string/Settings"
-        android:src="@drawable/settings"
-        custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
+    <LinearLayout
+        android:layout_width="49dp"
+        android:layout_height="87dp"
+        android:orientation="vertical"
+        custom:layout_constraintBottom_toBottomOf="parent"
         custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintHorizontal_bias="0.952"
+        custom:layout_constraintStart_toEndOf="@+id/gridLayout2"
         custom:layout_constraintTop_toTopOf="parent"
-        custom:layout_constraintVertical_bias="0.545" />
+        custom:layout_constraintVertical_bias="0.496">
 
-    <ImageView
-        android:id="@+id/resetbtn"
-        android:layout_width="45dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="4dp"
-        android:contentDescription="Reset"
-        android:src="@drawable/reset"
-        custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
-        custom:layout_constraintHorizontal_bias="0.0"
-        custom:layout_constraintStart_toStartOf="parent"
-        custom:layout_constraintTop_toTopOf="parent"
-        custom:layout_constraintVertical_bias="0.909" />
+        <ImageView
+            android:id="@+id/settingsDialog"
+            android:layout_width="43dp"
+            android:layout_height="42dp"
+            android:contentDescription="@string/Settings"
+            android:onClick="settingDialog"
+            android:src="@drawable/settings" />
+
+        <ImageView
+            android:id="@+id/resetbtn"
+            android:layout_width="43dp"
+            android:layout_height="42dp"
+            android:contentDescription="Reset"
+            android:onClick="reset"
+            android:src="@drawable/reset" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/timeView"
@@ -238,11 +239,10 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:typeface="normal"
-        android:visibility="gone"
-        custom:layout_constraintBottom_toTopOf="@+id/sudokuBoard"
-        custom:layout_constraintEnd_toStartOf="@+id/settingsDialog"
-        custom:layout_constraintStart_toEndOf="@+id/resetbtn"
+        custom:layout_constraintEnd_toEndOf="parent"
+        custom:layout_constraintStart_toStartOf="parent"
         custom:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
