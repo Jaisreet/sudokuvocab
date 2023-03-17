@@ -8,6 +8,8 @@ public class board_GamePlay {
 
     int[][] board;
     Board_Generation input = new Board_Generation();
+    int N = input.return_n();
+    int SQRT = input.return_sqrt();
     public ArrayList<ArrayList<Object>> emptyBoxIndex;
     int selected_row;
     public int selected_column;
@@ -19,15 +21,15 @@ public class board_GamePlay {
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
         selected_row = -1;
-        board = new int[9][9];  // main working board
-        flag = new int[9][9];   // flag to keep track of pre-filled squares
-        solutionBoard = new int[9][9];
+        board = new int[N][N];  // main working board
+        flag = new int[N][N];   // flag to keep track of pre-filled squares
+        solutionBoard = new int[N][N];
         // algorithm to move generated board set up into main board
 
         // for every row
-        for(int r=0; r<9; r++) {
+        for(int r=0; r<N; r++) {
             // for every colomn
-            for(int c=0;c<9;c++) {
+            for(int c=0;c<N;c++) {
                 board[r][c] = input.getArr_gameBoard()[r][c];
                 solutionBoard[r][c] = input.getArr_solutionBoard()[r][c];
                 // if the board at that spot is not empty, set the flag to one
@@ -48,15 +50,15 @@ public class board_GamePlay {
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
         selected_row = -1;
-        board = new int[9][9];  // main working board
+        board = new int[N][N];  // main working board
         flag = flag_input;  // flag to keep track of pre-filled squares
         solutionBoard = solution_input;
         // algorithm to move generated board set up into main board
 
         // for every row
-        for(int r=0; r<9; r++) {
+        for(int r=0; r < N; r++) {
             // for every colomn
-            for(int c=0;c<9;c++) {
+            for(int c=0;c < N;c++) {
                 board[r][c] = input[r][c];
             }
         }
@@ -65,8 +67,8 @@ public class board_GamePlay {
     }
     //getting indexes of boxes with 0 (empty boxes)
     public void getEmptyBoxIndexs(){
-        for(int r=0; r<9; r++){
-            for(int c= 0; c<9; c++){
+        for(int r=0; r<N; r++){
+            for(int c= 0; c<N; c++){
                 if(this.flag[r][c]==0){
                     this.emptyBoxIndex.add(new ArrayList<>());
                     this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(r);
@@ -148,5 +150,10 @@ public class board_GamePlay {
     public int[][] getFlag(){
         return this.flag;
     }
+
+    public int return_n() {return N;}
+    public int return_sqrt() {return SQRT;}
+
+
 
 }

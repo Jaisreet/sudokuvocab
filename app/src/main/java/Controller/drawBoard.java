@@ -30,6 +30,8 @@ public class drawBoard extends View implements Serializable {
 
     Context context;
     private Model.board_GamePlay board_GamePlay = new board_GamePlay();
+    int N = board_GamePlay.return_n();
+    int SQRT = board_GamePlay.return_sqrt();
 
 
     public drawBoard(Context context, @Nullable AttributeSet attrs) {
@@ -77,7 +79,7 @@ public class drawBoard extends View implements Serializable {
         //int dimension = Math.min(this.getWidth(), this.getHeight());
         int dimension = getMeasuredWidth();
 
-        cellsize = dimension / 9;
+        cellsize = dimension / N;
 
 
         // set our view width and height to the dimension
@@ -140,8 +142,8 @@ public class drawBoard extends View implements Serializable {
         //size of numbers are set according to the size of cell
         letterPaint.setTextSize(cellsize);
 
-        for(int r=0; r<9;r++){
-            for(int c =0; c<9;c++){
+        for(int r=0; r<N;r++){
+            for(int c =0; c<N;c++){
                 if(board_GamePlay.getBoard()[r][c] != 0){
                     String text = Integer.toString(board_GamePlay.getBoard()[r][c]);
                     float width, height;
@@ -186,10 +188,10 @@ public class drawBoard extends View implements Serializable {
     //show the selected cell by highlighting it
     private void colorCell(Canvas canvas, int r, int c){
             //highlight the row and column of selected cell with cellHightlightcolorpaint
-            canvas.drawRect((c-1)*cellsize, 0, c*cellsize , cellsize*9,
+            canvas.drawRect((c-1)*cellsize, 0, c * cellsize , cellsize*N,
                     cellHightlightColorPaint );
 
-            canvas.drawRect(0, (r-1)*cellsize, cellsize*9 , r*cellsize,
+            canvas.drawRect(0, (r-1)*cellsize, cellsize * N , r*cellsize,
                     cellHightlightColorPaint );
             //highlight the selected cell with cell fill color paint
             canvas.drawRect((c-1)*cellsize, (r-1)*cellsize, c*cellsize , r*cellsize,
@@ -215,8 +217,8 @@ public class drawBoard extends View implements Serializable {
     //draw the sudoku board
     private void drawBoard(Canvas canvas){
         //columns of board
-        for (int col = 0; col < 10; col++ ) {
-            if (col%3 == 0) {
+        for (int col = 0; col <= N; col++ ) {
+            if (col%SQRT == 0) {
                 //outer think lines
                 DrawThickLine();
             } else {
@@ -227,8 +229,8 @@ public class drawBoard extends View implements Serializable {
                     getWidth(),boardColorPaint);
         }
         //rows of board
-        for (int row = 0; row < 10; row++ ) {
-            if (row%3 == 0) {
+        for (int row = 0; row < N; row++ ) {
+            if (row%SQRT == 0) {
                 //outer thick lines
                 DrawThickLine();
             } else {

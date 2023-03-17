@@ -7,9 +7,9 @@ public class Board_Generation {
     private Context Board_Generation;
     int[][] arr_gameBoard;
     int[][] arr_solutionBoard;
-    int N = 9; // length and width of the grid
-    int SQRT = 3; // length and width of the diagonal sub-grids
-    int K =  40; // number of elements to be removed
+    int N = 6; // length and width of the grid
+    int SQRT = (int) Math.sqrt(N); // length and width of the diagonal sub-grids
+    int K =  20; // number of elements to be removed
 
 
 
@@ -26,8 +26,8 @@ public class Board_Generation {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}};
         */
-        arr_gameBoard = new int[9][9];
-        arr_solutionBoard = new int[9][9];
+        arr_gameBoard = new int[N][N];
+        arr_solutionBoard = new int[N][N];
 
         // 1. Fill the diagonal sub-matrices
         fillDiagonal(arr_gameBoard);
@@ -47,12 +47,19 @@ public class Board_Generation {
 
     }
 
+    // functions to return important grid nums
+    int return_n() {return N;}
+    int return_sqrt() {return SQRT;}
+    int return_k() {return K;}
+
+
+
     // print board to console
 
     void printBoard(int arr[][])
     {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 System.out.print("|" + arr[i][j] + "|" );
             }
             System.out.print("\n");
@@ -206,8 +213,8 @@ public class Board_Generation {
     {
         while (count != 0)
         {
-            int i = (int) (Math.random() * 9 );
-            int j = (int) (Math.random() * 9 );
+            int i = (int) (Math.random() * N );
+            int j = (int) (Math.random() * N );
 
             // System.out.println(i+" "+j);
             if (arr[i][j] != 0)
