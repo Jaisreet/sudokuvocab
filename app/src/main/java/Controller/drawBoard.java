@@ -216,17 +216,33 @@ public class drawBoard extends View implements Serializable {
 
     //draw the sudoku board
     private void drawBoard(Canvas canvas){
-        //columns of board
-        for (int col = 0; col <= N; col++ ) {
-            if (col%SQRT == 0) {
-                //outer think lines
-                DrawThickLine();
-            } else {
-                //inner thin lines
-                DrawThinLine();
+        // specific case for 6x6 or 12x12
+        if (N == 6 || N == 12) {
+            for (int col = 0; col <= N; col++) {
+                if (col % (SQRT+1) == 0) {
+                    //outer think lines
+                    DrawThickLine();
+                } else {
+                    //inner thin lines
+                    DrawThinLine();
+                }
+                canvas.drawLine(cellsize * col, 0, cellsize * col,
+                        getWidth(), boardColorPaint);
             }
-            canvas.drawLine(cellsize * col, 0, cellsize * col,
-                    getWidth(),boardColorPaint);
+        } else {
+
+            //columns of board for 9x9, 4x4
+            for (int col = 0; col <= N; col++) {
+                if (col % SQRT == 0) {
+                    //outer think lines
+                    DrawThickLine();
+                } else {
+                    //inner thin lines
+                    DrawThinLine();
+                }
+                canvas.drawLine(cellsize * col, 0, cellsize * col,
+                        getWidth(), boardColorPaint);
+            }
         }
         //rows of board
         for (int row = 0; row < N; row++ ) {
