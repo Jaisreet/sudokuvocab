@@ -26,12 +26,13 @@ public class drawBoard extends View implements Serializable {
     private final Paint cellHightlightColorPaint = new Paint();
     private final Paint letterPaint = new Paint();
     private final Rect letterPaintBounds = new Rect();
+    private int difficultyLevel;
     private int cellsize;
 
     Context context;
-    private Model.board_GamePlay board_GamePlay = new board_GamePlay();
-    int N = board_GamePlay.return_n();
-    int SQRT = board_GamePlay.return_sqrt();
+    private board_GamePlay board_GamePlay= new board_GamePlay(20);
+    int N= board_GamePlay.return_n();
+    int SQRT= board_GamePlay.return_sqrt();
 
 
     public drawBoard(Context context, @Nullable AttributeSet attrs) {
@@ -51,26 +52,10 @@ public class drawBoard extends View implements Serializable {
         } finally {
             a.recycle();
         }
+
     }
 
-    public drawBoard(Context context, @Nullable AttributeSet attrs, int[][] input) {
-        super(context, attrs);
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SudokuBoard,
-                0, 0);
 
-        try {
-            // extract board color from typed array
-            boardColor = a.getInteger(R.styleable.SudokuBoard_boardColor, 0);
-            cellFillColor = a.getInteger(R.styleable.SudokuBoard_cellFilledColor, 0);
-            cellHightlightColor = a.getInteger(R.styleable.SudokuBoard_cellHightlightColor, 0);
-            letterColor= a.getInteger(R.styleable.SudokuBoard_letterColor,0 );
-            letterColorSolve = a.getInteger(R.styleable.SudokuBoard_letterColorSolve,0);
-            int wrongAns = a.getInteger(R.styleable.SudokuBoard_wrongAns, 0);
-
-        } finally {
-            a.recycle();
-        }
-    }
     @Override
     protected void onMeasure(int width, int height) {
         super.onMeasure(width, width);
@@ -187,15 +172,15 @@ public class drawBoard extends View implements Serializable {
 
     //show the selected cell by highlighting it
     private void colorCell(Canvas canvas, int r, int c){
-            //highlight the row and column of selected cell with cellHightlightcolorpaint
-            canvas.drawRect((c-1)*cellsize, 0, c * cellsize , cellsize*N,
-                    cellHightlightColorPaint );
+        //highlight the row and column of selected cell with cellHightlightcolorpaint
+        canvas.drawRect((c-1)*cellsize, 0, c * cellsize , cellsize*N,
+                cellHightlightColorPaint );
 
-            canvas.drawRect(0, (r-1)*cellsize, cellsize * N , r*cellsize,
-                    cellHightlightColorPaint );
-            //highlight the selected cell with cell fill color paint
-            canvas.drawRect((c-1)*cellsize, (r-1)*cellsize, c*cellsize , r*cellsize,
-                    cellFillColorPaint );
+        canvas.drawRect(0, (r-1)*cellsize, cellsize * N , r*cellsize,
+                cellHightlightColorPaint );
+        //highlight the selected cell with cell fill color paint
+        canvas.drawRect((c-1)*cellsize, (r-1)*cellsize, c*cellsize , r*cellsize,
+                cellFillColorPaint );
 
         invalidate();
     }
@@ -216,17 +201,33 @@ public class drawBoard extends View implements Serializable {
 
     //draw the sudoku board
     private void drawBoard(Canvas canvas){
-        //columns of board
-        for (int col = 0; col <= N; col++ ) {
-            if (col%SQRT == 0) {
-                //outer think lines
-                DrawThickLine();
-            } else {
-                //inner thin lines
-                DrawThinLine();
+        // specific case for 6x6 or 12x12
+        if (N == 6 || N == 12) {
+            for (int col = 0; col <= N; col++) {
+                if (col % (SQRT+1) == 0) {
+                    //outer think lines
+                    DrawThickLine();
+                } else {
+                    //inner thin lines
+                    DrawThinLine();
+                }
+                canvas.drawLine(cellsize * col, 0, cellsize * col,
+                        getWidth(), boardColorPaint);
             }
-            canvas.drawLine(cellsize * col, 0, cellsize * col,
-                    getWidth(),boardColorPaint);
+        } else {
+
+            //columns of board for 9x9, 4x4
+            for (int col = 0; col <= N; col++) {
+                if (col % SQRT == 0) {
+                    //outer think lines
+                    DrawThickLine();
+                } else {
+                    //inner thin lines
+                    DrawThinLine();
+                }
+                canvas.drawLine(cellsize * col, 0, cellsize * col,
+                        getWidth(), boardColorPaint);
+            }
         }
         //rows of board
         for (int row = 0; row < N; row++ ) {
@@ -250,6 +251,8 @@ public class drawBoard extends View implements Serializable {
 
     public void setBoard(int[][] board) {
         board_GamePlay.setBoard(board);
+        N = board_GamePlay.return_n();
+        SQRT = board_GamePlay.return_sqrt();
         invalidate(); // Redraw the view to reflect the new state
     }
 
@@ -258,7 +261,7 @@ public class drawBoard extends View implements Serializable {
     }
 
 
-    public void setBoardFill(Model.board_GamePlay gameBoardGamePlay) {
+    public void setBoardFill(board_GamePlay gameBoardGamePlay) {
         board_GamePlay = gameBoardGamePlay;
     }
 }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.sudokuapp.R;
 import java.util.ArrayList;
@@ -34,13 +35,18 @@ public class MainActivity extends AppCompatActivity {
     private boolean goneSwitchState;
     boolean switchResult;
 
+    private int difficultyLevel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get the selected difficulty level from the settingPage activity
+        difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
 
         gameBoard = findViewById(R.id.sudokuBoard);
+        //gameBoard = new drawBoard(this, null, difficultyLevel);
         timeView = findViewById(R.id.timeView);
 
         SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
@@ -70,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            gameBoardGamePlay = new board_GamePlay();
-            gameBoardGamePlay = gameBoard.getBoardFill();
+            gameBoardGamePlay = new board_GamePlay(difficultyLevel);
+            gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             if(switchResult){
                 running = true;

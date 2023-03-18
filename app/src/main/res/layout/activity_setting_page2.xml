@@ -9,6 +9,8 @@
     <TextView
         android:layout_width="181dp"
         android:layout_height="71dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif"
         android:text="@string/Settings"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -16,10 +18,8 @@
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="3dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="3dp" />
 
     <LinearLayout
         android:id="@+id/SettingsLinear"
@@ -38,13 +38,14 @@
             android:id="@+id/timer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Timer"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:textSize="20sp"
             android:summary="Enable/disable timer"
+            android:text="Timer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <!--- commented out for use in iteration 3
@@ -65,15 +66,16 @@
             android:id="@+id/modes"
             android:layout_width="155dp"
             android:layout_height="43dp"
-            android:text="@string/modes"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:text="@string/modes"
+            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <RadioGroup
+            android:id="@+id/languageRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/languageRadioGroup"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="10dp">
 
@@ -83,16 +85,16 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/english"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                />
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <RadioButton
                 android:id="@+id/French"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/french"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                />
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
         </RadioGroup>
 
 
@@ -100,16 +102,16 @@
             android:id="@+id/levels"
             android:layout_width="388dp"
             android:layout_height="52dp"
-            android:text="@string/levels"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            />
+            android:text="@string/levels"
+            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <RadioGroup
+            android:id="@+id/difficultyRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id = "@+id/difficultyRadioGroup"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="10dp">
 
@@ -119,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/easy"
+                android:textSize="20sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <RadioButton
@@ -126,6 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/intermediate"
+                android:textSize="20sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <RadioButton
@@ -133,7 +137,62 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hard"
+                android:textSize="20sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/gridLayout"
+            android:layout_width="388dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Grid Layout"
+            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <RadioGroup
+            android:id="@+id/GridRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp">
+
+            <RadioButton
+                android:id="@+id/fourbyfour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="4x4"
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <RadioButton
+                android:id="@+id/sixbysix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6x6"
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <RadioButton
+                android:id="@+id/ninebynine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9x9"
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <RadioButton
+                android:id="@+id/twelvebytwelve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12x12"
+                android:textSize="20sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+
         </RadioGroup>
 
 
@@ -147,6 +206,7 @@
         android:layout_marginBottom="10dp"
         android:onClick="backToMain"
         android:text="Back"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -158,6 +218,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:text="Save Changes"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button14"
         app:layout_constraintStart_toStartOf="parent" />

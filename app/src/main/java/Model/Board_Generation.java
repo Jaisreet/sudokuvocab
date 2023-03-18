@@ -3,11 +3,13 @@ package Model;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Board_Generation {
     private Context Board_Generation;
     int[][] arr_gameBoard;
     int[][] arr_solutionBoard;
-    int N = 6; // length and width of the grid
+    int N = 9; // length and width of the grid
     int SQRT = (int) Math.sqrt(N); // length and width of the diagonal sub-grids
     int K =  20; // number of elements to be removed
 
@@ -29,17 +31,20 @@ public class Board_Generation {
         arr_gameBoard = new int[N][N];
         arr_solutionBoard = new int[N][N];
 
-        // 1. Fill the diagonal sub-matrices
+        //1. Fill the diagonal sub-matrices
         fillDiagonal(arr_gameBoard);
 
         // 2. Fill the remaining cells using recursion
-        fillRemaining(arr_gameBoard,0, SQRT);
-
+        if (N == 6) {
+            fillRemaining(arr_gameBoard, 0, 1);
+        } else {
+            fillRemaining(arr_gameBoard, 0, SQRT);
+        }
         // 3. copy the grid to the solution board before we remove elements
         gridCopy(arr_gameBoard, arr_solutionBoard, N);
 
         // 4.
-        removeKDigits(arr_gameBoard, N, K);
+        //removeKDigits(arr_gameBoard, N, K);
 
         // print board
         //printBoard(arr_gameBoard);
@@ -211,12 +216,13 @@ public class Board_Generation {
     // Remove the K no. of digits from board
     public void removeKDigits(int arr[][], int len, int count)
     {
+        printBoard(arr_gameBoard);
         while (count != 0)
         {
-            int i = (int) (Math.random() * N );
-            int j = (int) (Math.random() * N );
+            int i = (int) (ThreadLocalRandom.current().nextInt(0, len));
+            int j = (int) (ThreadLocalRandom.current().nextInt(0, len));
 
-            // System.out.println(i+" "+j);
+            System.out.println("i is "+ i +" ,j is" + j + " ,and count is "+count+" we're removing "+ arr[i][j]);
             if (arr[i][j] != 0)
             {
                 count--;
