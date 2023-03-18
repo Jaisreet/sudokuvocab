@@ -21,9 +21,6 @@ public class activity_how_to_play extends AppCompatActivity {
 
         okay = findViewById(R.id.instructions_okay);
         okay.setOnClickListener(view -> okayListener());
-
-        text = findViewById(R.id.howtoplay);
-
     }
 
     private void okayListener() {
