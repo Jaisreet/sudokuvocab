@@ -47,20 +47,17 @@
             android:summary="Enable/disable timer"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        <!--- commented out for use in iteration 3
+
          <TextView
+             android:id="@+id/howtoplay"
             android:layout_width="match_parent"
             android:layout_height="57dp"
             android:text="@string/howtoplay"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/purple_700"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="10dp"/>
 
-           >
-           -->
-
-        <!-- to be implemented in iteration 3 -->
         <TextView
             android:id="@+id/modes"
             android:layout_width="155dp"

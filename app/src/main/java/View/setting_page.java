@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.sudokuapp.R;
 
@@ -22,6 +23,7 @@ public class setting_page extends AppCompatActivity {
     private RadioButton mediumButton;
     private RadioButton hardButton;
     private RadioGroup difficultyRadioGroup;
+    private TextView howtoplay;
 
     private String selectedDifficulty;
 
@@ -42,6 +44,8 @@ public class setting_page extends AppCompatActivity {
         easyButton = findViewById(R.id.easyButton);
         mediumButton = findViewById(R.id.mediumButton);
         hardButton = findViewById(R.id.hardButton);
+        howtoplay = findViewById(R.id.howtoplay);
+        howtoplay.setOnClickListener(view -> play());
 
         SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
         result = sharedPreferences.getBoolean("result", false);
@@ -95,6 +99,11 @@ public class setting_page extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void play() {
+        Intent intent = new Intent(this, activity_how_to_play.class);
+        this.startActivity(intent);
     }
 
 
