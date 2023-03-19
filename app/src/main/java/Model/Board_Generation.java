@@ -9,9 +9,13 @@ public class Board_Generation {
     private Context Board_Generation;
     int[][] arr_gameBoard;
     int[][] arr_solutionBoard;
+
     int N ; // length and width of the grid
     int SQRT; // length and width of the diagonal sub-grids
     int removeNum;  // number of elements to be removed
+
+
+
 
 
 
@@ -70,7 +74,9 @@ public class Board_Generation {
             }
         }
         // 4.
+
         removeKDigits(arr_gameBoard, N, removeNum);
+
 
         // print board
         //printBoard(arr_gameBoard);

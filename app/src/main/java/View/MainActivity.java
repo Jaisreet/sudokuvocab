@@ -43,16 +43,11 @@ public class MainActivity extends AppCompatActivity {
         int difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
         int gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-        //int difficultyLevel = sharedPreferences.getInt("difficulty", 1);
-        //int gridSize = sharedPreferences.getInt("grid_size", 9);
         switchResult = sharedPreferences.getBoolean("timer_enabled", true);
 
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoard.setBoardSize(gridSize);
         timeView = findViewById(R.id.timeView);
-
-        //SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
-        //switchResult = sharedPreferences.getBoolean("result",false);
 
         timer = getIntent().getStringExtra("timerStr");
 
@@ -158,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
             goneSwitchState = true;
             timeView.setVisibility(View.GONE);
         }
+
 
     }
 
@@ -366,6 +362,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("default_grid_size", 9);
         startActivity(intent);
     }
+
 
 
 

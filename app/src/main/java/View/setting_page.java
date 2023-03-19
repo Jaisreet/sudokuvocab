@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.sudokuapp.R;
 
@@ -24,6 +25,9 @@ public class setting_page extends AppCompatActivity {
 
     private int selectedGrid;
     Boolean result;
+
+
+    private TextView howtoplay;
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -39,9 +43,6 @@ public class setting_page extends AppCompatActivity {
 
         simpleSwitch = findViewById(R.id.timer);
 
-
-
-        //simpleSwitch.setChecked(Boolean.valueOf(timerState));
         RadioGroup difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup);
         RadioButton easyButton = findViewById(R.id.easyButton);
         RadioButton mediumButton = findViewById(R.id.mediumButton);
@@ -52,6 +53,18 @@ public class setting_page extends AppCompatActivity {
         RadioButton sixbysix = findViewById(R.id.sixbysix);
         RadioButton ninebynine = findViewById(R.id.ninebynine);
         RadioButton twelvebytwelve = findViewById(R.id.twelvebytwelve);
+
+
+        howtoplay = findViewById(R.id.howtoplay);
+        if(howtoplay != null){
+            howtoplay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    play();
+                }
+            });
+        }
+
 
 
         SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
@@ -76,12 +89,13 @@ public class setting_page extends AppCompatActivity {
 
         });
 
+
         // Retrieve the intent extras
         Intent intent = getIntent();
         int defaultDifficulty = intent.getIntExtra("default_difficulty", 1);
         int defaultGridSize = intent.getIntExtra("default_grid_size", 9);
         // Set the default difficulty and grid size
-       selectedDifficulty = defaultDifficulty;
+        selectedDifficulty = defaultDifficulty;
         selectedGrid = defaultGridSize;
 
         //SharedPreferences sharedPreferencesDiff = getSharedPreferences("settings", MODE_PRIVATE);
@@ -165,6 +179,12 @@ public class setting_page extends AppCompatActivity {
 
         });
 
+
+    }
+
+    private void play() {
+        Intent intent = new Intent(this, activity_how_to_play.class);
+        this.startActivity(intent);
     }
 
 

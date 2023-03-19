@@ -12,8 +12,9 @@
         android:theme="@style/Theme.Sudokuapp"
         tools:targetApi="31">
         <activity
-            android:name=".howToPlay"
-            android:exported="false" />
+            android:name="View.activity_how_to_play"
+            android:screenOrientation="sensor"
+            android:exported="true" />
         <activity
             android:name="View.setting_page"
             android:screenOrientation="sensor"

@@ -48,6 +48,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+
         <TextView
             android:id="@+id/howtoplay"
             android:layout_width="match_parent"

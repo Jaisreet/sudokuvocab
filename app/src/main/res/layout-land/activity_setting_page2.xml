@@ -45,20 +45,16 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        <!--- commented out for use in iteration 3
-         <TextView
+        <TextView
+            android:id="@+id/howtoplay"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
+            android:layout_height="wrap_content"
             android:text="@string/howtoplay"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/purple_700"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-
-           >
-           -->
-
-        <!-- to be implemented in iteration 3 -->
+            android:layout_marginRight="10dp"/>
 
         <RadioGroup
             android:id="@+id/languageRadioGroup"
