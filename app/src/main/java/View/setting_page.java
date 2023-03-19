@@ -25,6 +25,8 @@ public class setting_page extends AppCompatActivity {
 
     private String selectedDifficulty;
 
+    SharedPreferences sharedPreferences;
+
     Boolean result;
 
     @Override
@@ -43,7 +45,7 @@ public class setting_page extends AppCompatActivity {
         mediumButton = findViewById(R.id.mediumButton);
         hardButton = findViewById(R.id.hardButton);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
         result = sharedPreferences.getBoolean("result", false);
         simpleSwitch.setChecked(result);
         // Set switch listener
@@ -67,6 +69,19 @@ public class setting_page extends AppCompatActivity {
             }
         });
 
+        sharedPreferences = getSharedPreferences("difficulty", MODE_PRIVATE);
+        selectedDifficulty = sharedPreferences.getString("selectedDifficulty", "easy");
+        switch (selectedDifficulty){
+            case "easy":
+                difficultyRadioGroup.check(R.id.easyButton);
+                break;
+            case "medium":
+                difficultyRadioGroup.check(R.id.mediumButton);
+                break;
+            case "hard":
+                difficultyRadioGroup.check(R.id.hardButton);
+                break;
+        }
         // Set radio group listener
         difficultyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -81,6 +96,9 @@ public class setting_page extends AppCompatActivity {
                         selectedDifficulty = "hard";
                         break;
                 }
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("selectedDifficulty", selectedDifficulty);
+                editor.apply();
             }
         });
         save = findViewById(R.id.save);
