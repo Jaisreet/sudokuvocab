@@ -26,5 +26,6 @@
     <string name="intermediate">Intermediate</string>
     <string name="hard">Hard</string>
     <string name="On">On</string>
+    <string name="instructions">instructions</string>
 
 </resources>

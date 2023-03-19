@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.sudokuapp.R;
 import java.util.ArrayList;
@@ -35,23 +34,25 @@ public class MainActivity extends AppCompatActivity {
     private boolean goneSwitchState;
     boolean switchResult;
 
-    private int difficultyLevel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Get the selected difficulty level from the settingPage activity
-        difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
+        int difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
+        int gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        //int difficultyLevel = sharedPreferences.getInt("difficulty", 1);
+        //int gridSize = sharedPreferences.getInt("grid_size", 9);
+        switchResult = sharedPreferences.getBoolean("timer_enabled", true);
 
         gameBoard = findViewById(R.id.sudokuBoard);
-        //gameBoard = new drawBoard(this, null, difficultyLevel);
+        gameBoard.setBoardSize(gridSize);
         timeView = findViewById(R.id.timeView);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
-        switchResult = sharedPreferences.getBoolean("result",false);
-
+        //SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
+        //switchResult = sharedPreferences.getBoolean("result",false);
 
         timer = getIntent().getStringExtra("timerStr");
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            gameBoardGamePlay = new board_GamePlay(difficultyLevel);
+            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             if(switchResult){
@@ -131,11 +132,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void timerOn() {
-        running = true;
-    }
-
-
     public void onClickReset()
     {
         seconds = 0;
@@ -150,6 +146,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         SharedPreferences sharedPreferences = getSharedPreferences("switchResult", MODE_PRIVATE);
         boolean switchResult = sharedPreferences.getBoolean("result",false);
+        int difficultyLevel = sharedPreferences.getInt("difficulty", 1);
+        int gridSize = sharedPreferences.getInt("grid_size", 9);
+
         if(switchResult){
             running = true;
             timeView.setVisibility(View.VISIBLE);
@@ -363,6 +362,8 @@ public class MainActivity extends AppCompatActivity {
     //opens the setting page activity
     public void settingPage() {
         Intent intent = new Intent(getApplicationContext(), setting_page.class);
+        intent.putExtra("default_difficulty", 1);
+        intent.putExtra("default_grid_size", 9);
         startActivity(intent);
     }
 

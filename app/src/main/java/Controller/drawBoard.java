@@ -30,13 +30,17 @@ public class drawBoard extends View implements Serializable {
     private int cellsize;
 
     Context context;
-    private board_GamePlay board_GamePlay= new board_GamePlay(20);
-    int N= board_GamePlay.return_n();
-    int SQRT= board_GamePlay.return_sqrt();
+    private board_GamePlay board_GamePlay; //= new board_GamePlay(20);
+    int N;//= board_GamePlay.return_n();
+    int SQRT;//= board_GamePlay.return_sqrt();
+
 
 
     public drawBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        board_GamePlay = new board_GamePlay(5, 9);
+        N= board_GamePlay.return_n();
+        SQRT= board_GamePlay.return_sqrt();
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SudokuBoard,
                 0, 0);
 
@@ -54,6 +58,9 @@ public class drawBoard extends View implements Serializable {
         }
 
     }
+
+
+
 
 
     @Override
@@ -263,5 +270,19 @@ public class drawBoard extends View implements Serializable {
 
     public void setBoardFill(board_GamePlay gameBoardGamePlay) {
         board_GamePlay = gameBoardGamePlay;
+    }
+
+    public void setBoardSize(int size) {
+        // Update the board size in the game model
+        board_GamePlay.setBoardSize(size);
+
+        // Update the cell size and view dimensions based on the new board size
+        N = board_GamePlay.return_n();
+        SQRT = board_GamePlay.return_sqrt();
+        cellsize = getMeasuredWidth() / N;
+        setMeasuredDimension(getMeasuredWidth(), getMeasuredWidth());
+
+        // Redraw the board with the new size
+        invalidate();
     }
 }

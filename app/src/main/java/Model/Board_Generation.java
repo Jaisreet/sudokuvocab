@@ -9,25 +9,20 @@ public class Board_Generation {
     private Context Board_Generation;
     int[][] arr_gameBoard;
     int[][] arr_solutionBoard;
-    int N = 9; // length and width of the grid
-    int SQRT = (int) Math.sqrt(N); // length and width of the diagonal sub-grids
-    int K =  20; // number of elements to be removed
+    int N ; // length and width of the grid
+    int SQRT; // length and width of the diagonal sub-grids
+    int removeNum;  // number of elements to be removed
 
 
 
-    public Board_Generation(){
-        /*
-        arr_gameBoard = new int[][]{
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-        */
+    public Board_Generation(int size, int difficulty ){
+
+        N=size;
+        if(N ==12){
+            SQRT = 2;
+        }else {
+            SQRT = (int) Math.sqrt(N);
+        }
         arr_gameBoard = new int[N][N];
         arr_solutionBoard = new int[N][N];
 
@@ -43,8 +38,39 @@ public class Board_Generation {
         // 3. copy the grid to the solution board before we remove elements
         gridCopy(arr_gameBoard, arr_solutionBoard, N);
 
+        if(difficulty ==1){
+            if(N==9) {
+                removeNum = 20;
+            } else if (N ==12) {
+                removeNum = 40;
+            } else if (N == 6) {
+                removeNum = 3;
+            }else{
+                removeNum = 2;
+            }
+        } else if (difficulty ==2) {
+            if(N==9) {
+                removeNum = 30;
+            } else if (N ==12) {
+                removeNum = 60;
+            } else if (N == 6) {
+                removeNum = 5;
+            }else{
+                removeNum = 4;
+            }
+        }else{
+            if(N==9) {
+                removeNum = 40;
+            } else if (N ==12) {
+                removeNum = 80;
+            } else if (N == 6) {
+                removeNum = 7;
+            }else{
+                removeNum = 6;
+            }
+        }
         // 4.
-        //removeKDigits(arr_gameBoard, N, K);
+        removeKDigits(arr_gameBoard, N, removeNum);
 
         // print board
         //printBoard(arr_gameBoard);
@@ -55,7 +81,7 @@ public class Board_Generation {
     // functions to return important grid nums
     int return_n() {return N;}
     int return_sqrt() {return SQRT;}
-    int return_k() {return K;}
+    int return_k() {return removeNum;}
 
 
 

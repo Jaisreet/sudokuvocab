@@ -5,9 +5,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class board_GamePlay {
 
     int[][] board;
-    Board_Generation input = new Board_Generation();
-    int N = input.return_n();
-    int SQRT = input.return_sqrt();
+    Board_Generation input; //= new Board_Generation();
+    int N;// = input.return_n();
+    int SQRT;// = input.return_sqrt();
     public ArrayList<ArrayList<Object>> emptyBoxIndex;
     int selected_row;
     public int selected_column;
@@ -16,8 +16,12 @@ public class board_GamePlay {
     int removeNum;
 
 
-    public board_GamePlay(int difficulty){
+    public board_GamePlay(int difficulty, int size){
         // when the user has not selected a square yet, set selected col and row to -1
+        setBoardSize(size);
+        input = new Board_Generation(size, difficulty);
+        N = input.return_n();
+        SQRT = input.return_sqrt();
         selected_column = -1;
         selected_row = -1;
         board = new int[N][N];  // main working board
@@ -25,26 +29,14 @@ public class board_GamePlay {
         solutionBoard = new int[N][N];
         // algorithm to move generated board set up into main board
 
-        for(int i=0; i<N;i++){
-            for(int j=0;j<N;j++){
-                solutionBoard[i][j] = input.getArr_gameBoard()[i][j];
-            }
-        }
-        if(difficulty ==1){
-            removeNum = 20;
-        } else if (difficulty ==2) {
-            removeNum = 30;
-        }else{
-            removeNum = 40;
-        }
 
-        board = removeKDigits(solutionBoard, N, removeNum);
 
         // for every row
         for(int r=0; r<N; r++) {
             // for every colomn
             for(int c=0;c<N;c++) {
-                //board[r][c] = input.getArr_gameBoard()[r][c];
+                board[r][c] = input.getArr_gameBoard()[r][c];
+                solutionBoard[r][c] = input.getArr_gameBoard()[r][c];
                 // if the board at that spot is not empty, set the flag to one
                 if(board[r][c] != 0){
                     flag[r][c] = 1;
@@ -57,6 +49,7 @@ public class board_GamePlay {
         }
 
         emptyBoxIndex = new ArrayList<>();
+        getEmptyBoxIndexs();
     }
 
     public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input){
@@ -77,25 +70,14 @@ public class board_GamePlay {
         }
 
         emptyBoxIndex = new ArrayList<>();
+
     }
 
-
-    public int[][] removeKDigits(int arr[][], int len, int count)
-    {
-        while (count != 0)
-        {
-            int i = (int) (ThreadLocalRandom.current().nextInt(0, len));
-            int j = (int) (ThreadLocalRandom.current().nextInt(0, len));
-
-            //System.out.println("i is "+ i +" ,j is" + j + " ,and count is "+count+" we're removing "+ arr[i][j]);
-            if (arr[i][j] != 0)
-            {
-                count--;
-                arr[i][j] = 0;
-            }
-        }
-        return arr;
+    public void setBoardSize(int size) {
+        N = size;
+        SQRT = (int) Math.sqrt(N);
     }
+
     //getting indexes of boxes with 0 (empty boxes)
     public void getEmptyBoxIndexs(){
         for(int r=0; r<N; r++){
