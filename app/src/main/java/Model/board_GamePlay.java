@@ -70,6 +70,7 @@ public class board_GamePlay {
         }
 
         emptyBoxIndex = new ArrayList<>();
+        getEmptyBoxIndexs();
 
     }
 
@@ -127,6 +128,10 @@ public class board_GamePlay {
     //return the array indexes of the board which has value 0, that is equivalent to empty box
     public ArrayList<ArrayList<Object>> getEmptyBoxIndex() {
         return this.emptyBoxIndex;
+    }
+
+    public void setEmptyBoxIndex(ArrayList<ArrayList<Object>> emptyBoxIndex1){
+        emptyBoxIndex = emptyBoxIndex1;
     }
 
     //return the selected row

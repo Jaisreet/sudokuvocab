@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
             int[][] flag = (int[][]) savedInstanceState.getSerializable("flag_state");
             int[][] solution = (int[][]) savedInstanceState.getSerializable("solution_state");
             gameBoardGamePlay = new board_GamePlay(board, flag, solution);
-            gameBoardGamePlay.getEmptyBoxIndexs();
             gameBoard.setBoardFill(gameBoardGamePlay);
+            gameBoardGamePlay.getEmptyBoxIndexs();
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
