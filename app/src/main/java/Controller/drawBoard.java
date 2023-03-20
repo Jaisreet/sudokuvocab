@@ -26,16 +26,21 @@ public class drawBoard extends View implements Serializable {
     private final Paint cellHightlightColorPaint = new Paint();
     private final Paint letterPaint = new Paint();
     private final Rect letterPaintBounds = new Rect();
+    private int difficultyLevel;
     private int cellsize;
 
     Context context;
-    private Model.board_GamePlay board_GamePlay = new board_GamePlay();
-    int N = board_GamePlay.return_n();
-    int SQRT = board_GamePlay.return_sqrt();
+    private board_GamePlay board_GamePlay; //= new board_GamePlay(20);
+    int N;//= board_GamePlay.return_n();
+    int SQRT;//= board_GamePlay.return_sqrt();
+
 
 
     public drawBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        board_GamePlay = new board_GamePlay(5, 9);
+        N= board_GamePlay.return_n();
+        SQRT= board_GamePlay.return_sqrt();
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SudokuBoard,
                 0, 0);
 
@@ -51,26 +56,13 @@ public class drawBoard extends View implements Serializable {
         } finally {
             a.recycle();
         }
+
     }
 
-    public drawBoard(Context context, @Nullable AttributeSet attrs, int[][] input) {
-        super(context, attrs);
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SudokuBoard,
-                0, 0);
 
-        try {
-            // extract board color from typed array
-            boardColor = a.getInteger(R.styleable.SudokuBoard_boardColor, 0);
-            cellFillColor = a.getInteger(R.styleable.SudokuBoard_cellFilledColor, 0);
-            cellHightlightColor = a.getInteger(R.styleable.SudokuBoard_cellHightlightColor, 0);
-            letterColor= a.getInteger(R.styleable.SudokuBoard_letterColor,0 );
-            letterColorSolve = a.getInteger(R.styleable.SudokuBoard_letterColorSolve,0);
-            int wrongAns = a.getInteger(R.styleable.SudokuBoard_wrongAns, 0);
 
-        } finally {
-            a.recycle();
-        }
-    }
+
+
     @Override
     protected void onMeasure(int width, int height) {
         super.onMeasure(width, width);
@@ -187,15 +179,15 @@ public class drawBoard extends View implements Serializable {
 
     //show the selected cell by highlighting it
     private void colorCell(Canvas canvas, int r, int c){
-            //highlight the row and column of selected cell with cellHightlightcolorpaint
-            canvas.drawRect((c-1)*cellsize, 0, c * cellsize , cellsize*N,
-                    cellHightlightColorPaint );
+        //highlight the row and column of selected cell with cellHightlightcolorpaint
+        canvas.drawRect((c-1)*cellsize, 0, c * cellsize , cellsize*N,
+                cellHightlightColorPaint );
 
-            canvas.drawRect(0, (r-1)*cellsize, cellsize * N , r*cellsize,
-                    cellHightlightColorPaint );
-            //highlight the selected cell with cell fill color paint
-            canvas.drawRect((c-1)*cellsize, (r-1)*cellsize, c*cellsize , r*cellsize,
-                    cellFillColorPaint );
+        canvas.drawRect(0, (r-1)*cellsize, cellsize * N , r*cellsize,
+                cellHightlightColorPaint );
+        //highlight the selected cell with cell fill color paint
+        canvas.drawRect((c-1)*cellsize, (r-1)*cellsize, c*cellsize , r*cellsize,
+                cellFillColorPaint );
 
         invalidate();
     }
@@ -266,6 +258,8 @@ public class drawBoard extends View implements Serializable {
 
     public void setBoard(int[][] board) {
         board_GamePlay.setBoard(board);
+        N = board_GamePlay.return_n();
+        SQRT = board_GamePlay.return_sqrt();
         invalidate(); // Redraw the view to reflect the new state
     }
 
@@ -274,7 +268,21 @@ public class drawBoard extends View implements Serializable {
     }
 
 
-    public void setBoardFill(Model.board_GamePlay gameBoardGamePlay) {
+    public void setBoardFill(board_GamePlay gameBoardGamePlay) {
         board_GamePlay = gameBoardGamePlay;
+    }
+
+    public void setBoardSize(int size) {
+        // Update the board size in the game model
+        board_GamePlay.setBoardSize(size);
+
+        // Update the cell size and view dimensions based on the new board size
+        N = board_GamePlay.return_n();
+        SQRT = board_GamePlay.return_sqrt();
+        cellsize = getMeasuredWidth() / N;
+        setMeasuredDimension(getMeasuredWidth(), getMeasuredWidth());
+
+        // Redraw the board with the new size
+        invalidate();
     }
 }

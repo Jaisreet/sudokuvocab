@@ -26,5 +26,7 @@
     <string name="intermediate">Intermediate</string>
     <string name="hard">Hard</string>
     <string name="On">On</string>
+    <string name="instructions">1.) Create a Sudoku grid with blank spaces. \n \n 2.) Choose a vocabulary word and write it in the grid. \n \n 3.) Fill in the blank spaces with random letters from the alphabet.\n \n 4.) Complete the Sudoku grid using only the letters from the chosen word.\n \n 5.) Each letter can only be used once in each row, column, and box.\n \n 6.) Repeat steps 2-5 for each vocabulary word.\n \n Have fun and challenge yourself with new words!</string>
+
 
 </resources>
