@@ -79,10 +79,15 @@ public class First_pageTest {
 
     @Test
     public void onCreate() {
+
     }
 
     @Test
-    public void newGame() {
+    public void newGame() throws UiObjectNotFoundException {
+        UiObject newGame = mDevice.findObject(new UiSelector()
+                .resourceId("button12")
+        );
+        newGame.click();
     }
 
     @Test
