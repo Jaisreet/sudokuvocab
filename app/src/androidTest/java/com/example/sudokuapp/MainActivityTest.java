@@ -41,6 +41,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Basic sample for unbundled UiAutomator.
@@ -82,8 +83,90 @@ public class MainActivityTest {
         mDevice.wait(Until.hasObject(By.pkg(SUDOKU).depth(0)), LAUNCH_TIMEOUT);
     }
 
+    /**
+     * Uses package manager to find the package name of the device launcher. Usually this package
+     * is "com.android.launcher" but can be different at times. This is a generic solution which
+     * works on all platforms.`
+     */
+    private String getLauncherPackageName() {
+        // Create launcher Intent
+        final Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+
+        // Use PackageManager to get the launcher package name
+        PackageManager pm = getApplicationContext().getPackageManager();
+        ResolveInfo resolveInfo = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        return resolveInfo.activityInfo.packageName;
+    }
+
+    public void testOnNewIntent() {
+    }
+
+    public void testOnPause() {
+    }
+
+    public void testOnClickReset() {
+    }
+
+    public void testOnResume() {
+    }
+
+    public void testTimerOff() {
+    }
+
+    public void testTimerStatus() {
+    }
+
+    public void testBackToMain() {
+    }
+
+    public void testBTNOnePress() {
+    }
+
+    public void testBTNTwoPress() {
+    }
+
+    public void testBTNThreePress() {
+    }
+
+    public void testBTNFourPress() {
+    }
+
+    public void testBTNFivePress() {
+    }
+
+    public void testBTNSixPress() {
+    }
+
+    public void testBTNSevenPress() {
+    }
+
+    public void testBTNEightPress() {
+    }
+
+    public void testBTNNinePress() {
+    }
+
+    public void testEraseText() {
+    }
+
+    public void testReset() {
+    }
+
+    public void testCheck() {
+    }
+
+    public void testOpenDialog() {
+    }
+
+    public void testOpenSettingDialog() {
+    }
+
+    public void testStartNewGame() {
+    }
+
     @Test
-    public void open_settings() {
+    public void testSettingPage() {
 
         UiObject settings = mDevice.findObject(new UiSelector()
                 .text("settings")
@@ -100,35 +183,44 @@ public class MainActivityTest {
     }
 
     @Test
-    public void hint() {
+    public void testQuit() throws UiObjectNotFoundException {
+        UiObject quit = mDevice.findObject(new UiSelector()
+                .text("quitGame")
+                .className("android.widget.Button"));
 
-        UiObject settings = mDevice.findObject(new UiSelector()
+        // Simulate a user-click on the OK button, if found.
+
+        if(quit.exists() && quit.isEnabled()) {
+            quit.click();
+            // Wait for the hint dialog to appear
+            mDevice.wait(Until.hasObject(By.text("Quit Game")), 5000);
+
+            // Check that the hint dialog title is correct
+            UiObject hintDialogTitle = mDevice.findObject(new UiSelector().text("Hint Dialog"));
+            assertTrue(hintDialogTitle.exists());
+        }
+    }
+
+
+
+    @Test
+    public void testHint() throws UiObjectNotFoundException {
+
+        UiObject hint = mDevice.findObject(new UiSelector()
                 .text("hint")
                 .className("android.widget.Button"));
 
         // Simulate a user-click on the OK button, if found.
-        try {
-            if(settings.exists() && settings.isEnabled()) {
-                settings.click();
-            }
-        } catch (UiObjectNotFoundException e) {
-            throw new RuntimeException(e);
+
+        if(hint.exists() && hint.isEnabled()) {
+            hint.click();
+            // Wait for the hint dialog to appear
+            mDevice.wait(Until.hasObject(By.text("Hint Dialog")), 5000);
+
+            // Check that the hint dialog title is correct
+            UiObject hintDialogTitle = mDevice.findObject(new UiSelector().text("Hint Dialog"));
+            assertTrue(hintDialogTitle.exists());
         }
     }
 
-    /**
-     * Uses package manager to find the package name of the device launcher. Usually this package
-     * is "com.android.launcher" but can be different at times. This is a generic solution which
-     * works on all platforms.`
-     */
-    private String getLauncherPackageName() {
-        // Create launcher Intent
-        final Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-
-        // Use PackageManager to get the launcher package name
-        PackageManager pm = getApplicationContext().getPackageManager();
-        ResolveInfo resolveInfo = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        return resolveInfo.activityInfo.packageName;
-    }
 }
