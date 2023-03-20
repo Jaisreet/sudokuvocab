@@ -84,10 +84,6 @@ public class setting_pageTest {
 
 
     @Test
-    public void onNewIntent() {
-    }
-
-    @Test
     public void backToMain() {
 
     }

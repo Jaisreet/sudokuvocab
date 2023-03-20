@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
-public class MainActivityTest {
+public class settingsDialogTest {
 
     private static final String SUDOKU
             = "com.example.sudokuapp";
@@ -66,7 +66,7 @@ public class MainActivityTest {
         mDevice.wait(Until.hasObject(By.pkg(SUDOKU).depth(0)), LAUNCH_TIMEOUT);
 
         UiObject newGame = mDevice.findObject(new UiSelector()
-                .resourceId("com.example.sudokuapp:id/button12")
+                .resourceId("com.example.sudokuapp:id/settingsDialog")
         );
         newGame.click();
     }
@@ -88,104 +88,11 @@ public class MainActivityTest {
     }
 
 
-
     @Test
-    public void testBTNOnePress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button"));
-        button.click();
-    }
-
-    @Test
-    public void testBTNTwoPress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button2"));
-        button.click();
-    }
-
-    @Test
-    public void testBTNThreePress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button3"));
-        button.click();
-    }
-
-    @Test
-    public void testBTNFourPress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button4"));
-        button.click();
-    }
-
-    @Test
-    public void testBTNFivePress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button5"));
-        button.click();
-    }
-
-    @Test
-    public void testBTNSixPress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button6"));
-        button.click();
-    }
-
-    @Test
-    public void testBTNSevenPress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button7"));
-        button.click();
-    }
-
-    @Test
-    public void testBTNEightPress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button8"));
-        button.click();
-    }
-
-    @Test
-    public void testBTNNinePress() throws UiObjectNotFoundException {
-        UiObject button = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/button9"));
-        button.click();
-    }
-
-    @Test
-    public void testEraseText() throws UiObjectNotFoundException {
-        UiObject erase = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/erase"));
-        erase.click();
-    }
-
-    @Test
-    public void testReset() throws UiObjectNotFoundException {
-        UiObject reset = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/resetbtn"));
-        reset.click();
-    }
-
-    @Test
-    public void testCheck() throws UiObjectNotFoundException {
-        UiObject check = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/checkBtn"));
-        check.click();
-    }
-
-    @Test
-    public void testOpenSettingDialog() throws UiObjectNotFoundException {
-        UiObject dialog = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/settingsDialog"));
-        dialog.click();
-    }
-
-
-    @Test
-    public void testHint() throws UiObjectNotFoundException {
+    public void testResume() throws UiObjectNotFoundException {
 
         UiObject dialog = mDevice.findObject(new UiSelector().
-                resourceId(SUDOKU+":id/hint"));
+                resourceId(SUDOKU+":id/resume"));
         dialog.click();
     }
 }
