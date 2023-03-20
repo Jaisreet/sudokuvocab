@@ -1,6 +1,8 @@
 package view;
 
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -14,18 +16,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.sudokuapp.R;
-
 import java.util.ArrayList;
 import java.util.Locale;
-
 import Controller.drawBoard;
 import Model.board_GamePlay;
-import view.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
             int[][] flag = (int[][]) savedInstanceState.getSerializable("flag_state");
             int[][] solution = (int[][]) savedInstanceState.getSerializable("solution_state");
             gameBoardGamePlay = new board_GamePlay(board, flag, solution);
-            gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
+            gameBoard.setBoardFill(gameBoardGamePlay);
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
@@ -131,6 +126,12 @@ public class MainActivity extends AppCompatActivity {
         goneSwitchState = false;
     }
 
+
+    public void onClickReset()
+    {
+        seconds = 0;
+        running = false;
+    }
     // If the activity is resumed,
     // start the stopwatch
     // again if it was running previously.
@@ -156,7 +157,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void timerOff() {
+        running = false;
+    }
 
+    public void timerStatus(Boolean state) {
+        if(state) {
+            running = true;
+        }
+        else {
+            running = false;
+            seconds = 0;
+            timeView.setText("Timer off");
+        }
+    }
     private void runTimer()
     {
 
@@ -263,6 +277,21 @@ public class MainActivity extends AppCompatActivity {
         gameBoard.invalidate();
     }
 
+    public void BTNTenPress(View view) {
+        gameBoardGamePlay.setNumberPos(10);
+        gameBoard.invalidate();
+    }
+
+    public void BTNElevenPress(View view) {
+        gameBoardGamePlay.setNumberPos(11);
+        gameBoard.invalidate();
+    }
+
+    public void BTNTwelvePress(View view) {
+        gameBoardGamePlay.setNumberPos(12);
+        gameBoard.invalidate();
+    }
+
 
     //calls eraseNumber function which set the value to given cell to 0
     public void eraseText() {
@@ -355,11 +384,9 @@ public class MainActivity extends AppCompatActivity {
     //open the quit dialog box
     public void quit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Quit Game");
         TextView message = new TextView(this );
         message.setTextSize(40);
         message.setText("Are you sure you want to quit?");
-
         builder.setView(message)
                 //if yes front page is opened
                 .setPositiveButton("Yes", (dialog, id) -> backToMain())
@@ -402,3 +429,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
+

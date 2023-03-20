@@ -28,8 +28,8 @@
 
     <GridLayout
         android:id="@+id/gridLayout2"
-        android:layout_width="291dp"
-        android:layout_height="193dp"
+        android:layout_width="289dp"
+        android:layout_height="162dp"
         android:layout_marginTop="60dp"
         android:columnCount="3"
         android:foregroundGravity="center"

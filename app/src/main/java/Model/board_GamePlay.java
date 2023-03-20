@@ -149,15 +149,6 @@ public class board_GamePlay {
         selected_column = c;
     }
 
-
-    public int getCurrentGame(){
-        return selected_row;
-    }
-
-    public void setCurrentState(int[][] state) {
-        this.board = state;
-    }
-
     public void setBoard(int[][] newBoard) {
         board = newBoard;
     }
