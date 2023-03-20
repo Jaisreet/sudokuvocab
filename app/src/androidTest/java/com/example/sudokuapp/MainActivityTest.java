@@ -60,7 +60,7 @@ public class MainActivityTest {
     private UiDevice mDevice;
 
     @Before
-    public void startMainActivityFromHomeScreen() {
+    public void startMainActivityFromHomeScreen() throws UiObjectNotFoundException {
         // Initialize UiDevice instance
         mDevice = UiDevice.getInstance(getInstrumentation());
 
@@ -81,6 +81,11 @@ public class MainActivityTest {
 
         // Wait for the app to appear
         mDevice.wait(Until.hasObject(By.pkg(SUDOKU).depth(0)), LAUNCH_TIMEOUT);
+
+        UiObject newGame = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/button12")
+        );
+        newGame.click();
     }
 
     /**

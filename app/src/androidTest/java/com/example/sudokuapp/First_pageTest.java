@@ -77,24 +77,21 @@ public class First_pageTest {
         return resolveInfo.activityInfo.packageName;
     }
 
-    @Test
-    public void onCreate() {
-
-    }
 
     @Test
     public void newGame() throws UiObjectNotFoundException {
         UiObject newGame = mDevice.findObject(new UiSelector()
-                .resourceId("button12")
+                .resourceId("com.example.sudokuapp:id/button12")
         );
         newGame.click();
     }
 
     @Test
-    public void settingPage() {
+    public void settingPage() throws UiObjectNotFoundException {
+        UiObject Settings = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/textView2")
+        );
+        Settings.click();
     }
 
-    @Test
-    public void onConfigurationChanged() {
-    }
 }

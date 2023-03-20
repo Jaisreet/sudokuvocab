@@ -12,6 +12,9 @@ import android.content.pm.ResolveInfo;
 
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
+import androidx.test.uiautomator.UiObject;
+import androidx.test.uiautomator.UiObjectNotFoundException;
+import androidx.test.uiautomator.UiSelector;
 import androidx.test.uiautomator.Until;
 
 import org.junit.Before;
@@ -29,7 +32,7 @@ public class setting_pageTest {
     private UiDevice mDevice;
 
     @Before
-    public void startMainActivityFromHomeScreen() {
+    public void startMainActivityFromHomeScreen() throws UiObjectNotFoundException {
         // Initialize UiDevice instance
         mDevice = UiDevice.getInstance(getInstrumentation());
 
@@ -50,6 +53,22 @@ public class setting_pageTest {
 
         // Wait for the app to appear
         mDevice.wait(Until.hasObject(By.pkg(SUDOKU).depth(0)), LAUNCH_TIMEOUT);
+
+
+        UiObject newGame = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/button12")
+        );
+        UiObject settings1 = mDevice.findObject(new UiSelector()
+                        .resourceId("com.example.sudokuapp:id/settingsDialog")
+        );
+        UiObject settings2 = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/settingsPage")
+        );
+
+        newGame.click();
+        settings1.click();
+        settings2.click();
+
     }
 
     private String getLauncherPackageName() {
@@ -63,9 +82,6 @@ public class setting_pageTest {
         return resolveInfo.activityInfo.packageName;
     }
 
-    @Test
-    public void onCreate() {
-    }
 
     @Test
     public void onNewIntent() {
@@ -73,6 +89,7 @@ public class setting_pageTest {
 
     @Test
     public void backToMain() {
+
     }
 
     @Test

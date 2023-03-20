@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:columnCount="3"
+        android:columnCount="4"
         android:foregroundGravity="center"
         android:rowCount="3"
         custom:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +156,42 @@
             custom:layout_constraintTop_toBottomOf="@+id/button5"
             custom:layout_constraintVertical_bias="0.688" />
 
+        <Button
+            android:id="@+id/button10"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="BTNTwoPress"
+            android:text="dix"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            custom:layout_constraintEnd_toStartOf="@+id/button3"
+            custom:layout_constraintStart_toEndOf="@+id/button"
+            custom:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button11"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="onze"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            custom:layout_constraintEnd_toStartOf="@+id/button3"
+            custom:layout_constraintStart_toEndOf="@+id/button"
+            custom:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/button12"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="twelve"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            custom:layout_constraintEnd_toStartOf="@+id/button3"
+            custom:layout_constraintStart_toEndOf="@+id/button"
+            custom:layout_constraintTop_toTopOf="parent" />
+
     </GridLayout>
 
 
@@ -201,6 +237,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Check" />
+
 
 
     </GridLayout>
