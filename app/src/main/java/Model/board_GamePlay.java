@@ -76,6 +76,8 @@ public class board_GamePlay {
     public void setBoardSize(int size) {
         N = size;
         SQRT = (int) Math.sqrt(N);
+        if (size == 12)
+            SQRT = 3;
     }
 
     //getting indexes of boxes with 0 (empty boxes)

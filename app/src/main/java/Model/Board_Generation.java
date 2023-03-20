@@ -16,15 +16,14 @@ public class Board_Generation {
 
 
 
-
-
-
     public Board_Generation(int size, int difficulty ){
 
-        N=size;
-        if(N ==12){
+        N = size;
+        if(N == 12){
             SQRT = 2;
-        }else {
+        }else if (N == 4) {
+            SQRT = 2;
+        } else {
             SQRT = (int) Math.sqrt(N);
         }
         arr_gameBoard = new int[N][N];
@@ -34,17 +33,18 @@ public class Board_Generation {
         fillDiagonal(arr_gameBoard);
 
         // 2. Fill the remaining cells using recursion
-        if (N == 6) {
-            fillRemaining(arr_gameBoard, 0, 1);
-        } else {
-            fillRemaining(arr_gameBoard, 0, SQRT);
+        if (N == 9) {
+
+            fillRemaining(arr_gameBoard, 0, SQRT); }
+        else {
+            fillRemainingDiffGridSizes(arr_gameBoard);
         }
         // 3. copy the grid to the solution board before we remove elements
         gridCopy(arr_gameBoard, arr_solutionBoard, N);
 
-        if(difficulty ==1){
-            if(N==9) {
-                removeNum = 20;
+        if(difficulty == 1){
+            if( N==9) {
+                removeNum = 10;
             } else if (N ==12) {
                 removeNum = 40;
             } else if (N == 6) {
@@ -64,9 +64,9 @@ public class Board_Generation {
             }
         }else{
             if(N==9) {
-                removeNum = 40;
+                removeNum = 65;
             } else if (N ==12) {
-                removeNum = 80;
+                removeNum = 100;
             } else if (N == 6) {
                 removeNum = 7;
             }else{
@@ -74,7 +74,6 @@ public class Board_Generation {
             }
         }
         // 4.
-
         removeKDigits(arr_gameBoard, N, removeNum);
 
 
@@ -218,10 +217,35 @@ public class Board_Generation {
     }
 
 
+
+
+    public boolean fillRemainingDiffGridSizes(int arr[][])
+    {
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+               if (arr[i][j] == 0)
+               {
+                   for (int num = 1; num<=N; num++)
+                   {
+                       if (CheckIfSafe(arr,i, j, num)) {
+                           arr[i][j] = num;
+                       } else {
+                           arr[i][j] = (int)(Math.random() * N);
+                       }
+                   }
+               }
+            }
+        }
+        return true;
+    }
+
     // Check if safe to put in cell
     public boolean CheckIfSafe(int arr[][], int i, int j, int num)
     {
-        return (unUsedInRow(arr, i, num) &&
+        return (arr[i][j] == 0 &&
+                unUsedInRow(arr, i, num) &&
                 unUsedInCol(arr, j, num) &&
                 unUsedInBox(arr,i-i%SQRT, j-j%SQRT, num));
     }
