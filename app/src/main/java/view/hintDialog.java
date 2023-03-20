@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

@@ -11,7 +11,7 @@ import Model.board_GamePlay;
 
 public class board_GamePlayTest {
 
-    Model.board_GamePlay board_GamePlay = new board_GamePlay();
+    Model.board_GamePlay board_GamePlay = new board_GamePlay(0,0);
     ArrayList<ArrayList<Object>> emptyBoxIndexBoard;
     ArrayList<ArrayList<Object>> emptyBoxIndexInput;
 

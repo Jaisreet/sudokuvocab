@@ -5,6 +5,7 @@ plugins {
 android {
     namespace 'com.example.sudokuapp'
     compileSdk 33
+    testOptions.unitTests.includeAndroidResources = true
 
     defaultConfig {
         applicationId "com.example.sudokuapp"
@@ -14,6 +15,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
     }
 
     buildTypes {
@@ -25,6 +28,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
     }
 }
 
@@ -34,7 +38,26 @@ dependencies {
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.test:core:1.5.0'
+    implementation 'androidx.test:runner:1.5.2'
+    implementation 'androidx.test.ext:junit-ktx:1.1.5'
+    implementation 'androidx.test.uiautomator:uiautomator-v18:2.2.0-alpha1'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+// Espresso dependencies
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
 }
+android {
+    // ...
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+}
+
+
+

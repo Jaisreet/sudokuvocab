@@ -1,4 +1,4 @@
-package View;
+package view;
 
 
 import androidx.annotation.NonNull;
@@ -369,9 +369,11 @@ public class MainActivity extends AppCompatActivity {
     //open the quit dialog box
     public void quit() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Quit Game");
         TextView message = new TextView(this );
         message.setTextSize(40);
         message.setText("Are you sure you want to quit?");
+
         builder.setView(message)
                 //if yes front page is opened
                 .setPositiveButton("Yes", (dialog, id) -> backToMain())
