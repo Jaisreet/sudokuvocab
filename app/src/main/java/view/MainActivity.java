@@ -1,8 +1,6 @@
 package view;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -16,11 +14,18 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.sudokuapp.R;
+
 import java.util.ArrayList;
 import java.util.Locale;
+
 import Controller.drawBoard;
 import Model.board_GamePlay;
+import view.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -126,12 +131,6 @@ public class MainActivity extends AppCompatActivity {
         goneSwitchState = false;
     }
 
-
-    public void onClickReset()
-    {
-        seconds = 0;
-        running = false;
-    }
     // If the activity is resumed,
     // start the stopwatch
     // again if it was running previously.
@@ -157,20 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void timerOff() {
-        running = false;
-    }
 
-    public void timerStatus(Boolean state) {
-        if(state) {
-            running = true;
-        }
-        else {
-            running = false;
-            seconds = 0;
-            timeView.setText("Timer off");
-        }
-    }
     private void runTimer()
     {
 
