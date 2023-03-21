@@ -85,7 +85,7 @@
 
 
 6. As an expert language learner, I want to have different difficulty levels so that I can choose the one that fits my ability.
-<br> Status: To Be Implemented ⏩
+<br> Status: Complete ✅
     - TDD Example:
 
         - Visible state: The user is presented with a setting button in the main menu and in the game page at the top right.
@@ -115,7 +115,7 @@
     <br>
 
 8.  As a user I want to be able to view the instructions on how to play the game whenever I want. 
-<br> Status: To Be Implemented ⏩
+<br> Status: Complete ✅
     - TDD Example:
         - Visible state: The user is presented with a setting button in the main menu / game page.
         - User Action: The user clicks on the setting button.
@@ -165,7 +165,7 @@
     <img src = "https://i.imgur.com/dZSB3i7.png" title = "mockup11: imgur.com" height="400"/>
     <br>
 12. As a teacher of elementary and junior high school children, I want scaled versions of Sudoku that use 4x4 and 6x6 grids.
-<br> Status: To Be Implemented ⏩
+<br> Status: Complete ✅
 
     - TDD Example:
         - Visible state: The user is presented with 4 options for the size of the grid: 9x9 (default), 4x4, 6x6, and 12x12 in the settings.
@@ -184,7 +184,7 @@
     <img src = "https://i.imgur.com/zKfcuZi.png" title = "mockup12: imgur.com" height="400"/>
     <br>
 13. AS a vocabulary learner who wants extra challenging mode, I want a 12x12 version of Sudoku to play on my tablet.
- <br> Status: To Be Implemented ⏩ 
+ <br> Status: Complete ✅
     - TDD Example:
         - Visible state: The user is presented with 4 options for the size of the grid: 9x9 (default), 4x4, 6x6, and 12x12 in the settings.
         - User action: The user choose 12x12.
