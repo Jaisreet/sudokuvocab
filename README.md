@@ -128,7 +128,7 @@
     <br>
 
 9. As a user, I want a timer so that I can know how much time I spent on the game.
-<br> Status: To Be Implemented ⏩
+<br> Status: Status: Complete ✅
 
     - TDD Example:
         - Visible state: The user is presented with a setting button in the main menu / game page.
@@ -143,7 +143,7 @@
     <img src="https://i.imgur.com/wpx8KnS.png" title="mockup9: imgur.com" height="400"/>
     <br>
 10. As a vocabulary learner practicing at home, I want to use my tablet for Sudoku vocabulary practice.
-<br> Status: To Be Implemented ⏩
+<br> Status: Status: Complete ✅
 
     - TDD Example:
         - Visible state: The user is presented with bigger words and the app screen fits the tablet screen.
@@ -152,7 +152,7 @@
     <img src = "https://i.imgur.com/kNNiC2O.png" title = "mockup10: imgur.com" height="400"/>
     <br>
 11. As a vocabulary learner taking the bus, I want to use my phone in landscape mode for Sudoku vocabulary practice.
-<br> Status: To Be Implemented ⏩
+<br> Status: Status: Complete ✅
     - TDD Example:
         - Scenario 1:
             - Visible state: The user is presented with a bigger font when they open the app in landscape mode than when their phone is in portrait mode.

@@ -12,7 +12,7 @@ import Model.Board_Generation;
 
 
 public class Board_GenerationTest {
-    Board_Generation newBoard = new Board_Generation();
+    Board_Generation newBoard = new Board_Generation(9, 20);
 
     // test 1
     @Test

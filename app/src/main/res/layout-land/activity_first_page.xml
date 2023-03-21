@@ -6,15 +6,16 @@
     android:layout_height="match_parent"
     tools:context="view.First_page">
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="60dp"
         android:text="@string/name"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textStyle="bold"
         android:textColor="#351c75"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +25,7 @@
         android:id="@+id/button12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:onClick="newGame"
         android:text="New Game"
         app:layout_constraintEnd_toEndOf="parent"

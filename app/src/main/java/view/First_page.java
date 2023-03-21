@@ -1,8 +1,9 @@
-package View;
+package view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 
@@ -26,6 +27,11 @@ public class First_page extends AppCompatActivity {
         Intent intent = new Intent(this, setting_page.class);
         this.startActivity(intent);
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
 }

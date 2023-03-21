@@ -12,13 +12,16 @@
         android:theme="@style/Theme.Sudokuapp"
         tools:targetApi="31">
         <activity
-            android:name=".howToPlay"
-            android:exported="false" />
+            android:name="view.activity_how_to_play"
+            android:screenOrientation="sensor"
+            android:exported="true" />
         <activity
-            android:name="View.setting_page"
-            android:exported="false" />
+            android:name="view.setting_page"
+            android:screenOrientation="sensor"
+            android:exported="true" />
         <activity
-            android:name="View.First_page"
+            android:name="view.First_page"
+            android:screenOrientation="sensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +30,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="View.MainActivity"
+            android:name="view.MainActivity"
+            android:screenOrientation="sensor"
             android:exported="true" />
     </application>
 

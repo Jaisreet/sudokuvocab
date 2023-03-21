@@ -3,43 +3,79 @@ package Model;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Board_Generation {
     private Context Board_Generation;
     int[][] arr_gameBoard;
     int[][] arr_solutionBoard;
-    int N = 9; // length and width of the grid
-    int SQRT = 3; // length and width of the diagonal sub-grids
-    int K =  40; // number of elements to be removed
+
+    int N ; // length and width of the grid
+    int SQRT; // length and width of the diagonal sub-grids
+    int removeNum;  // number of elements to be removed
 
 
 
-    public Board_Generation(){
-        /*
-        arr_gameBoard = new int[][]{
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-        */
-        arr_gameBoard = new int[9][9];
-        arr_solutionBoard = new int[9][9];
+    public Board_Generation(int size, int difficulty ){
 
-        // 1. Fill the diagonal sub-matrices
+        N = size;
+        if(N == 12){
+            SQRT = 2;
+        }else if (N == 4) {
+            SQRT = 2;
+        } else {
+            SQRT = (int) Math.sqrt(N);
+        }
+        arr_gameBoard = new int[N][N];
+        arr_solutionBoard = new int[N][N];
+
+        //1. Fill the diagonal sub-matrices
         fillDiagonal(arr_gameBoard);
 
         // 2. Fill the remaining cells using recursion
-        fillRemaining(arr_gameBoard,0, SQRT);
+        if (N == 9) {
 
+            fillRemaining(arr_gameBoard, 0, SQRT); }
+        else {
+            fillRemainingDiffGridSizes(arr_gameBoard);
+        }
         // 3. copy the grid to the solution board before we remove elements
         gridCopy(arr_gameBoard, arr_solutionBoard, N);
 
+        if(difficulty == 1){
+            if( N==9) {
+                removeNum = 10;
+            } else if (N ==12) {
+                removeNum = 40;
+            } else if (N == 6) {
+                removeNum = 3;
+            }else{
+                removeNum = 2;
+            }
+        } else if (difficulty ==2) {
+            if(N==9) {
+                removeNum = 30;
+            } else if (N ==12) {
+                removeNum = 60;
+            } else if (N == 6) {
+                removeNum = 5;
+            }else{
+                removeNum = 4;
+            }
+        }else{
+            if(N==9) {
+                removeNum = 65;
+            } else if (N ==12) {
+                removeNum = 100;
+            } else if (N == 6) {
+                removeNum = 7;
+            }else{
+                removeNum = 6;
+            }
+        }
         // 4.
-        removeKDigits(arr_gameBoard, N, K);
+        removeKDigits(arr_gameBoard, N, removeNum);
+
 
         // print board
         //printBoard(arr_gameBoard);
@@ -47,12 +83,19 @@ public class Board_Generation {
 
     }
 
+    // functions to return important grid nums
+    int return_n() {return N;}
+    int return_sqrt() {return SQRT;}
+    int return_k() {return removeNum;}
+
+
+
     // print board to console
 
     void printBoard(int arr[][])
     {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 System.out.print("|" + arr[i][j] + "|" );
             }
             System.out.print("\n");
@@ -174,10 +217,35 @@ public class Board_Generation {
     }
 
 
+
+
+    public boolean fillRemainingDiffGridSizes(int arr[][])
+    {
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+               if (arr[i][j] == 0)
+               {
+                   for (int num = 1; num<=N; num++)
+                   {
+                       if (CheckIfSafe(arr,i, j, num)) {
+                           arr[i][j] = num;
+                       } else {
+                           arr[i][j] = (int)(Math.random() * N);
+                       }
+                   }
+               }
+            }
+        }
+        return true;
+    }
+
     // Check if safe to put in cell
     public boolean CheckIfSafe(int arr[][], int i, int j, int num)
     {
-        return (unUsedInRow(arr, i, num) &&
+        return (arr[i][j] == 0 &&
+                unUsedInRow(arr, i, num) &&
                 unUsedInCol(arr, j, num) &&
                 unUsedInBox(arr,i-i%SQRT, j-j%SQRT, num));
     }
@@ -204,12 +272,13 @@ public class Board_Generation {
     // Remove the K no. of digits from board
     public void removeKDigits(int arr[][], int len, int count)
     {
+        printBoard(arr_gameBoard);
         while (count != 0)
         {
-            int i = (int) (Math.random() * 9 );
-            int j = (int) (Math.random() * 9 );
+            int i = (int) (ThreadLocalRandom.current().nextInt(0, len));
+            int j = (int) (ThreadLocalRandom.current().nextInt(0, len));
 
-            // System.out.println(i+" "+j);
+            System.out.println("i is "+ i +" ,j is" + j + " ,and count is "+count+" we're removing "+ arr[i][j]);
             if (arr[i][j] != 0)
             {
                 count--;

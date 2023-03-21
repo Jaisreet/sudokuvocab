@@ -1,35 +1,42 @@
 package Model;
-
-import android.content.Context;
-
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class board_GamePlay {
 
     int[][] board;
-    Board_Generation input = new Board_Generation();
+    Board_Generation input; //= new Board_Generation();
+    int N;// = input.return_n();
+    int SQRT;// = input.return_sqrt();
     public ArrayList<ArrayList<Object>> emptyBoxIndex;
     int selected_row;
     public int selected_column;
     int [][] flag;
     int[][] solutionBoard;
-    private Context boardFill;
+    int removeNum;
 
-    public board_GamePlay(){
+
+    public board_GamePlay(int difficulty, int size){
         // when the user has not selected a square yet, set selected col and row to -1
+        setBoardSize(size);
+        input = new Board_Generation(size, difficulty);
+        N = input.return_n();
+        SQRT = input.return_sqrt();
         selected_column = -1;
         selected_row = -1;
-        board = new int[9][9];  // main working board
-        flag = new int[9][9];   // flag to keep track of pre-filled squares
-        solutionBoard = new int[9][9];
+        board = new int[N][N];  // main working board
+        flag = new int[N][N];   // flag to keep track of pre-filled squares
+        solutionBoard = new int[N][N];
         // algorithm to move generated board set up into main board
 
+
+
         // for every row
-        for(int r=0; r<9; r++) {
+        for(int r=0; r<N; r++) {
             // for every colomn
-            for(int c=0;c<9;c++) {
+            for(int c=0;c<N;c++) {
                 board[r][c] = input.getArr_gameBoard()[r][c];
-                solutionBoard[r][c] = input.getArr_solutionBoard()[r][c];
+                solutionBoard[r][c] = input.getArr_gameBoard()[r][c];
                 // if the board at that spot is not empty, set the flag to one
                 if(board[r][c] != 0){
                     flag[r][c] = 1;
@@ -42,13 +49,42 @@ public class board_GamePlay {
         }
 
         emptyBoxIndex = new ArrayList<>();
+        getEmptyBoxIndexs();
+    }
+
+    public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input){
+        // when the user has not selected a square yet, set selected col and row to -1
+        selected_column = -1;
+        selected_row = -1;
+        board = new int[N][N];  // main working board
+        flag = flag_input;  // flag to keep track of pre-filled squares
+        solutionBoard = solution_input;
+        // algorithm to move generated board set up into main board
+
+        // for every row
+        for(int r=0; r < N; r++) {
+            // for every colomn
+            for(int c=0;c < N;c++) {
+                board[r][c] = input[r][c];
+            }
+        }
+
+        emptyBoxIndex = new ArrayList<>();
+
+    }
+
+    public void setBoardSize(int size) {
+        N = size;
+        SQRT = (int) Math.sqrt(N);
+        if (size == 12)
+            SQRT = 3;
     }
 
     //getting indexes of boxes with 0 (empty boxes)
     public void getEmptyBoxIndexs(){
-        for(int r=0; r<9; r++){
-            for(int c= 0; c<9; c++){
-                if(this.board[r][c]==0){
+        for(int r=0; r<N; r++){
+            for(int c= 0; c<N; c++){
+                if(this.flag[r][c]==0){
                     this.emptyBoxIndex.add(new ArrayList<>());
                     this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(r);
                     this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(c);
@@ -61,7 +97,7 @@ public class board_GamePlay {
     public void setNumberPos(int num){
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
-                    this.board[this.selected_row - 1][this.selected_column - 1] = num;
+                this.board[this.selected_row - 1][this.selected_column - 1] = num;
 
             }
         }
@@ -88,7 +124,7 @@ public class board_GamePlay {
     //return the solution board
     public int[][] getSolutionBoard(){return this.solutionBoard;}
 
-   //return the array indexes of the board which has value 0, that is equivalent to empty box
+    //return the array indexes of the board which has value 0, that is equivalent to empty box
     public ArrayList<ArrayList<Object>> getEmptyBoxIndex() {
         return this.emptyBoxIndex;
     }
@@ -112,5 +148,27 @@ public class board_GamePlay {
     public void setSelected_column(int c){
         selected_column = c;
     }
+
+
+    public int getCurrentGame(){
+        return selected_row;
+    }
+
+    public void setCurrentState(int[][] state) {
+        this.board = state;
+    }
+
+    public void setBoard(int[][] newBoard) {
+        board = newBoard;
+    }
+
+    public int[][] getFlag(){
+        return this.flag;
+    }
+
+    public int return_n() {return N;}
+    public int return_sqrt() {return SQRT;}
+
+
 
 }
