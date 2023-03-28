@@ -34,7 +34,7 @@
         <Switch
             android:id="@+id/timer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
@@ -86,7 +86,7 @@
             <RadioButton
                 android:id="@+id/easyButton"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="48dp"
                 android:checked="true"
                 android:text="@string/easy"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -95,7 +95,7 @@
             <RadioButton
                 android:id="@+id/mediumButton"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
+                android:layout_height="48dp"
                 android:text="@string/intermediate"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="15sp" />
@@ -103,7 +103,7 @@
             <RadioButton
                 android:id="@+id/hardButton"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
+                android:layout_height="48dp"
                 android:text="@string/hard"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                 android:textSize="15sp" />
@@ -161,7 +161,7 @@
         <RadioButton
             android:id="@+id/english"
             android:layout_width="wrap_content"
-            android:layout_height="33dp"
+            android:layout_height="48dp"
             android:checked="true"
             android:text="@string/english"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -170,7 +170,7 @@
         <RadioButton
             android:id="@+id/French"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
+            android:layout_height="48dp"
             android:text="@string/french"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="15sp" />
@@ -195,7 +195,7 @@
             <RadioButton
                 android:id="@+id/fourbyfour"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="48dp"
                 android:checked="true"
                 android:text="4x4"
                 android:textSize="15sp"
@@ -204,7 +204,7 @@
             <RadioButton
                 android:id="@+id/sixbysix"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="48dp"
                 android:text="6x6"
                 android:textSize="15sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
@@ -212,7 +212,7 @@
             <RadioButton
                 android:id="@+id/ninebynine"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="48dp"
                 android:text="9x9"
                 android:textSize="15sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
@@ -220,7 +220,7 @@
             <RadioButton
                 android:id="@+id/twelvebytwelve"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="48dp"
                 android:text="12x12"
                 android:textSize="15sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
