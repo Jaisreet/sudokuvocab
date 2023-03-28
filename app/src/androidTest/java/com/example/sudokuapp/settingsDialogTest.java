@@ -65,17 +65,19 @@ public class settingsDialogTest {
         // Wait for the app to appear
         mDevice.wait(Until.hasObject(By.pkg(SUDOKU).depth(0)), LAUNCH_TIMEOUT);
 
+
         UiObject newGame = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/button12")
+        );
+        UiObject settings1 = mDevice.findObject(new UiSelector()
                 .resourceId("com.example.sudokuapp:id/settingsDialog")
         );
+
         newGame.click();
+        settings1.click();
+
     }
 
-    /**
-     * Uses package manager to find the package name of the device launcher. Usually this package
-     * is "com.android.launcher" but can be different at times. This is a generic solution which
-     * works on all platforms.`
-     */
     private String getLauncherPackageName() {
         // Create launcher Intent
         final Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -88,11 +90,36 @@ public class settingsDialogTest {
     }
 
 
+
     @Test
     public void testResume() throws UiObjectNotFoundException {
 
         UiObject dialog = mDevice.findObject(new UiSelector().
                 resourceId(SUDOKU+":id/resume"));
+        dialog.click();
+    }
+
+    @Test
+    public void testNewGame() throws UiObjectNotFoundException {
+
+        UiObject dialog = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU+":id/newGameBtn"));
+        dialog.click();
+    }
+
+    @Test
+    public void testQuitGame() throws UiObjectNotFoundException {
+
+        UiObject dialog = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU+":id/quitGame"));
+        dialog.click();
+    }
+
+    @Test
+    public void testSettingsPage() throws UiObjectNotFoundException {
+
+        UiObject dialog = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU+":id/settingsPage"));
         dialog.click();
     }
 }
