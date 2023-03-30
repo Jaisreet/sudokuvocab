@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,8 +24,9 @@ public class setting_page extends AppCompatActivity {
     private int selectedDifficulty;
 
     private int selectedGrid;
-    Boolean result;
-
+    private Boolean result;
+    private Boolean isFirstTime;
+    private int selectedLanguage;
 
     private TextView howtoplay;
 
@@ -37,9 +38,11 @@ public class setting_page extends AppCompatActivity {
 
         timerState = "true";
 
-        selectedDifficulty = 1;
+        //selectedDifficulty = 1;
 
         selectedGrid = 9;
+
+        selectedLanguage = 1;
 
         simpleSwitch = findViewById(R.id.timer);
 
@@ -53,6 +56,10 @@ public class setting_page extends AppCompatActivity {
         RadioButton sixbysix = findViewById(R.id.sixbysix);
         RadioButton ninebynine = findViewById(R.id.ninebynine);
         RadioButton twelvebytwelve = findViewById(R.id.twelvebytwelve);
+
+        RadioGroup languageRadioGroup = findViewById(R.id.languageRadioGroup);
+        RadioButton english = findViewById(R.id.english);
+        RadioButton french = findViewById(R.id.French);
 
 
         howtoplay = findViewById(R.id.howtoplay);
@@ -89,17 +96,43 @@ public class setting_page extends AppCompatActivity {
 
         });
 
+        /*
+        SharedPreferences sharedPreferences1 = getSharedPreferences("settings", MODE_PRIVATE);
+        isFirstTime = sharedPreferences1.getBoolean("isFirstTime", true);
+        if(isFirstTime){
+            SharedPreferences.Editor editor = sharedPreferences1.edit();
+            editor.putInt("difficulty", 1);
+            editor.putInt("language", 2);
+            editor.putInt("grid_size", 9);
+            editor.putBoolean("isFirstTime", false);
+            editor.apply();
+        }
+        else{
 
+         */
+        SharedPreferences sharedPreferencesDiff = getSharedPreferences("settings", MODE_PRIVATE);
+        selectedDifficulty = sharedPreferencesDiff.getInt("difficulty", 1);
+
+        SharedPreferences sharedPreferencesLang = getSharedPreferences("settings", MODE_PRIVATE);
+        selectedLanguage = sharedPreferencesLang.getInt("language", 2);
+
+        SharedPreferences sharedPreferencesGrid = getSharedPreferences("settings", MODE_PRIVATE);
+        selectedGrid = sharedPreferencesGrid.getInt("grid_size", 9);
+
+
+        /*
         // Retrieve the intent extras
         Intent intent = getIntent();
         int defaultDifficulty = intent.getIntExtra("default_difficulty", 1);
         int defaultGridSize = intent.getIntExtra("default_grid_size", 9);
-        // Set the default difficulty and grid size
-        selectedDifficulty = defaultDifficulty;
-        selectedGrid = defaultGridSize;
+        int defaultLanguage = intent.getIntExtra("default_language", 2)
+         */
+        //Set the default difficulty and grid size
+        //selectedDifficulty = defaultDifficulty;
+        //selectedGrid = defaultGridSize;
+        //selectedLanguage = defaultLanguage;
 
-        //SharedPreferences sharedPreferencesDiff = getSharedPreferences("settings", MODE_PRIVATE);
-        //selectedDifficulty = sharedPreferencesDiff.getInt("difficulty", 1);
+
         switch (selectedDifficulty) {
             case 1:
                 easyButton.setChecked(true);
@@ -124,11 +157,14 @@ public class setting_page extends AppCompatActivity {
                     selectedDifficulty = 3;
                     break;
             }
+            SharedPreferences sharedPreferencesDiff1 = getSharedPreferences("settings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferencesDiff1.edit();
+            editor.putInt("difficulty", selectedDifficulty);
+            editor.apply();
         });
 
 
-        //SharedPreferences sharedPreferencesGrid = getSharedPreferences("settings", MODE_PRIVATE);
-        //selectedGrid = sharedPreferencesGrid.getInt("grid_size", 9);
+
         switch (selectedGrid) {
             case 4:
                 fourbyfour.setChecked(true);
@@ -166,6 +202,10 @@ public class setting_page extends AppCompatActivity {
                     ninebynine.setChecked(true); // set the default value to 9 and check the corresponding radio button
                     break;
             }
+            SharedPreferences sharedPreferencesGrid1 = getSharedPreferences("settings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferencesGrid1.edit();
+            editor.putInt("grid_size", selectedGrid);
+            editor.apply();
         });
 
 
@@ -173,9 +213,32 @@ public class setting_page extends AppCompatActivity {
         Button save = findViewById(R.id.save);
         save.setOnClickListener(view -> save());
 
-        RadioGroup languageRadioGroup = findViewById(R.id.languageRadioGroup);
+        switch (selectedLanguage) {
+            case 1:
+                english.setChecked(true);
+                break;
+            case 2:
+                french.setChecked(true);
+                break;
+            default:
+                selectedLanguage = 2;
+                french.setChecked(true); // set the default value to french if none of the cases match
+                break;
+        }
         languageRadioGroup.setOnCheckedChangeListener((radioGroup, checkedId) -> {
-            RadioButton radioButton = findViewById(checkedId);
+            switch (checkedId){
+                case R.id.english:
+                    selectedLanguage = 1;
+                    break;
+
+                case R.id.French:
+                    selectedLanguage = 2;
+                    break;
+            }
+            SharedPreferences sharedPreferencesLang1 = getSharedPreferences("settings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferencesLang1.edit();
+            editor.putInt("language", selectedLanguage);
+            editor.apply();
 
         });
 
@@ -206,6 +269,7 @@ public class setting_page extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences("settings", MODE_PRIVATE).edit();
         editor.putInt("difficulty", selectedDifficulty);
         editor.putInt("grid_size", selectedGrid); // add this line to save the selected grid size
+        editor.putInt("language", selectedLanguage);
         editor.putBoolean("timer_enabled", simpleSwitch.isChecked());
         editor.apply();
 
@@ -213,6 +277,7 @@ public class setting_page extends AppCompatActivity {
         Intent intent = new Intent(setting_page.this, MainActivity.class);
         intent.putExtra("difficulty", selectedDifficulty);
         intent.putExtra("grid_size", selectedGrid); // add this line to pass the selected grid size
+        intent.putExtra("language", selectedLanguage);
         startActivity(intent);
 
 

@@ -275,7 +275,6 @@ public class drawBoard extends View implements Serializable {
     public void setBoardSize(int size) {
         // Update the board size in the game model
         board_GamePlay.setBoardSize(size);
-
         // Update the cell size and view dimensions based on the new board size
         N = board_GamePlay.return_n();
         SQRT = board_GamePlay.return_sqrt();
@@ -285,4 +284,5 @@ public class drawBoard extends View implements Serializable {
         // Redraw the board with the new size
         invalidate();
     }
+
 }

@@ -1,4 +1,4 @@
-package View;
+package view;
 
 
 import androidx.annotation.NonNull;
@@ -33,30 +33,49 @@ public class MainActivity extends AppCompatActivity {
     public String timer;
     private boolean goneSwitchState;
     boolean switchResult;
+    int difficultyLevel;
+    int gridSize;
 
+    int language;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Get the selected difficulty level from the settingPage activity
-        int difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
-        int gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
+        difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
+        gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
+        language = getIntent().getIntExtra("language", 2);
+
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         switchResult = sharedPreferences.getBoolean("timer_enabled", true);
 
+        SharedPreferences sharedPreferences1 = getSharedPreferences("settings", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences1.edit();
+        editor.putInt("difficulty", difficultyLevel);
+        editor.putInt("language", language);
+        editor.putInt("grid_size", gridSize);
+        editor.apply();
+
+
+
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoard.setBoardSize(gridSize);
+
         timeView = findViewById(R.id.timeView);
 
         timer = getIntent().getStringExtra("timerStr");
 
+
+
         if (savedInstanceState != null) {
+            difficultyLevel = savedInstanceState.getInt("difficulty");
+            gridSize = savedInstanceState.getInt("grid");
             // Retrieve the stored data from the bundle and restore the state of the drawBoard view
             int[][] board = (int[][]) savedInstanceState.getSerializable("board");
             int[][] flag = (int[][]) savedInstanceState.getSerializable("flag_state");
             int[][] solution = (int[][]) savedInstanceState.getSerializable("solution_state");
-            gameBoardGamePlay = new board_GamePlay(board, flag, solution);
+            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             seconds = savedInstanceState.getInt("seconds");
@@ -106,6 +125,61 @@ public class MainActivity extends AppCompatActivity {
         //opens the setting dialog box when the setting button is clicked
         ImageView settingsDialog = findViewById(R.id.settingsDialog);
         settingsDialog.setOnClickListener(view -> openSettingDialog());
+
+        Button ButtonOne = (Button) findViewById(R.id.button);
+        Button ButtonTwo = (Button) findViewById(R.id.button2);
+        Button ButtonThree = (Button) findViewById(R.id.button3);
+        Button ButtonFour = (Button) findViewById(R.id.button4);
+        Button ButtonFive = (Button) findViewById(R.id.button5);
+        Button ButtonSix = (Button) findViewById(R.id.button6);
+        Button ButtonSeven = (Button) findViewById(R.id.button7);
+        Button ButtonEight = (Button) findViewById(R.id.button8);
+        Button ButtonNine = (Button) findViewById(R.id.button9);
+        Button ButtonTen = (Button) findViewById(R.id.button10);
+        Button ButtonEleven = (Button) findViewById(R.id.button11);
+        Button ButtonTwelve = (Button) findViewById(R.id.button12);
+
+
+
+        if(gridSize == 4){
+            ButtonFive.setVisibility(View.GONE);
+            ButtonSix.setVisibility(View.GONE);
+            ButtonSeven.setVisibility(View.GONE);
+            ButtonEight.setVisibility(View.GONE);
+            ButtonNine.setVisibility(View.GONE);
+            ButtonTen.setVisibility(View.GONE);
+            ButtonEleven.setVisibility(View.GONE);
+            ButtonTwelve.setVisibility(View.GONE);
+        } else if (gridSize == 6 ) {
+            ButtonSeven.setVisibility(View.GONE);
+            ButtonEight.setVisibility(View.GONE);
+            ButtonNine.setVisibility(View.GONE);
+            ButtonTen.setVisibility(View.GONE);
+            ButtonEleven.setVisibility(View.GONE);
+            ButtonTwelve.setVisibility(View.GONE);
+        } else if (gridSize == 9) {
+            ButtonTen.setVisibility(View.GONE);
+            ButtonEleven.setVisibility(View.GONE);
+            ButtonTwelve.setVisibility(View.GONE);
+        }
+
+        if(language == 1){
+            ButtonOne.setText("One");
+            ButtonTwo.setText("Two");
+            ButtonThree.setText("Three");
+            ButtonFour.setText("Four");
+            ButtonFive.setText("Five");
+            ButtonSix.setText("Six");
+            ButtonSeven.setText("Seven");
+            ButtonEight.setText("Eight");
+            ButtonNine.setText("Nine");
+            ButtonTen.setText("Ten");
+            ButtonEleven.setText("Eleven");
+            ButtonTwelve.setText("Twelve");
+
+        }
+
+
     }
 
 
@@ -223,6 +297,7 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+
     //set the value of selected column to 1 when button one is pressed that is "un"
     public void BTNOnePress(View view) {
         gameBoardGamePlay.setNumberPos(1);
@@ -274,6 +349,21 @@ public class MainActivity extends AppCompatActivity {
     //set the value of selected column to 9 when button nine is pressed that is "neuf"
     public void BTNNinePress(View view) {
         gameBoardGamePlay.setNumberPos(9);
+        gameBoard.invalidate();
+    }
+
+    public void BTNTenPress(View view) {
+        gameBoardGamePlay.setNumberPos(10);
+        gameBoard.invalidate();
+    }
+
+    public void BTNElevenPress(View view) {
+        gameBoardGamePlay.setNumberPos(11);
+        gameBoard.invalidate();
+    }
+
+    public void BTNTwelvePress(View view) {
+        gameBoardGamePlay.setNumberPos(12);
         gameBoard.invalidate();
     }
 
@@ -410,6 +500,8 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("seconds", seconds);
         outState.putBoolean("running", running);
         outState.putBoolean("wasRunning", wasRunning);
+        outState.putInt("difficulty", difficultyLevel);
+        outState.putInt("grid", gridSize);
     }
 
 

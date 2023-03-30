@@ -52,7 +52,8 @@ public class board_GamePlay {
         getEmptyBoxIndexs();
     }
 
-    public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input){
+    public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input, int size){
+        setBoardSize(size);
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
         selected_row = -1;
@@ -70,6 +71,7 @@ public class board_GamePlay {
         }
 
         emptyBoxIndex = new ArrayList<>();
+        getEmptyBoxIndexs();
 
     }
 
@@ -129,6 +131,10 @@ public class board_GamePlay {
         return this.emptyBoxIndex;
     }
 
+    public void setEmptyBoxIndex(ArrayList<ArrayList<Object>> emptyBoxIndex1){
+        emptyBoxIndex = emptyBoxIndex1;
+    }
+
     //return the selected row
     public int getSelected_row(){
         return selected_row;
@@ -147,15 +153,6 @@ public class board_GamePlay {
     //set the column to given value c
     public void setSelected_column(int c){
         selected_column = c;
-    }
-
-
-    public int getCurrentGame(){
-        return selected_row;
-    }
-
-    public void setCurrentState(int[][] state) {
-        this.board = state;
     }
 
     public void setBoard(int[][] newBoard) {

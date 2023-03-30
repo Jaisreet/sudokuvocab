@@ -1,9 +1,8 @@
-package View;
+package view;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
