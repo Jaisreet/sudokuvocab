@@ -21,7 +21,7 @@ public class Board_Generation {
         N = size;
         if(N == 12){
             SQRT = 2;
-        }else if (N == 4) {
+        }else if (N == 4 || N == 6) {
             SQRT = 2;
         } else {
             SQRT = (int) Math.sqrt(N);

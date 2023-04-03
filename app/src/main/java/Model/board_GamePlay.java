@@ -36,7 +36,7 @@ public class board_GamePlay {
             // for every colomn
             for(int c=0;c<N;c++) {
                 board[r][c] = input.getArr_gameBoard()[r][c];
-                solutionBoard[r][c] = input.getArr_gameBoard()[r][c];
+                solutionBoard[r][c] = input.getArr_solutionBoard()[r][c];
                 // if the board at that spot is not empty, set the flag to one
                 if(board[r][c] != 0){
                     flag[r][c] = 1;
@@ -78,8 +78,10 @@ public class board_GamePlay {
     public void setBoardSize(int size) {
         N = size;
         SQRT = (int) Math.sqrt(N);
-        if (size == 12)
+        if (size == 12) {
             SQRT = 3;
+        }
+
     }
 
     //getting indexes of boxes with 0 (empty boxes)
