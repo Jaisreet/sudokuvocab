@@ -197,6 +197,12 @@
     <br>
 14. As a student who wants to practice my understanding of spoken words in the language that I am learning, I want a listening comprehension mode.
     - TDD Example:
+        - Visible state: The user is presented with a setting button in the main menu / game page.
+        - User Action: The user clicks on the setting button.
+        - Visible state: In the settings page, there is an option to turn on listening comprehension mode or not
+        - User Action: The user chooses “On”.
+        - System Response: The checkbox next to “On” is filled.
+        - User Action: The user starts a new game
         - Visible state: When user is in a game, numbers will appear in the prefilled cells.
         - User action: The user presses the number
         - System response: the corresponding word in the language that the user is learning will be read out to him. The user can then test his listening comprehension by selecting from the menu the correct English translation of the word.
