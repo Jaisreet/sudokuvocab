@@ -200,7 +200,9 @@
         - Visible state: When user is in a game, numbers will appear in the prefilled cells.
         - User action: The user presses the number
         - System response: the corresponding word in the language that the user is learning will be read out to him. The user can then test his listening comprehension by selecting from the menu the correct English translation of the word.
-
+    <br>
+    <img src = "https://i.imgur.com/84tOYY6.png" title = "mockup14: imgur.com" height="400"/>
+    <br>
 
     
 
