@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     int difficultyLevel;
     int gridSize;
     int language;
+
+    boolean listenCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             difficultyLevel = getIntent().getIntExtra("ndifficulty", 1); // default difficulty is 1 (easy)
             gridSize = getIntent().getIntExtra("ngrid_size", 9); // 9 is the default value
             language = getIntent().getIntExtra("nlanguage", 2);
-
+            listenCheck = getIntent().getBooleanExtra("nListen", false);
             SharedPreferences sharedPreferences1 = getSharedPreferences("newGame", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences1.edit();
             editor.putInt("ndifficulty", difficultyLevel);
@@ -112,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize, language);
+            System.out.println(listenCheck+" hello");
+            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize, language, listenCheck);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             if(switchResult){

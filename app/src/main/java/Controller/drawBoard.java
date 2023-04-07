@@ -38,7 +38,7 @@ public class drawBoard extends View implements Serializable {
 
     public drawBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        board_GamePlay = new board_GamePlay(5, 9,0);
+        board_GamePlay = new board_GamePlay(5, 9,0,false);
         N= board_GamePlay.return_n();
         SQRT= board_GamePlay.return_sqrt();
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SudokuBoard,
@@ -139,7 +139,15 @@ public class drawBoard extends View implements Serializable {
         for(int r=0; r<N;r++){
             for(int c =0; c<N;c++){
                 if(board_GamePlay.getBoard()[r][c] != 0){
-                    String text = (board_GamePlay.getWordBoard()[r][c]);
+                    String text;
+                    //String text= board_GamePlay.getWordBoard()[r][c];
+                    if(board_GamePlay.getListenCheck()) {
+                        text = Integer.toString(board_GamePlay.getBoard()[r][c]);
+                    }else{
+                        text = (board_GamePlay.getWordBoard()[r][c]);
+                    }
+
+
                     float width, height;
 
                     letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
@@ -171,7 +179,14 @@ public class drawBoard extends View implements Serializable {
             int r = (int)letter.get(0);
             int c = (int)letter.get(1);
             if(board_GamePlay.getBoard()[r][c] != 0 ) {
-                String text = (board_GamePlay.getWordBoard()[r][c]);
+                String text;  // board_GamePlay.getWordBoard()[r][c];
+
+                if(board_GamePlay.getListenCheck()) {
+                    text = Integer.toString(board_GamePlay.getBoard()[r][c]);
+                }else{
+                    text = (board_GamePlay.getWordBoard()[r][c]);
+                }
+
                 float width, height;
 
                 letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);

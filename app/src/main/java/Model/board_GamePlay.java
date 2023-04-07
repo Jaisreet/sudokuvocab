@@ -21,9 +21,11 @@ public class board_GamePlay {
     public ArrayList<ArrayList<Object>> emptyBoxIndex;
     int selected_row;
     public int selected_column;
-    static HashMap<Integer, String[]> gameWords;
+    public static HashMap<Integer, String[]> gameWords;
 
-    public board_GamePlay(int difficulty, int size, int lang){
+    public static boolean listenCheck;
+
+    public board_GamePlay(int difficulty, int size, int lang, boolean check){
         // when the user has not selected a square yet, set selected col and row to -1
         setBoardSize(size);
         input = new Board_Generation(size, difficulty);
@@ -36,6 +38,7 @@ public class board_GamePlay {
         solutionBoard = new int[N][N];
         wordBoard = new String [N][N];
         solutionWordBoard = new String[N][N];
+        listenCheck = check;
         // algorithm to move generated board set up into main board
         wordList = new wordList();
         gameWords = wordList.gameWords(12);
@@ -162,6 +165,8 @@ public class board_GamePlay {
             }
         }
     }
+
+    public static boolean getListenCheck(){return listenCheck;}
     public static HashMap<Integer, String[]> getWordMap(){
         return gameWords;
     }
