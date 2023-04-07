@@ -328,70 +328,70 @@ public class MainActivity extends AppCompatActivity {
 
     //set the value of selected column to 1 when button one is pressed that is "un"
     public void BTNOnePress(View view) {
-        gameBoardGamePlay.setNumberPos(1);
+        gameBoardGamePlay.setNumberPos(1, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 2 when the button two is pressed that is "duex"
     public void BTNTwoPress(View view) {
-        gameBoardGamePlay.setNumberPos(2);
+        gameBoardGamePlay.setNumberPos(2, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 3 when button three is pressed that is "trois"
     public void BTNThreePress(View view) {
-        gameBoardGamePlay.setNumberPos(3);
+        gameBoardGamePlay.setNumberPos(3, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 4 when button four is pressed that is "quatre"
     public void BTNFourPress(View view) {
-        gameBoardGamePlay.setNumberPos(4);
+        gameBoardGamePlay.setNumberPos(4, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 5 when button five is pressed that is "cinq"
     public void BTNFivePress(View view) {
-        gameBoardGamePlay.setNumberPos(5);
+        gameBoardGamePlay.setNumberPos(5, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 6 when button six is pressed that is "six"
     public void BTNSixPress(View view) {
-        gameBoardGamePlay.setNumberPos(6);
+        gameBoardGamePlay.setNumberPos(6, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 7 when button seven is pressed that is "sept"
     public void BTNSevenPress(View view) {
-        gameBoardGamePlay.setNumberPos(7);
+        gameBoardGamePlay.setNumberPos(7, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 8 when button eight is pressed that is "huit"
     public void BTNEightPress(View view) {
-        gameBoardGamePlay.setNumberPos(8);
+        gameBoardGamePlay.setNumberPos(8, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 9 when button nine is pressed that is "neuf"
     public void BTNNinePress(View view) {
-        gameBoardGamePlay.setNumberPos(9);
+        gameBoardGamePlay.setNumberPos(9, language);
         gameBoard.invalidate();
     }
 
     public void BTNTenPress(View view) {
-        gameBoardGamePlay.setNumberPos(10);
+        gameBoardGamePlay.setNumberPos(10, language);
         gameBoard.invalidate();
     }
 
     public void BTNElevenPress(View view) {
-        gameBoardGamePlay.setNumberPos(11);
+        gameBoardGamePlay.setNumberPos(11, language);
         gameBoard.invalidate();
     }
 
     public void BTNTwelvePress(View view) {
-        gameBoardGamePlay.setNumberPos(12);
+        gameBoardGamePlay.setNumberPos(12, language);
         gameBoard.invalidate();
     }
 
