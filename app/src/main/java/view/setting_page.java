@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
@@ -27,6 +28,8 @@ public class setting_page extends AppCompatActivity {
     private Boolean result;
     private Boolean isFirstTime;
     private int selectedLanguage;
+
+    Boolean isChecked;
 
     private TextView howtoplay;
 
@@ -61,6 +64,7 @@ public class setting_page extends AppCompatActivity {
         RadioButton english = findViewById(R.id.english);
         RadioButton french = findViewById(R.id.French);
 
+        CheckBox check = findViewById(R.id.checkBox);
 
         howtoplay = findViewById(R.id.howtoplay);
         if(howtoplay != null){
@@ -105,6 +109,21 @@ public class setting_page extends AppCompatActivity {
 
         SharedPreferences sharedPreferencesGrid = getSharedPreferences("settings", MODE_PRIVATE);
         selectedGrid = sharedPreferencesGrid.getInt("grid_size", 9);
+
+        SharedPreferences sharedPreferencesListen = getSharedPreferences("settings", MODE_PRIVATE);
+        isChecked = sharedPreferencesListen.getBoolean("Listen", false);
+        check.setChecked(isChecked);
+
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isChecked = check.isChecked();
+                SharedPreferences sharedPreferencesListen = getSharedPreferences("settings", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferencesListen.edit();
+                editor.putBoolean("Listen", check.isChecked());
+                editor.apply();
+            }
+        });
 
 
         switch (selectedDifficulty) {
@@ -245,6 +264,7 @@ public class setting_page extends AppCompatActivity {
         editor.putInt("grid_size", selectedGrid); // add this line to save the selected grid size
         editor.putInt("language", selectedLanguage);
         editor.putBoolean("timer_enabled", simpleSwitch.isChecked());
+        editor.putBoolean("Listen",isChecked);
         editor.apply();
 
         // Start the main activity with the selected difficulty level and grid size as intent extras
@@ -253,6 +273,7 @@ public class setting_page extends AppCompatActivity {
         intent.putExtra("grid_size", selectedGrid); // add this line to pass the selected grid size
         intent.putExtra("language", selectedLanguage);
         intent.putExtra("from_setting", true);
+        intent.putExtra("Listen", isChecked);
         startActivity(intent);
 
 

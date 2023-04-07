@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
             difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
             gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
             language = getIntent().getIntExtra("language", 2);
+            listenCheck = getIntent().getBooleanExtra("Listen", false);
+
             SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
             switchResult = sharedPreferences.getBoolean("timer_enabled", true);
 
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putInt("difficulty", difficultyLevel);
             editor.putInt("language", language);
             editor.putInt("grid_size", gridSize);
+            editor.putBoolean("Listen", listenCheck);
             editor.apply();
         } else if (fromNewGame) {
             difficultyLevel = getIntent().getIntExtra("ndifficulty", 1); // default difficulty is 1 (easy)
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putInt("ndifficulty", difficultyLevel);
             editor.putInt("nlanguage", language);
             editor.putInt("ngrid_size", gridSize);
+            editor.putBoolean("nListen", listenCheck);
             editor.apply();
         }
 
