@@ -413,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //check the user input in emptyboxindex with the solutionBoard
+    //check the user input in empty box index with the solutionBoard
     //if solution is correct it stays if wrong the value in that cell is set to 0
     public void check(){
 
