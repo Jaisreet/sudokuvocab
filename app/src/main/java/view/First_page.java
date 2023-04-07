@@ -47,7 +47,7 @@ public class First_page extends AppCompatActivity {
         }
     }
 
-    private void openNewGameDialogBox() {
+    public void openNewGameDialogBox() {
         dialog = new Dialog(First_page.this);
         // Include dialog.xml file
         dialog.setContentView(R.layout.newgame_dialog);
