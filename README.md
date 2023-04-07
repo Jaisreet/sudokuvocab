@@ -183,7 +183,7 @@
     <img src = "https://i.imgur.com/NBac6qW.png" title = "mockup12: imgur.com" height="400"/>
     <img src = "https://i.imgur.com/zKfcuZi.png" title = "mockup12: imgur.com" height="400"/>
     <br>
-13. AS a vocabulary learner who wants extra challenging mode, I want a 12x12 version of Sudoku to play on my tablet.
+13. As a vocabulary learner who wants extra challenging mode, I want a 12x12 version of Sudoku to play on my tablet.
  <br> Status: Complete ✅ 
     - TDD Example:
         - Visible state: The user is presented with 4 options for the size of the grid: 9x9 (default), 4x4, 6x6, and 12x12 in the settings.
@@ -195,8 +195,20 @@
     <img src = "https://i.imgur.com/7fJDQmp.png" title = "mockup13: imgur.com" height="400"/>
     <img src = "https://i.imgur.com/LraCeFq.png" title = "mockup13: imgur.com" height="400"/>
     <br>
-
-
+14. As a student who wants to practice my understanding of spoken words in the language that I am learning, I want a listening comprehension mode.
+    - TDD Example:
+        - Visible state: The user is presented with a setting button in the main menu / game page.
+        - User Action: The user clicks on the setting button.
+        - Visible state: In the settings page, there is an option to turn on listening comprehension mode or not
+        - User Action: The user chooses “On”.
+        - System Response: The checkbox next to “On” is filled.
+        - User Action: The user starts a new game
+        - Visible state: When user is in a game, numbers will appear in the prefilled cells.
+        - User action: The user presses the number
+        - System response: the corresponding word in the language that the user is learning will be read out to him. The user can then test his listening comprehension by selecting from the menu the correct English translation of the word.
+    <br>
+    <img src = "https://i.imgur.com/84tOYY6.png" title = "mockup14: imgur.com" height="400"/>
+    <br>
 
     
 
