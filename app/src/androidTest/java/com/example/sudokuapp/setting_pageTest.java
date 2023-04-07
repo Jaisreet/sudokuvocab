@@ -55,19 +55,11 @@ public class setting_pageTest {
         mDevice.wait(Until.hasObject(By.pkg(SUDOKU).depth(0)), LAUNCH_TIMEOUT);
 
 
-        UiObject newGame = mDevice.findObject(new UiSelector()
-                .resourceId("com.example.sudokuapp:id/button12")
-        );
-        UiObject settings1 = mDevice.findObject(new UiSelector()
-                        .resourceId("com.example.sudokuapp:id/settingsDialog")
-        );
-        UiObject settings2 = mDevice.findObject(new UiSelector()
-                .resourceId("com.example.sudokuapp:id/settingsPage")
+        UiObject settings = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/button13")
         );
 
-        newGame.click();
-        settings1.click();
-        settings2.click();
+        settings.click();
 
     }
 
@@ -84,15 +76,56 @@ public class setting_pageTest {
 
 
     @Test
-    public void backToMain() {
-
+    public void save() throws UiObjectNotFoundException {
+        UiObject save = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU+":id/save"));
+        save.click();
     }
 
     @Test
-    public void save() {
+    public void back() throws UiObjectNotFoundException {
+        UiObject back = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU+":id/button14"));
+        back.click();
     }
 
     @Test
-    public void onConfigurationChanged() {
+    public void modes() throws UiObjectNotFoundException {
+        UiObject en = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU+":id/english"));
+        en.click();
+
+        UiObject fre = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU+":id/French"));
+        fre.click();
+    }
+
+    @Test
+    public void levels() throws UiObjectNotFoundException {
+        UiObject emode = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU + ":id/easyButton"));
+        emode.click();
+        UiObject mmode = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU + ":id/mediumButton"));
+        mmode.click();
+        UiObject hmode = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU + ":id/hardButton"));
+        hmode.click();
+    }
+
+    @Test
+    public void layout() throws UiObjectNotFoundException {
+        UiObject four = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU + ":id/fourbyfour"));
+        four.click();
+        UiObject six = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU + ":id/sixbysix"));
+        six.click();
+        UiObject nine = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU + ":id/ninebynine"));
+        nine.click();
+        UiObject twelve = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU + ":id/twelvebytwelve"));
+        twelve.click();
     }
 }

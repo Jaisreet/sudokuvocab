@@ -69,6 +69,11 @@ public class MainActivityTest {
                 .resourceId("com.example.sudokuapp:id/button12")
         );
         newGame.click();
+
+        UiObject startGame = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/startGame")
+        );
+        startGame.click();
     }
 
     /**
