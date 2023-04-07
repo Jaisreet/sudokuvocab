@@ -495,7 +495,7 @@ public class MainActivity extends AppCompatActivity {
 
         newGame.setOnClickListener(v -> {
             //starts the new game by calling startNewGame()
-            startNewGame();
+            backToMain();
 
         });
 
