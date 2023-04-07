@@ -48,7 +48,7 @@
             android:text="@string/Three"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="15sp"
             custom:layout_constraintBottom_toBottomOf="parent"
             custom:layout_constraintEnd_toEndOf="parent"
             custom:layout_constraintTop_toBottomOf="@+id/button6" />
@@ -64,7 +64,7 @@
             android:text="@string/One"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="15sp"
             custom:layout_constraintStart_toStartOf="parent"
             custom:layout_constraintTop_toTopOf="parent" />
 
@@ -77,9 +77,10 @@
             android:layout_column="1"
             android:onClick="BTNTwoPress"
             android:text="@string/Two"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+             />
 
         <Button
             android:id="@+id/button8"
@@ -90,9 +91,10 @@
             android:layout_column="1"
             android:onClick="BTNEightPress"
             android:text="@string/Eight"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+             />
 
         <Button
             android:id="@+id/button9"
@@ -103,9 +105,10 @@
             android:layout_column="2"
             android:onClick="BTNNinePress"
             android:text="@string/Nine"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+             />
 
         <Button
             android:id="@+id/button4"
@@ -116,9 +119,10 @@
             android:layout_column="0"
             android:onClick="BTNFourPress"
             android:text="@string/Four"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+             />
 
         <Button
             android:id="@+id/button5"
@@ -129,9 +133,10 @@
             android:layout_column="1"
             android:onClick="BTNFivePress"
             android:text="@string/Five"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+             />
 
         <Button
             android:id="@+id/button7"
@@ -142,9 +147,10 @@
             android:layout_column="0"
             android:onClick="BTNSevenPress"
             android:text="@string/Seven"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+             />
 
         <Button
             android:id="@+id/button6"
@@ -155,9 +161,10 @@
             android:layout_column="2"
             android:onClick="BTNSixPress"
             android:text="@string/Six"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+             />
 
         <Button
             android:id="@+id/button10"
@@ -169,7 +176,7 @@
             android:text="dix"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="15sp"
             custom:layout_constraintEnd_toStartOf="@+id/button3"
             custom:layout_constraintStart_toEndOf="@+id/button"
             custom:layout_constraintTop_toTopOf="parent" />
@@ -181,9 +188,9 @@
             android:layout_height="wrap_content"
             android:onClick="BTNElevenPress"
             android:text="onze"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
             custom:layout_constraintEnd_toStartOf="@+id/button3"
             custom:layout_constraintStart_toEndOf="@+id/button"
             custom:layout_constraintTop_toTopOf="parent" />
@@ -197,7 +204,7 @@
             android:text="twelve"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="15sp"
             custom:layout_constraintEnd_toStartOf="@+id/button3"
             custom:layout_constraintStart_toEndOf="@+id/button"
             custom:layout_constraintTop_toTopOf="parent" />

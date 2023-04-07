@@ -24,7 +24,7 @@
 
         <Button
             android:id="@+id/resume"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:onClick="backToGame"
             android:text="@string/resume"
@@ -32,20 +32,20 @@
 
         <Button
             android:id="@+id/settingsPage"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/Settings" />
 
         <Button
             android:id="@+id/newGameBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:onClick="newGame"
             android:text="New Game" />
 
         <Button
             android:id="@+id/quitGame"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Quit Game" />
 

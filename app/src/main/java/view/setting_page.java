@@ -96,20 +96,7 @@ public class setting_page extends AppCompatActivity {
 
         });
 
-        /*
-        SharedPreferences sharedPreferences1 = getSharedPreferences("settings", MODE_PRIVATE);
-        isFirstTime = sharedPreferences1.getBoolean("isFirstTime", true);
-        if(isFirstTime){
-            SharedPreferences.Editor editor = sharedPreferences1.edit();
-            editor.putInt("difficulty", 1);
-            editor.putInt("language", 2);
-            editor.putInt("grid_size", 9);
-            editor.putBoolean("isFirstTime", false);
-            editor.apply();
-        }
-        else{
 
-         */
         SharedPreferences sharedPreferencesDiff = getSharedPreferences("settings", MODE_PRIVATE);
         selectedDifficulty = sharedPreferencesDiff.getInt("difficulty", 1);
 
@@ -118,19 +105,6 @@ public class setting_page extends AppCompatActivity {
 
         SharedPreferences sharedPreferencesGrid = getSharedPreferences("settings", MODE_PRIVATE);
         selectedGrid = sharedPreferencesGrid.getInt("grid_size", 9);
-
-
-        /*
-        // Retrieve the intent extras
-        Intent intent = getIntent();
-        int defaultDifficulty = intent.getIntExtra("default_difficulty", 1);
-        int defaultGridSize = intent.getIntExtra("default_grid_size", 9);
-        int defaultLanguage = intent.getIntExtra("default_language", 2)
-         */
-        //Set the default difficulty and grid size
-        //selectedDifficulty = defaultDifficulty;
-        //selectedGrid = defaultGridSize;
-        //selectedLanguage = defaultLanguage;
 
 
         switch (selectedDifficulty) {
@@ -278,6 +252,7 @@ public class setting_page extends AppCompatActivity {
         intent.putExtra("difficulty", selectedDifficulty);
         intent.putExtra("grid_size", selectedGrid); // add this line to pass the selected grid size
         intent.putExtra("language", selectedLanguage);
+        intent.putExtra("from_setting", true);
         startActivity(intent);
 
 

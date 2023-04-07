@@ -1,6 +1,8 @@
 package view;
 
 
+import static android.os.Build.VERSION_CODES.N;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
@@ -18,14 +20,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.sudokuapp.R;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
 import Controller.drawBoard;
+import Controller.wordList;
 import Model.board_GamePlay;
 
 public class MainActivity extends AppCompatActivity {
 
     private drawBoard gameBoard;
     private board_GamePlay gameBoardGamePlay;
+
+    private First_page firstPage;
+
     private int seconds = 0;
     private boolean running;
     private boolean wasRunning;
@@ -35,37 +43,48 @@ public class MainActivity extends AppCompatActivity {
     boolean switchResult;
     int difficultyLevel;
     int gridSize;
-
     int language;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get the selected difficulty level from the settingPage activity
-        difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
-        gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
-        language = getIntent().getIntExtra("language", 2);
+        boolean fromNewGame = getIntent().getBooleanExtra("from_new_game", false);
+        boolean fromSettingPage = getIntent().getBooleanExtra("from_setting", false);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-        switchResult = sharedPreferences.getBoolean("timer_enabled", true);
+        if(fromSettingPage){
+            // Get the selected difficulty level from the settingPage activity
+            difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
+            gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
+            language = getIntent().getIntExtra("language", 2);
+            SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+            switchResult = sharedPreferences.getBoolean("timer_enabled", true);
 
-        SharedPreferences sharedPreferences1 = getSharedPreferences("settings", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences1.edit();
-        editor.putInt("difficulty", difficultyLevel);
-        editor.putInt("language", language);
-        editor.putInt("grid_size", gridSize);
-        editor.apply();
+            SharedPreferences sharedPreferences1 = getSharedPreferences("settings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences1.edit();
+            editor.putInt("difficulty", difficultyLevel);
+            editor.putInt("language", language);
+            editor.putInt("grid_size", gridSize);
+            editor.apply();
+        } else if (fromNewGame) {
+            difficultyLevel = getIntent().getIntExtra("ndifficulty", 1); // default difficulty is 1 (easy)
+            gridSize = getIntent().getIntExtra("ngrid_size", 9); // 9 is the default value
+            language = getIntent().getIntExtra("nlanguage", 2);
 
+            SharedPreferences sharedPreferences1 = getSharedPreferences("newGame", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences1.edit();
+            editor.putInt("ndifficulty", difficultyLevel);
+            editor.putInt("nlanguage", language);
+            editor.putInt("ngrid_size", gridSize);
+            editor.apply();
+        }
 
 
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoard.setBoardSize(gridSize);
 
         timeView = findViewById(R.id.timeView);
-
         timer = getIntent().getStringExtra("timerStr");
-
 
 
         if (savedInstanceState != null) {
@@ -75,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
             int[][] board = (int[][]) savedInstanceState.getSerializable("board");
             int[][] flag = (int[][]) savedInstanceState.getSerializable("flag_state");
             int[][] solution = (int[][]) savedInstanceState.getSerializable("solution_state");
-            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize);
+            String[][] wordBoard = (String[][])savedInstanceState.getSerializable("word_board");
+            String[][] wordBoardSolution = (String[][])savedInstanceState.getSerializable("word_solution_state");
+            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize,wordBoard,wordBoardSolution);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             seconds = savedInstanceState.getInt("seconds");
@@ -91,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize);
+            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize, language);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             if(switchResult){
@@ -139,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         Button ButtonEleven = (Button) findViewById(R.id.button11);
         Button ButtonTwelve = (Button) findViewById(R.id.button12);
 
-
+        HashMap<Integer, String[]> gameWords = board_GamePlay.getWordMap();
 
         if(gridSize == 4){
             ButtonFive.setVisibility(View.GONE);
@@ -164,19 +185,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(language == 1){
-            ButtonOne.setText("One");
-            ButtonTwo.setText("Two");
-            ButtonThree.setText("Three");
-            ButtonFour.setText("Four");
-            ButtonFive.setText("Five");
-            ButtonSix.setText("Six");
-            ButtonSeven.setText("Seven");
-            ButtonEight.setText("Eight");
-            ButtonNine.setText("Nine");
-            ButtonTen.setText("Ten");
-            ButtonEleven.setText("Eleven");
-            ButtonTwelve.setText("Twelve");
-
+            ButtonOne.setText(gameWords.get(1)[0]);
+            ButtonTwo.setText(gameWords.get(2)[0]);
+            ButtonThree.setText(gameWords.get(3)[0]);
+            ButtonFour.setText(gameWords.get(4)[0]);
+            ButtonFive.setText(gameWords.get(5)[0]);
+            ButtonSix.setText(gameWords.get(6)[0]);
+            ButtonSeven.setText(gameWords.get(7)[0]);
+            ButtonEight.setText(gameWords.get(8)[0]);
+            ButtonNine.setText(gameWords.get(9)[0]);
+            ButtonTen.setText(gameWords.get(10)[0]);
+            ButtonEleven.setText(gameWords.get(11)[0]);
+            ButtonTwelve.setText(gameWords.get(12)[0]);
+        }
+        else{
+            ButtonOne.setText(gameWords.get(1)[1]);
+            ButtonTwo.setText(gameWords.get(2)[1]);
+            ButtonThree.setText(gameWords.get(3)[1]);
+            ButtonFour.setText(gameWords.get(4)[1]);
+            ButtonFive.setText(gameWords.get(5)[1]);
+            ButtonSix.setText(gameWords.get(6)[1]);
+            ButtonSeven.setText(gameWords.get(7)[1]);
+            ButtonEight.setText(gameWords.get(8)[1]);
+            ButtonNine.setText(gameWords.get(9)[1]);
+            ButtonTen.setText(gameWords.get(10)[1]);
+            ButtonEleven.setText(gameWords.get(11)[1]);
+            ButtonTwelve.setText(gameWords.get(12)[1]);
         }
 
 
@@ -300,70 +334,70 @@ public class MainActivity extends AppCompatActivity {
 
     //set the value of selected column to 1 when button one is pressed that is "un"
     public void BTNOnePress(View view) {
-        gameBoardGamePlay.setNumberPos(1);
+        gameBoardGamePlay.setNumberPos(1, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 2 when the button two is pressed that is "duex"
     public void BTNTwoPress(View view) {
-        gameBoardGamePlay.setNumberPos(2);
+        gameBoardGamePlay.setNumberPos(2, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 3 when button three is pressed that is "trois"
     public void BTNThreePress(View view) {
-        gameBoardGamePlay.setNumberPos(3);
+        gameBoardGamePlay.setNumberPos(3, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 4 when button four is pressed that is "quatre"
     public void BTNFourPress(View view) {
-        gameBoardGamePlay.setNumberPos(4);
+        gameBoardGamePlay.setNumberPos(4, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 5 when button five is pressed that is "cinq"
     public void BTNFivePress(View view) {
-        gameBoardGamePlay.setNumberPos(5);
+        gameBoardGamePlay.setNumberPos(5, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 6 when button six is pressed that is "six"
     public void BTNSixPress(View view) {
-        gameBoardGamePlay.setNumberPos(6);
+        gameBoardGamePlay.setNumberPos(6, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 7 when button seven is pressed that is "sept"
     public void BTNSevenPress(View view) {
-        gameBoardGamePlay.setNumberPos(7);
+        gameBoardGamePlay.setNumberPos(7, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 8 when button eight is pressed that is "huit"
     public void BTNEightPress(View view) {
-        gameBoardGamePlay.setNumberPos(8);
+        gameBoardGamePlay.setNumberPos(8, language);
         gameBoard.invalidate();
     }
 
     //set the value of selected column to 9 when button nine is pressed that is "neuf"
     public void BTNNinePress(View view) {
-        gameBoardGamePlay.setNumberPos(9);
+        gameBoardGamePlay.setNumberPos(9, language);
         gameBoard.invalidate();
     }
 
     public void BTNTenPress(View view) {
-        gameBoardGamePlay.setNumberPos(10);
+        gameBoardGamePlay.setNumberPos(10, language);
         gameBoard.invalidate();
     }
 
     public void BTNElevenPress(View view) {
-        gameBoardGamePlay.setNumberPos(11);
+        gameBoardGamePlay.setNumberPos(11, language);
         gameBoard.invalidate();
     }
 
     public void BTNTwelvePress(View view) {
-        gameBoardGamePlay.setNumberPos(12);
+        gameBoardGamePlay.setNumberPos(12, language);
         gameBoard.invalidate();
     }
 
@@ -385,9 +419,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //check the user input in emptyboxindex with the solutionBoard
+    //check the user input in empty box index with the solutionBoard
     //if solution is correct it stays if wrong the value in that cell is set to 0
     public void check(){
+
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int secs = seconds % 60;
+
+        // Format the seconds into hours, minutes,
+        // and seconds.
+        String time
+                = String
+                .format(Locale.getDefault(),
+                        "%d:%02d:%02d", hours,
+                        minutes, secs);
+
         for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
             int r = (int) letter.get(0);
             int c = (int) letter.get(1);
@@ -395,10 +442,31 @@ public class MainActivity extends AppCompatActivity {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
             }
         }
-    }
+
+        if(Arrays.deepEquals(gameBoardGamePlay.getBoard(),gameBoardGamePlay.getSolutionBoard())){
+            System.out.print("\n");
+            onPause();
+            AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+
+            alert.setTitle("Game Complete");
+            alert.setMessage("Congratulations!! You finished the game successfully in " + time
+            + "\n Do you want to start a new game?");
+            alert.setPositiveButton("Okay",
+                    (dialog, which) -> {
+                        backToMain();
+                        dialog.cancel();
+                    });
+
+            alert.show();
+        }
+   }
+
     //opens the hint dialog box
     public void openDialog() {
         hintDialog hint = new hintDialog();
+        Bundle args = new Bundle();
+        args.putInt("value", gridSize);
+        hint.setArguments(args);
         hint.show(getSupportFragmentManager(), "hintDialog");
     }
 
@@ -441,8 +509,7 @@ public class MainActivity extends AppCompatActivity {
 
     //starts the new games by starting a new instance of main activity
     public void startNewGame(){
-        Intent intent = new Intent(this, MainActivity.class);
-        this.startActivity(intent);
+        firstPage.openNewGameDialogBox();
     }
 
     //opens the setting page activity
@@ -495,8 +562,10 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         // Store the data you want to save in the bundle
         outState.putSerializable("board", gameBoard.getBoard());
+        outState.putSerializable("word_board", gameBoardGamePlay.getWordBoard());
         outState.putSerializable("flag_state", gameBoardGamePlay.getFlag());
         outState.putSerializable("solution_state", gameBoardGamePlay.getSolutionBoard());
+        outState.putSerializable("word_solution_state", gameBoardGamePlay.getSolutionWordBoard());
         outState.putInt("seconds", seconds);
         outState.putBoolean("running", running);
         outState.putBoolean("wasRunning", wasRunning);
