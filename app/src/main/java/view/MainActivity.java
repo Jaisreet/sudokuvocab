@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.sudokuapp.R;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 import Controller.drawBoard;
 import Controller.wordList;
@@ -87,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
             int[][] board = (int[][]) savedInstanceState.getSerializable("board");
             int[][] flag = (int[][]) savedInstanceState.getSerializable("flag_state");
             int[][] solution = (int[][]) savedInstanceState.getSerializable("solution_state");
-            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize);
+            String[][] wordBoard = (String[][])savedInstanceState.getSerializable("word_board");
+            String[][] wordBoardSolution = (String[][])savedInstanceState.getSerializable("word_solution_state");
+            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize,wordBoard,wordBoardSolution);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             seconds = savedInstanceState.getInt("seconds");
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize);
+            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize, language);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             if(switchResult){
@@ -151,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         Button ButtonEleven = (Button) findViewById(R.id.button11);
         Button ButtonTwelve = (Button) findViewById(R.id.button12);
 
-
+        HashMap<Integer, String[]> gameWords = board_GamePlay.getWordMap();
 
         if(gridSize == 4){
             ButtonFive.setVisibility(View.GONE);
@@ -176,18 +179,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(language == 1){
-            ButtonOne.setText("One");
-            ButtonTwo.setText("Two");
-            ButtonThree.setText("Three");
-            ButtonFour.setText("Four");
-            ButtonFive.setText("Five");
-            ButtonSix.setText("Six");
-            ButtonSeven.setText("Seven");
-            ButtonEight.setText("Eight");
-            ButtonNine.setText("Nine");
-            ButtonTen.setText("Ten");
-            ButtonEleven.setText("Eleven");
-            ButtonTwelve.setText("Twelve");
+            ButtonOne.setText(gameWords.get(1)[0]);
+            ButtonTwo.setText(gameWords.get(2)[0]);
+            ButtonThree.setText(gameWords.get(3)[0]);
+            ButtonFour.setText(gameWords.get(4)[0]);
+            ButtonFive.setText(gameWords.get(5)[0]);
+            ButtonSix.setText(gameWords.get(6)[0]);
+            ButtonSeven.setText(gameWords.get(7)[0]);
+            ButtonEight.setText(gameWords.get(8)[0]);
+            ButtonNine.setText(gameWords.get(9)[0]);
+            ButtonTen.setText(gameWords.get(10)[0]);
+            ButtonEleven.setText(gameWords.get(11)[0]);
+            ButtonTwelve.setText(gameWords.get(12)[0]);
+        }
+        else{
+            ButtonOne.setText(gameWords.get(1)[1]);
+            ButtonTwo.setText(gameWords.get(2)[1]);
+            ButtonThree.setText(gameWords.get(3)[1]);
+            ButtonFour.setText(gameWords.get(4)[1]);
+            ButtonFive.setText(gameWords.get(5)[1]);
+            ButtonSix.setText(gameWords.get(6)[1]);
+            ButtonSeven.setText(gameWords.get(7)[1]);
+            ButtonEight.setText(gameWords.get(8)[1]);
+            ButtonNine.setText(gameWords.get(9)[1]);
+            ButtonTen.setText(gameWords.get(10)[1]);
+            ButtonEleven.setText(gameWords.get(11)[1]);
+            ButtonTwelve.setText(gameWords.get(12)[1]);
         }
 
 
@@ -406,13 +423,16 @@ public class MainActivity extends AppCompatActivity {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
             }
         }
-        if(gameBoardGamePlay.getBoard() == gameBoardGamePlay.getSolutionBoard()){
-
+        if(gameBoardGamePlay.getBoard() == gameBoardGamePlay.getSolutionBoard()) {
+            
         }
     }
     //opens the hint dialog box
     public void openDialog() {
         hintDialog hint = new hintDialog();
+        Bundle args = new Bundle();
+        args.putInt("value", gridSize);
+        hint.setArguments(args);
         hint.show(getSupportFragmentManager(), "hintDialog");
     }
 
@@ -509,8 +529,10 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         // Store the data you want to save in the bundle
         outState.putSerializable("board", gameBoard.getBoard());
+        outState.putSerializable("word_board", gameBoardGamePlay.getWordBoard());
         outState.putSerializable("flag_state", gameBoardGamePlay.getFlag());
         outState.putSerializable("solution_state", gameBoardGamePlay.getSolutionBoard());
+        outState.putSerializable("word_solution_state", gameBoardGamePlay.getSolutionWordBoard());
         outState.putInt("seconds", seconds);
         outState.putBoolean("running", running);
         outState.putBoolean("wasRunning", wasRunning);

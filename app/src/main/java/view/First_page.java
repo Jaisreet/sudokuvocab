@@ -1,5 +1,6 @@
 package view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -21,6 +22,9 @@ public class First_page extends AppCompatActivity {
 
     private int selectedGrid;
     private int selectedLanguage;
+    private Dialog dialog;
+
+    private Bundle dialogState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +34,37 @@ public class First_page extends AppCompatActivity {
         Button newGame = findViewById(R.id.button12);
         newGame.setOnClickListener(View-> openNewGameDialogBox());
 
+        if (savedInstanceState != null) {
+            // restore the state of the dialog box if it was previously saved
+            dialogState = savedInstanceState.getBundle("dialogState");
+            if (dialogState != null) {
+                dialog = new Dialog(First_page.this);
+                dialog.setContentView(R.layout.newgame_dialog);
+                dialog.setTitle("New Game");
+                dialog.show();
+                dialog.onRestoreInstanceState(dialogState);
+            }
+        }
     }
 
     private void openNewGameDialogBox() {
-        final Dialog dialog = new Dialog(First_page.this);
+        dialog = new Dialog(First_page.this);
         // Include dialog.xml file
         dialog.setContentView(R.layout.newgame_dialog);
         // Set dialog title
         dialog.setTitle("New Game");
         dialog.show();
+
+        // Set the dialog width and height based on the screen orientation
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        } else {
+            layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
+            layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
+        }
+        dialog.getWindow().setAttributes(layoutParams);
 
         Button game = dialog.findViewById(R.id.startGame);
         game.setOnClickListener(view -> newGame());
@@ -181,6 +207,7 @@ public class First_page extends AppCompatActivity {
         });
 
 
+
     }
 
 
@@ -212,6 +239,26 @@ public class First_page extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+
+        // If the dialog is showing, dismiss it first and then show it again
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+            openNewGameDialogBox();
+        }
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // save the state of the dialog box before the activity is destroyed
+        if (dialog != null && dialog.isShowing()) {
+            dialogState = new Bundle();
+            dialog.onSaveInstanceState();
+            outState.putBundle("dialogState", dialogState);
+        }
+    }
+
 
 }

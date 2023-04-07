@@ -95,9 +95,9 @@ public class Board_Generation {
         if(n ==4){
             int[][] board = {
                     {1, 3, 4, 2},
-                    {2, 4, 1, 3},
+                    {2, 4, 3, 1},
                     {3, 2, 1, 4},
-                    {4, 1, 3, 2}
+                    {4, 1, 2, 3}
             };
             return board;
         } else if (n ==6) {
@@ -131,7 +131,7 @@ public class Board_Generation {
     }
 
     // functions to return important grid nums
-    int return_n() {return N;}
+    public int return_n() {return N;}
     int return_sqrt() {return SQRT;}
     int return_k() {return removeNum;}
 

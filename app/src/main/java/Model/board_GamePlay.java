@@ -21,9 +21,9 @@ public class board_GamePlay {
     public ArrayList<ArrayList<Object>> emptyBoxIndex;
     int selected_row;
     public int selected_column;
-    HashMap<Integer, String[]> gameWords;
+    static HashMap<Integer, String[]> gameWords;
 
-    public board_GamePlay(int difficulty, int size){
+    public board_GamePlay(int difficulty, int size, int lang){
         // when the user has not selected a square yet, set selected col and row to -1
         setBoardSize(size);
         input = new Board_Generation(size, difficulty);
@@ -38,7 +38,7 @@ public class board_GamePlay {
         solutionWordBoard = new String[N][N];
         // algorithm to move generated board set up into main board
         wordList = new wordList();
-        gameWords = wordList.gameWords(size);
+        gameWords = wordList.gameWords(12);
         for (Map.Entry<Integer, String[]> entry : gameWords.entrySet()) {
             System.out.print(entry.getKey() + " -> ");
             String[] values = entry.getValue();
@@ -58,11 +58,21 @@ public class board_GamePlay {
                 }
                 else{
                     String[] values = gameWords.get(board[r][c]);
-                    wordBoard[r][c] = values[0];
+                    if(lang == 1){
+                        wordBoard[r][c] = values[1];
+                    }else{
+                        wordBoard[r][c] = values[0];
+                    }
+
                 }
 
                 solutionBoard[r][c] = input.getArr_solutionBoard()[r][c];
-                solutionWordBoard[r][c]= gameWords.get(solutionBoard[r][c])[0];
+                if(lang == 1){
+                    solutionWordBoard[r][c]= gameWords.get(solutionBoard[r][c])[1];
+                }else{
+                    solutionWordBoard[r][c]= gameWords.get(solutionBoard[r][c])[0];
+                }
+
                 // if the board at that spot is not empty, set the flag to one
                 if(board[r][c] != 0){
                     flag[r][c] = 1;
@@ -81,7 +91,7 @@ public class board_GamePlay {
         getEmptyBoxIndexs();
     }
 
-    public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input, int size){
+    public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input, int size, String[][] wordBoardInput, String[][] wordSol){
         setBoardSize(size);
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
@@ -89,6 +99,8 @@ public class board_GamePlay {
         board = new int[N][N];  // main working board
         flag = flag_input;  // flag to keep track of pre-filled squares
         solutionBoard = solution_input;
+        wordBoard = new String[N][N];
+        solutionWordBoard = wordSol;
         // algorithm to move generated board set up into main board
 
         // for every row
@@ -96,6 +108,7 @@ public class board_GamePlay {
             // for every colomn
             for(int c=0;c < N;c++) {
                 board[r][c] = input[r][c];
+                wordBoard[r][c] = wordBoardInput[r][c];
             }
         }
 
@@ -131,7 +144,7 @@ public class board_GamePlay {
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
                 this.board[this.selected_row - 1][this.selected_column - 1] = num;
-                //this.wordBoard[this.selected_row-1][this.selected_column-1] = gameWords.get(num)[0];
+                this.wordBoard[this.selected_row-1][this.selected_column-1] = gameWords.get(num)[0];
             }
         }
 
@@ -141,9 +154,12 @@ public class board_GamePlay {
         if(this.selected_row != -1 && this.selected_column != -1){
             if(this.board[this.selected_row-1][this.selected_column-1]!= 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
                 this.board[this.selected_row-1][this.selected_column-1] = 0;
-                //this.wordBoard[this.selected_row-1][this.selected_column-1] = null;
+                this.wordBoard[this.selected_row-1][this.selected_column-1] = null;
             }
         }
+    }
+    public static HashMap<Integer, String[]> getWordMap(){
+        return gameWords;
     }
     //return value of selected cell
     public int getNum(){
