@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -26,25 +27,21 @@ public class First_page extends AppCompatActivity {
 
     private Bundle dialogState;
 
+    boolean isChecked;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
         Button newGame = findViewById(R.id.button12);
-        newGame.setOnClickListener(View-> openNewGameDialogBox());
-
-        if (savedInstanceState != null) {
-            // restore the state of the dialog box if it was previously saved
-            dialogState = savedInstanceState.getBundle("dialogState");
-            if (dialogState != null) {
-                dialog = new Dialog(First_page.this);
-                dialog.setContentView(R.layout.newgame_dialog);
-                dialog.setTitle("New Game");
-                dialog.show();
-                dialog.onRestoreInstanceState(dialogState);
+        newGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewGameDialogBox();
             }
-        }
+        });
+
     }
 
     public void openNewGameDialogBox() {
@@ -67,7 +64,12 @@ public class First_page extends AppCompatActivity {
         dialog.getWindow().setAttributes(layoutParams);
 
         Button game = dialog.findViewById(R.id.startGame);
-        game.setOnClickListener(view -> newGame());
+        game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newGame();
+            }
+        });
 
         selectedGrid = 9;
         selectedLanguage = 1;
@@ -87,7 +89,7 @@ public class First_page extends AppCompatActivity {
         RadioButton english = dialog.findViewById(R.id.english);
         RadioButton french = dialog.findViewById(R.id.French);
 
-
+        CheckBox check = dialog.findViewById(R.id.checkBox);
 
         SharedPreferences sharedPreferencesDiff = getSharedPreferences("newGame", MODE_PRIVATE);
         selectedDifficulty = sharedPreferencesDiff.getInt("ndifficulty", 1);
@@ -98,8 +100,21 @@ public class First_page extends AppCompatActivity {
         SharedPreferences sharedPreferencesGrid = getSharedPreferences("newGame", MODE_PRIVATE);
         selectedGrid = sharedPreferencesGrid.getInt("ngrid_size", 9);
 
+        SharedPreferences sharedPreferencesListen = getSharedPreferences("newGame", MODE_PRIVATE);
+        isChecked = sharedPreferencesListen.getBoolean("nListen", false);
+        check.setChecked(isChecked);
 
 
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isChecked = check.isChecked();
+                SharedPreferences sharedPreferencesListen = getSharedPreferences("newGame", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferencesListen.edit();
+                editor.putBoolean("nListen", check.isChecked());
+                editor.apply();
+            }
+        });
 
         switch (selectedDifficulty) {
             case 1:
@@ -130,7 +145,6 @@ public class First_page extends AppCompatActivity {
             editor.putInt("ndifficulty", selectedDifficulty);
             editor.apply();
         });
-
 
 
         switch (selectedGrid) {
@@ -190,7 +204,7 @@ public class First_page extends AppCompatActivity {
                 break;
         }
         languageRadioGroup.setOnCheckedChangeListener((radioGroup, checkedId) -> {
-            switch (checkedId){
+            switch (checkedId) {
                 case R.id.english:
                     selectedLanguage = 1;
                     break;
@@ -206,8 +220,6 @@ public class First_page extends AppCompatActivity {
 
         });
 
-
-
     }
 
 
@@ -218,6 +230,7 @@ public class First_page extends AppCompatActivity {
         editor.putInt("ndifficulty", selectedDifficulty);
         editor.putInt("ngrid_size", selectedGrid); // add this line to save the selected grid size
         editor.putInt("nlanguage", selectedLanguage);
+        editor.putBoolean("nListen",isChecked);
         editor.apply();
 
         // Start the main activity with the selected difficulty level and grid size as intent extras
@@ -226,6 +239,7 @@ public class First_page extends AppCompatActivity {
         intent.putExtra("ngrid_size", selectedGrid); // add this line to pass the selected grid size
         intent.putExtra("nlanguage", selectedLanguage);
         intent.putExtra("from_new_game", true);
+        intent.putExtra("nListen", isChecked);
         startActivity(intent);
 
     }
@@ -245,20 +259,17 @@ public class First_page extends AppCompatActivity {
             dialog.dismiss();
             openNewGameDialogBox();
         }
+
     }
 
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // save the state of the dialog box before the activity is destroyed
+    protected void onDestroy() {
+        super.onDestroy();
         if (dialog != null && dialog.isShowing()) {
-            dialogState = new Bundle();
-            dialog.onSaveInstanceState();
-            outState.putBundle("dialogState", dialogState);
+            dialog.dismiss();
         }
     }
 
-
 }
+

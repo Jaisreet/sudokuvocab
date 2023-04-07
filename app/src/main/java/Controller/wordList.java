@@ -130,9 +130,9 @@ public class wordList {
 
     public static HashMap<Integer, String[]> gameWords(int n) {
         int index;
+        Random rand = new Random(System.currentTimeMillis()); // set the seed value
         for (int i = 1; i < n + 1; i++) {
             //index = (int) (Math.random() * 100);
-            Random rand = new Random();
             index = rand.nextInt(62) + 1;
             gameWords.put(i, new String[]{ getWord(index, "French"),getWord(index, "English")});
         }
