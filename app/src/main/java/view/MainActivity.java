@@ -98,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
             int[][] solution = (int[][]) savedInstanceState.getSerializable("solution_state");
             String[][] wordBoard = (String[][])savedInstanceState.getSerializable("word_board");
             String[][] wordBoardSolution = (String[][])savedInstanceState.getSerializable("word_solution_state");
-            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize,wordBoard,wordBoardSolution);
+            HashMap<Integer, String[]> gameWord = (HashMap<Integer, String[]>)savedInstanceState.getSerializable("wordList");
+            Boolean listen = savedInstanceState.getBoolean("listenCheck");
+            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize,wordBoard,wordBoardSolution, gameWord,listenCheck );
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             seconds = savedInstanceState.getInt("seconds");
@@ -574,6 +576,8 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean("wasRunning", wasRunning);
         outState.putInt("difficulty", difficultyLevel);
         outState.putInt("grid", gridSize);
+        outState.putSerializable("wordList", gameBoardGamePlay.getWordMap());
+        outState.putBoolean("listenCheck", listenCheck);
     }
 
 

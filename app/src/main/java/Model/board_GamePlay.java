@@ -94,8 +94,10 @@ public class board_GamePlay {
         getEmptyBoxIndexs();
     }
 
-    public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input, int size, String[][] wordBoardInput, String[][] wordSol){
+    public board_GamePlay(int[][] input, int[][] flag_input, int[][] solution_input, int size, String[][] wordBoardInput, String[][] wordSol, HashMap<Integer, String[]> wordList, Boolean listen){
         setBoardSize(size);
+        gameWords = wordList;
+        listenCheck = listen;
         // when the user has not selected a square yet, set selected col and row to -1
         selected_column = -1;
         selected_row = -1;
