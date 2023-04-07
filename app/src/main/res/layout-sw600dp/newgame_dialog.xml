@@ -6,11 +6,12 @@
 
     <LinearLayout
         android:id="@+id/SettingsLinear"
-        android:layout_width="964dp"
-        android:layout_height="1587dp"
+        android:layout_width="894dp"
+        android:layout_height="1264dp"
         android:gravity="center"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        >
 
 
         <TextView
