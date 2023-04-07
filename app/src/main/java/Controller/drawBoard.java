@@ -131,10 +131,10 @@ public class drawBoard extends View implements Serializable {
     }
     //to add numbers to the board
     private void drawNumbers(Canvas canvas){
-        // size of numbers are set according to the size of cell
         float textSize = cellsize / 2;
         letterPaint.setTextSize(textSize);
         float originalTextSize = textSize;
+
 
         for(int r=0; r<N;r++){
             for(int c =0; c<N;c++){

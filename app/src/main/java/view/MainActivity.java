@@ -416,6 +416,19 @@ public class MainActivity extends AppCompatActivity {
     //check the user input in emptyboxindex with the solutionBoard
     //if solution is correct it stays if wrong the value in that cell is set to 0
     public void check(){
+
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int secs = seconds % 60;
+
+        // Format the seconds into hours, minutes,
+        // and seconds.
+        String time
+                = String
+                .format(Locale.getDefault(),
+                        "%d:%02d:%02d", hours,
+                        minutes, secs);
+
         for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
             int r = (int) letter.get(0);
             int c = (int) letter.get(1);
@@ -423,8 +436,28 @@ public class MainActivity extends AppCompatActivity {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
             }
         }
-        if(gameBoardGamePlay.getBoard() == gameBoardGamePlay.getSolutionBoard()) {
-            
+
+        if(gameBoardGamePlay.getBoard() == gameBoardGamePlay.getSolutionBoard()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Game Complete")
+                    .setMessage("Congratulations on completing the game! You completed the game in :" + time
+                            + "\n Do you want to start a new game?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            startNewGame();
+                        }
+                    });
+            builder.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            quit();
+                            dialog.cancel();
+                        }
+                    });
+            builder.create();
         }
     }
     //opens the hint dialog box
