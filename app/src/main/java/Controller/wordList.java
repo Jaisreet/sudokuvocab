@@ -1,20 +1,29 @@
 package Controller;
 
 import java.util.HashMap;
+import java.util.Random;
+
 
 public class wordList {
+
+    private drawBoard gameBoard;
     private static HashMap<Integer, String[]> wordList = new HashMap<>();
+    private static HashMap<Integer, String[]> gameWords;// = new HashMap<>();
+
+    public wordList(){
+        gameWords = new HashMap<>();
+    }
 
     static {
-        wordList.put(1, new String[] {"one", "un"});
-        wordList.put(2, new String[] {"two", "deux"});
-        wordList.put(3, new String[] {"three", "trois"});
-        wordList.put(4, new String[] {"four", "quatre"});
-        wordList.put(5, new String[] {"five", "cinq"});
-        wordList.put(6, new String[] {"six", "six"});
-        wordList.put(7, new String[] {"seven", "sept"});
-        wordList.put(8, new String[] {"eight", "huit"});
-        wordList.put(9, new String[] {"nine", "neuf"});
+        wordList.put(1, new String[] { "un","one"});
+        wordList.put(2, new String[] { "deux","two"});
+        wordList.put(3, new String[] { "trois","three"});
+        wordList.put(4, new String[] { "quatre","four"});
+        wordList.put(5, new String[] { "cinq","five"});
+        wordList.put(6, new String[] { "six","six"});
+        wordList.put(7, new String[] { "sept","seven"});
+        wordList.put(8, new String[] { "huit","eight"});
+        wordList.put(9, new String[] { "neuf","nine"});
         wordList.put(10, new String[] {"salut", "hi"});
         wordList.put(11, new String[] {"bonjour", "hello/good day"});
         wordList.put(12, new String[] {"bébé", "child"});
@@ -107,25 +116,27 @@ public class wordList {
         wordList.put(99, new String[] {"oef", "egg"});
         wordList.put(100, new String[] {"chien", "chien"});
     }
-
     public static String getWord(int value, String language) {
         if (wordList.containsKey(value)) {
             if (language.equals("English")) {
-                return wordList.get(value)[0];
-            } else if (language.equals("French")) {
                 return wordList.get(value)[1];
+            } else if (language.equals("French")) {
+                return wordList.get(value)[0];
             }
         }
         return "";
     }
 
-    public static int[] getRandomWordList(int n) {
-        int[] indices = new int[n];
 
-        for(int i = 0; i < n; i++){
-         indices[i] = (int)(Math.random() * 100);
+    public static HashMap<Integer, String[]> gameWords(int n) {
+        int index;
+        for (int i = 1; i < n + 1; i++) {
+            //index = (int) (Math.random() * 100);
+            Random rand = new Random();
+            index = rand.nextInt(100) + 1;
+            gameWords.put(i, new String[]{ getWord(index, "French"),getWord(index, "English")});
         }
 
-        return indices;
+        return gameWords;
     }
 }

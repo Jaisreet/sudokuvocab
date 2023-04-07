@@ -20,6 +20,7 @@ import com.example.sudokuapp.R;
 import java.util.ArrayList;
 import java.util.Locale;
 import Controller.drawBoard;
+import Controller.wordList;
 import Model.board_GamePlay;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,37 +36,48 @@ public class MainActivity extends AppCompatActivity {
     boolean switchResult;
     int difficultyLevel;
     int gridSize;
-
     int language;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get the selected difficulty level from the settingPage activity
-        difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
-        gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
-        language = getIntent().getIntExtra("language", 2);
+        boolean fromNewGame = getIntent().getBooleanExtra("from_new_game", false);
+        boolean fromSettingPage = getIntent().getBooleanExtra("from_setting", false);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-        switchResult = sharedPreferences.getBoolean("timer_enabled", true);
+        if(fromSettingPage){
+            // Get the selected difficulty level from the settingPage activity
+            difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
+            gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
+            language = getIntent().getIntExtra("language", 2);
+            SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+            switchResult = sharedPreferences.getBoolean("timer_enabled", true);
 
-        SharedPreferences sharedPreferences1 = getSharedPreferences("settings", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences1.edit();
-        editor.putInt("difficulty", difficultyLevel);
-        editor.putInt("language", language);
-        editor.putInt("grid_size", gridSize);
-        editor.apply();
+            SharedPreferences sharedPreferences1 = getSharedPreferences("settings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences1.edit();
+            editor.putInt("difficulty", difficultyLevel);
+            editor.putInt("language", language);
+            editor.putInt("grid_size", gridSize);
+            editor.apply();
+        } else if (fromNewGame) {
+            difficultyLevel = getIntent().getIntExtra("ndifficulty", 1); // default difficulty is 1 (easy)
+            gridSize = getIntent().getIntExtra("ngrid_size", 9); // 9 is the default value
+            language = getIntent().getIntExtra("nlanguage", 2);
 
+            SharedPreferences sharedPreferences1 = getSharedPreferences("newGame", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences1.edit();
+            editor.putInt("ndifficulty", difficultyLevel);
+            editor.putInt("nlanguage", language);
+            editor.putInt("ngrid_size", gridSize);
+            editor.apply();
+        }
 
 
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoard.setBoardSize(gridSize);
 
         timeView = findViewById(R.id.timeView);
-
         timer = getIntent().getStringExtra("timerStr");
-
 
 
         if (savedInstanceState != null) {
@@ -176,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
             ButtonTen.setText("Ten");
             ButtonEleven.setText("Eleven");
             ButtonTwelve.setText("Twelve");
-
         }
 
 
@@ -394,6 +405,9 @@ public class MainActivity extends AppCompatActivity {
             if (gameBoardGamePlay.getBoard()[r][c] != gameBoardGamePlay.getSolutionBoard()[r][c]) {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
             }
+        }
+        if(gameBoardGamePlay.getBoard() == gameBoardGamePlay.getSolutionBoard()){
+
         }
     }
     //opens the hint dialog box

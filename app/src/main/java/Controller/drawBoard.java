@@ -132,17 +132,45 @@ public class drawBoard extends View implements Serializable {
     //to add numbers to the board
     private void drawNumbers(Canvas canvas){
         //size of numbers are set according to the size of cell
-        letterPaint.setTextSize(cellsize);
+        //letterPaint.setTextSize(cellsize/2);
+        //letterPaint.setTextSize(40);
+        float textSize = cellsize - 10;
+        letterPaint.setTextSize(textSize);
 
         for(int r=0; r<N;r++){
             for(int c =0; c<N;c++){
                 if(board_GamePlay.getBoard()[r][c] != 0){
-                    String text = Integer.toString(board_GamePlay.getBoard()[r][c]);
+                    String text = (board_GamePlay.getWordBoard()[r][c]);
                     float width, height;
+
+                    // Call getTextBounds() and measureText() twice for the first three words
+                    if (r == 0 && c < 3) {
+                        letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
+                        width = letterPaint.measureText(text);
+                        height = letterPaintBounds.height();
+
+                        while (width > cellsize - 10 || height > cellsize - 10) {
+                            textSize--;
+                            letterPaint.setTextSize(textSize);
+                            letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
+                            width = letterPaint.measureText(text);
+                            height = letterPaintBounds.height();
+                        }
+                        letterPaint.setTextSize(textSize);
+                    }
 
                     letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
                     width = letterPaint.measureText(text);
                     height = letterPaintBounds.height();
+
+                    // If the text is too wide or too tall, decrease the text size until it fits
+                    while(width > cellsize - 10 || height > cellsize - 10) {
+                        textSize--;
+                        letterPaint.setTextSize(textSize);
+                        letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
+                        width = letterPaint.measureText(text);
+                        height = letterPaintBounds.height();
+                    }
 
                     canvas.drawText(text, (c*cellsize)+ ((cellsize-width)/2) ,
                             (r*cellsize+cellsize) - ((cellsize-height)/2),
@@ -159,12 +187,21 @@ public class drawBoard extends View implements Serializable {
             int r = (int)letter.get(0);
             int c = (int)letter.get(1);
             if(board_GamePlay.getBoard()[r][c] != 0 ) {
-                String text = Integer.toString(board_GamePlay.getBoard()[r][c]);
+                String text = (board_GamePlay.getWordBoard()[r][c]);
                 float width, height;
 
                 letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
                 width = letterPaint.measureText(text);
                 height = letterPaintBounds.height();
+
+                // If the text is too wide or too tall, decrease the text size until it fits
+                while(width > cellsize - 10 || height > cellsize - 10) {
+                    textSize--;
+                    letterPaint.setTextSize(textSize);
+                    letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
+                    width = letterPaint.measureText(text);
+                    height = letterPaintBounds.height();
+                }
 
                 canvas.drawText(text, (c * cellsize) + ((cellsize - width) / 2),
                         (r * cellsize + cellsize) - ((cellsize - height) / 2),

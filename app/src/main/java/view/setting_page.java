@@ -252,6 +252,7 @@ public class setting_page extends AppCompatActivity {
         intent.putExtra("difficulty", selectedDifficulty);
         intent.putExtra("grid_size", selectedGrid); // add this line to pass the selected grid size
         intent.putExtra("language", selectedLanguage);
+        intent.putExtra("from_setting", true);
         startActivity(intent);
 
 
