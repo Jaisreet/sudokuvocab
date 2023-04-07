@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
             String[][] wordBoard = (String[][])savedInstanceState.getSerializable("word_board");
             String[][] wordBoardSolution = (String[][])savedInstanceState.getSerializable("word_solution_state");
             HashMap<Integer, String[]> gameWord = (HashMap<Integer, String[]>)savedInstanceState.getSerializable("wordList");
-            Boolean listen = savedInstanceState.getBoolean("listenCheck");
-            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize,wordBoard,wordBoardSolution, gameWord,listenCheck );
+            listenCheck = savedInstanceState.getBoolean("listenCheck");
+            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize,wordBoard,wordBoardSolution, gameWord, listenCheck);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             seconds = savedInstanceState.getInt("seconds");
