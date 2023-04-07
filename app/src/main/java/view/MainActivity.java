@@ -1,6 +1,8 @@
 package view;
 
 
+import static android.os.Build.VERSION_CODES.N;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.sudokuapp.R;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import Controller.drawBoard;
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     private drawBoard gameBoard;
     private board_GamePlay gameBoardGamePlay;
+
+    private First_page firstPage;
+
     private int seconds = 0;
     private boolean running;
     private boolean wasRunning;
@@ -437,29 +443,24 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if(gameBoardGamePlay.getBoard() == gameBoardGamePlay.getSolutionBoard()){
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Game Complete")
-                    .setMessage("Congratulations on completing the game! You completed the game in :" + time
-                            + "\n Do you want to start a new game?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startNewGame();
-                        }
-                    });
-            builder.setNegativeButton("Cancel",
-                    new DialogInterface.OnClickListener() {
+        if(Arrays.deepEquals(gameBoardGamePlay.getBoard(),gameBoardGamePlay.getSolutionBoard())){
+            System.out.print("\n");
+            onPause();
+            AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            quit();
-                            dialog.cancel();
-                        }
+            alert.setTitle("Game Complete");
+            alert.setMessage("Congratulations!! You finished the game successfully in " + time
+            + "\n Do you want to start a new game?");
+            alert.setPositiveButton("Okay",
+                    (dialog, which) -> {
+                        backToMain();
+                        dialog.cancel();
                     });
-            builder.create();
+
+            alert.show();
         }
-    }
+   }
+
     //opens the hint dialog box
     public void openDialog() {
         hintDialog hint = new hintDialog();
@@ -508,8 +509,7 @@ public class MainActivity extends AppCompatActivity {
 
     //starts the new games by starting a new instance of main activity
     public void startNewGame(){
-        Intent intent = new Intent(this, MainActivity.class);
-        this.startActivity(intent);
+        firstPage.openNewGameDialogBox();
     }
 
     //opens the setting page activity
