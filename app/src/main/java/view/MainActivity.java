@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -45,9 +46,14 @@ public class MainActivity extends AppCompatActivity {
     int gridSize;
     int language;
 
+    TextToSpeech t1;
+
     boolean listenCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -85,6 +91,17 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
         }
 
+        t1 = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR)
+                    if (language == 1) {
+                        t1.setLanguage(Locale.ENGLISH);
+                    } else {
+                        t1.setLanguage(Locale.FRENCH);
+                    }
+            }
+        });
 
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoard.setBoardSize(gridSize);
@@ -156,6 +173,21 @@ public class MainActivity extends AppCompatActivity {
         ImageView settingsDialog = findViewById(R.id.settingsDialog);
         settingsDialog.setOnClickListener(view -> openSettingDialog());
 
+        Button Listen = findViewById(R.id.ListeningComprehension);
+        if (listenCheck == false) {
+            Listen.setVisibility(View.GONE);
+
+        }
+
+        Listen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String word =  gameBoardGamePlay.readOutLoud_text(language);
+
+                t1.speak(word, TextToSpeech.QUEUE_FLUSH,null);
+            }
+        });
+
         Button ButtonOne = (Button) findViewById(R.id.button);
         Button ButtonTwo = (Button) findViewById(R.id.button2);
         Button ButtonThree = (Button) findViewById(R.id.button3);
@@ -168,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
         Button ButtonTen = (Button) findViewById(R.id.button10);
         Button ButtonEleven = (Button) findViewById(R.id.button11);
         Button ButtonTwelve = (Button) findViewById(R.id.button12);
+
 
         HashMap<Integer, String[]> gameWords = board_GamePlay.getWordMap();
 

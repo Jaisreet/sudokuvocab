@@ -29,8 +29,12 @@ import static org.junit.Assert.assertTrue;
 /**
  * Basic sample for unbundled UiAutomator.
  */
+
+
 @RunWith(AndroidJUnit4.class)
 @SdkSuppress(minSdkVersion = 18)
+
+
 public class MainActivityTest {
 
     private static final String SUDOKU
@@ -189,3 +193,6 @@ public class MainActivityTest {
         dialog.click();
     }
 }
+
+
+

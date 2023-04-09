@@ -1,4 +1,6 @@
 package Model;
+import android.speech.tts.TextToSpeech;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,8 @@ import Controller.wordList;
 
 public class board_GamePlay {
 
+
+    TextToSpeech t1;
     int[][] board;
     String[][] wordBoard;
     int [][] flag;
@@ -22,6 +26,7 @@ public class board_GamePlay {
     int selected_row;
     public int selected_column;
     public static HashMap<Integer, String[]> gameWords;
+
 
     public static boolean listenCheck;
 
@@ -155,9 +160,26 @@ public class board_GamePlay {
                     this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
                 }
             }
+
         }
 
     }
+
+    public String readOutLoud_text(int language) {
+
+        if(this.selected_row != -1 && this.selected_column != -1) {
+            if (language == 1) {
+                String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[1];
+                return text;
+            } else {
+                String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[0];
+                return text;
+            }
+        }
+        return null;
+    }
+
+
     //set the value of selected column to 0 which is equal to erase
     public void eraseNumber() {
         if(this.selected_row != -1 && this.selected_column != -1){

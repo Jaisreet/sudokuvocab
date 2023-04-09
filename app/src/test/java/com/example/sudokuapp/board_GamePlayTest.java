@@ -76,4 +76,9 @@ public class board_GamePlayTest {
         board_GamePlay.setSelected_column(1);
         assertEquals(1, board_GamePlay.getSelected_column());
     }
+    /*
+    @Test
+    public void readOutLoud_text() {
+        assertEquals(1,1);
+    } */
 }
