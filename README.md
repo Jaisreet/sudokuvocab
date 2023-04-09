@@ -184,7 +184,7 @@
     <img src = "https://i.imgur.com/zKfcuZi.png" title = "mockup12: imgur.com" height="400"/>
     <br>
 13. As a vocabulary learner who wants extra challenging mode, I want a 12x12 version of Sudoku to play on my tablet.
- <br> Status: Complete ✅ 
+<br> Status: Complete ✅ 
     - TDD Example:
         - Visible state: The user is presented with 4 options for the size of the grid: 9x9 (default), 4x4, 6x6, and 12x12 in the settings.
         - User action: The user choose 12x12.
@@ -196,6 +196,7 @@
     <img src = "https://i.imgur.com/LraCeFq.png" title = "mockup13: imgur.com" height="400"/>
     <br>
 14. As a student who wants to practice my understanding of spoken words in the language that I am learning, I want a listening comprehension mode.
+<br> Status: Complete ✅
     - TDD Example:
         - Visible state: The user is presented with a setting button in the main menu / game page.
         - User Action: The user clicks on the setting button.
