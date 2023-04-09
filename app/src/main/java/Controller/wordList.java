@@ -77,8 +77,8 @@ public class wordList {
         wordList.put(60, new String[] {"votre", "your"});
         wordList.put(61, new String[] {"vous", "you"});
         wordList.put(62, new String[] {"sortie", "exit"});
-        wordList.put(63, new String[] {"cordialment", "regards"});
-        wordList.put(64, new String[] {"nous vous", "we"});
+        wordList.put(63, new String[] {"ognon", "onion"});
+        wordList.put(64, new String[] {"maison", "house"});
         wordList.put(65, new String[] {"voyage", "journey"});
         wordList.put(66, new String[] {"ami", "friend"});
         wordList.put(67, new String[] {"petit", "small"});
@@ -98,12 +98,12 @@ public class wordList {
         wordList.put(81, new String[] {"dernier", "previous"});
         wordList.put(82, new String[] {"prochain", "next"});
         wordList.put(83, new String[] {"batiment", "building"});
-        wordList.put(84, new String[] {"maison", "house"});
         wordList.put(85, new String[] {"contrat", "contract"});
         wordList.put(86, new String[] {"travail", "work"});
         wordList.put(87, new String[] {"etudiant", "student"});
         wordList.put(88, new String[] {"montagne", "mountain"});
-        wordList.put(89, new String[] {"ognon", "onion"});
+        wordList.put(89, new String[] {"cordialment", "regards"});
+        wordList.put(84, new String[] {"nous vous", "we"});
         wordList.put(90, new String[] {"dimanche", "sunday"});
         wordList.put(91, new String[] {"vendredi", "friday"});
         wordList.put(92, new String[] {"mercredi", "wednesday"});
@@ -132,8 +132,7 @@ public class wordList {
         int index;
         Random rand = new Random(System.currentTimeMillis()); // set the seed value
         for (int i = 1; i < n + 1; i++) {
-            //index = (int) (Math.random() * 100);
-            index = rand.nextInt(62) + 1;
+            index = rand.nextInt(88) + 1;
             gameWords.put(i, new String[]{ getWord(index, "French"),getWord(index, "English")});
         }
 
