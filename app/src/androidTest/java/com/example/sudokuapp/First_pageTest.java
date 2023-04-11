@@ -87,11 +87,25 @@ public class First_pageTest {
     }
 
     @Test
+    public void openNewGameDialogBox() throws UiObjectNotFoundException {
+        UiObject newGame = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/button12")
+        );
+        newGame.click();
+
+        UiObject startGame = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/startGame")
+        );
+        startGame.click();
+    }
+
+    @Test
     public void settingPage() throws UiObjectNotFoundException {
         UiObject Settings = mDevice.findObject(new UiSelector()
                 .resourceId("com.example.sudokuapp:id/textView2")
         );
         Settings.click();
     }
+
 
 }
