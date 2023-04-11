@@ -7,11 +7,12 @@
     <LinearLayout
         android:id="@+id/SettingsLinear"
         android:layout_width="413dp"
-        android:layout_height="715dp"
-        android:layout_marginTop="60dp"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        tools:ignore="MissingConstraints">
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="1dp">
 
 
         <TextView
@@ -19,14 +20,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/modes"
-            android:textSize="30sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="20sp" />
 
         <RadioGroup
             android:id="@+id/languageRadioGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           >
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/english"
@@ -34,16 +34,16 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/english"
-                android:textSize="20sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/French"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/french"
-                android:textSize="20sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp" />
         </RadioGroup>
 
 
@@ -52,8 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/levels"
-            android:textSize="30sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="20sp" />
 
         <RadioGroup
             android:id="@+id/difficultyRadioGroup"
@@ -67,24 +67,24 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/easy"
-                android:textSize="20sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/mediumButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/intermediate"
-                android:textSize="20sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/hardButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hard"
-                android:textSize="20sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="20sp" />
 
         </RadioGroup>
 
@@ -93,8 +93,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Grid Layout"
-            android:textSize="30sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="20sp" />
 
         <RadioGroup
             android:id="@+id/GridRadioGroup"
@@ -135,7 +135,16 @@
                 android:textSize="20sp" />
 
 
+
+
         </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Listening Mode" />
 
         <Button
             android:id="@+id/startGame"

@@ -11,8 +11,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -44,8 +46,15 @@ public class MainActivity extends AppCompatActivity {
     int difficultyLevel;
     int gridSize;
     int language;
+
+    TextToSpeech t1;
+
+    boolean listenCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -57,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             difficultyLevel = getIntent().getIntExtra("difficulty", 1); // default difficulty is 1 (easy)
             gridSize = getIntent().getIntExtra("grid_size", 9); // 9 is the default value
             language = getIntent().getIntExtra("language", 2);
+            listenCheck = getIntent().getBooleanExtra("Listen", false);
+
             SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
             switchResult = sharedPreferences.getBoolean("timer_enabled", true);
 
@@ -65,20 +76,34 @@ public class MainActivity extends AppCompatActivity {
             editor.putInt("difficulty", difficultyLevel);
             editor.putInt("language", language);
             editor.putInt("grid_size", gridSize);
+            editor.putBoolean("Listen", listenCheck);
             editor.apply();
         } else if (fromNewGame) {
             difficultyLevel = getIntent().getIntExtra("ndifficulty", 1); // default difficulty is 1 (easy)
             gridSize = getIntent().getIntExtra("ngrid_size", 9); // 9 is the default value
             language = getIntent().getIntExtra("nlanguage", 2);
-
+            listenCheck = getIntent().getBooleanExtra("nListen", false);
             SharedPreferences sharedPreferences1 = getSharedPreferences("newGame", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences1.edit();
             editor.putInt("ndifficulty", difficultyLevel);
             editor.putInt("nlanguage", language);
             editor.putInt("ngrid_size", gridSize);
+            editor.putBoolean("nListen", listenCheck);
             editor.apply();
         }
 
+        t1 = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR)
+                    
+                    if (language == 1) {
+                        t1.setLanguage(Locale.ENGLISH);
+                    } else {
+                        t1.setLanguage(Locale.FRENCH);
+                    }
+            }
+        });
 
         gameBoard = findViewById(R.id.sudokuBoard);
         gameBoard.setBoardSize(gridSize);
@@ -96,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
             int[][] solution = (int[][]) savedInstanceState.getSerializable("solution_state");
             String[][] wordBoard = (String[][])savedInstanceState.getSerializable("word_board");
             String[][] wordBoardSolution = (String[][])savedInstanceState.getSerializable("word_solution_state");
-            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize,wordBoard,wordBoardSolution);
+            HashMap<Integer, String[]> gameWord = (HashMap<Integer, String[]>)savedInstanceState.getSerializable("wordList");
+            listenCheck = savedInstanceState.getBoolean("listenCheck");
+            gameBoardGamePlay = new board_GamePlay(board, flag, solution, gridSize,wordBoard,wordBoardSolution, gameWord, listenCheck);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             seconds = savedInstanceState.getInt("seconds");
@@ -112,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize, language);
+            System.out.println(listenCheck+" hello");
+            gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize, language, listenCheck);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
             if(switchResult){
@@ -147,6 +175,21 @@ public class MainActivity extends AppCompatActivity {
         ImageView settingsDialog = findViewById(R.id.settingsDialog);
         settingsDialog.setOnClickListener(view -> openSettingDialog());
 
+        Button Listen = findViewById(R.id.ListeningComprehension);
+        if (listenCheck == false) {
+            Listen.setVisibility(View.GONE);
+
+        }
+
+        Listen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String word =  gameBoardGamePlay.readOutLoud_text(language);
+
+                t1.speak(word, TextToSpeech.QUEUE_FLUSH,null);
+            }
+        });
+
         Button ButtonOne = (Button) findViewById(R.id.button);
         Button ButtonTwo = (Button) findViewById(R.id.button2);
         Button ButtonThree = (Button) findViewById(R.id.button3);
@@ -159,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
         Button ButtonTen = (Button) findViewById(R.id.button10);
         Button ButtonEleven = (Button) findViewById(R.id.button11);
         Button ButtonTwelve = (Button) findViewById(R.id.button12);
+
 
         HashMap<Integer, String[]> gameWords = board_GamePlay.getWordMap();
 
@@ -571,6 +615,8 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean("wasRunning", wasRunning);
         outState.putInt("difficulty", difficultyLevel);
         outState.putInt("grid", gridSize);
+        outState.putSerializable("wordList", gameBoardGamePlay.getWordMap());
+        outState.putBoolean("listenCheck", listenCheck);
     }
 
 

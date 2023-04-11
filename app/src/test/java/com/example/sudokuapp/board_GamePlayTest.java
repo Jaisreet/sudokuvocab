@@ -11,7 +11,7 @@ import Model.board_GamePlay;
 
 public class board_GamePlayTest {
 
-    Model.board_GamePlay board_GamePlay = new board_GamePlay(0,0,0);
+    Model.board_GamePlay board_GamePlay = new board_GamePlay(0,0,0, false);
     ArrayList<ArrayList<Object>> emptyBoxIndexBoard;
     ArrayList<ArrayList<Object>> emptyBoxIndexInput;
 
@@ -76,4 +76,9 @@ public class board_GamePlayTest {
         board_GamePlay.setSelected_column(1);
         assertEquals(1, board_GamePlay.getSelected_column());
     }
+    /*
+    @Test
+    public void readOutLoud_text() {
+        assertEquals(1,1);
+    } */
 }
