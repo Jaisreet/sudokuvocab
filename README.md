@@ -69,7 +69,7 @@
         - System response: the pop up box disappears and the game screen is shown clearly again ready to for the user to continue playing
     <br>
     <img src="https://i.imgur.com/rykRC3C.png" title="mockup4: imgur.com" height="400"/>
-    <img src="https://i.imgur.com/WRDY5Iw.png" title="mockup4: imgur.com" height="400"/>
+    <img src="https://i.imgur.com/0Fax1Lh.png" title="mockup4: imgur.com" height="400"/>
     <br>
     
 5. As an intermediate language learner, I want to know if my answer is correct or if I have made any errors so that I can fix my mistakes.
@@ -80,6 +80,8 @@
         - User action: Click on the check button.
         - System response: All the incorrect user inputs are erased from the board, while the correct ones remain on the board. 
     
+    <br>
+    <img src="https://i.imgur.com/M1pGApA.png" title="mockup4: imgur.com" height="400"/>
     <br>
 
 
@@ -95,7 +97,7 @@
         - User Action: The user chooses the mode they want and presses "save changes".
         - System Response: The chosen box next to chosen mode is filled with black and the next game the user starts will have the selected mode applied
     <br>
-    <img src="https://i.imgur.com/9QdF8hr.png" title="mockup4: imgur.com" height="400"/>
+    <img src="https://i.imgur.com/84tOYY6.png" title="mockup4: imgur.com" height="400"/>
     <br>
 
 7. As a user, I want to be able to exit the game so that I can start a new game or quit when I need to.
@@ -111,6 +113,7 @@
         - User Action:The user choose “Yes”
         - System Response: Bring the user back to the main menu.
     <br>
+    <img src="https://i.imgur.com/w2oJ6Ln.png" title="mockup4: imgur.com" height="400"/>
     <img src="https://i.imgur.com/NgJmDpw.png" title="mockup7: imgur.com" height="400"/>
     <br>
 
@@ -123,7 +126,7 @@
         - User Action: The user clicks on the ‘How to play?’ button
         - System Response: A pop up appears giving the detailed instructions on how to play the game. 
     <br>
-    <img src="https://i.imgur.com/9QdF8hr.png" title="mockup8: imgur.com" height="400"/>
+    <img src="https://i.imgur.com/84tOYY6.png" title="mockup8: imgur.com" height="400"/>
     <img src="https://i.imgur.com/qx2jzsJ.png" title="mockup8: imgur.com" height="400"/>
     <br>
 
@@ -138,8 +141,8 @@
         - System Response: The checkbox next to “On” is filled. There is a timer on the top left of the game page if the user starts a new game. If the user completes the game, the congratulations page shows their total time. 
         
     <br>
-    <img src="https://i.imgur.com/9QdF8hr.png" title="mockup9: imgur.com" height="400"/>
-    <img src="https://i.imgur.com/SMzJ2Gm.png" title="mockup9: imgur.com" height="400"/>
+    <img src="https://i.imgur.com/84tOYY6.png" title="mockup9: imgur.com" height="400"/>
+    <img src="https://i.imgur.com/M1pGApA.png" title="mockup9: imgur.com" height="400"/>
     <img src="https://i.imgur.com/wpx8KnS.png" title="mockup9: imgur.com" height="400"/>
     <br>
 10. As a vocabulary learner practicing at home, I want to use my tablet for Sudoku vocabulary practice.
@@ -148,8 +151,8 @@
     - TDD Example:
         - Visible state: The user is presented with bigger words and the app screen fits the tablet screen.
     <br>
-    <img src = "https://i.imgur.com/K08qanI.png" title = "mockup10: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/kNNiC2O.png" title = "mockup10: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/84tOYY6.png" title = "mockup10: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/cnUvo5S.png" title = "mockup10: imgur.com" height="400"/>
     <br>
 11. As a vocabulary learner taking the bus, I want to use my phone in landscape mode for Sudoku vocabulary practice.
 <br> Status: Status: Complete ✅
@@ -161,8 +164,8 @@
             - User action: The user changes to landscape mode.
             - System response: The game is saved and the user can continue playing in landscape mode. They are presented with a bigger font than when they are in portrait mode.
     <br>
-    <img src = "https://i.imgur.com/FiSOJ2b.png" title = "mockup11: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/dZSB3i7.png" title = "mockup11: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/84tOYY6.png" title = "mockup11: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/jHoP2ig.png" title = "mockup11: imgur.com" height="400"/>
     <br>
 12. As a teacher of elementary and junior high school children, I want scaled versions of Sudoku that use 4x4 and 6x6 grids.
 <br> Status: Complete ✅
@@ -178,13 +181,13 @@
             - Scenario 2: The user chose 6x6 grid.
                 - The application releases a new game, the overall grid should be divided into rectangles of six cells each (2x3).
     <br>
-    <img src = "https://i.imgur.com/7fJDQmp.png" title = "mockup12: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/wlpcHpT.png" title = "mockup12: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/NBac6qW.png" title = "mockup12: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/zKfcuZi.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/84tOYY6.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/gud7gAj.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/NrFcvdk.png" title = "mockup12: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/M1pGApA.png" title = "mockup12: imgur.com" height="400"/>
     <br>
-13. AS a vocabulary learner who wants extra challenging mode, I want a 12x12 version of Sudoku to play on my tablet.
- <br> Status: Complete ✅
+13. As a vocabulary learner who wants extra challenging mode, I want a 12x12 version of Sudoku to play on my tablet.
+<br> Status: Complete ✅ 
     - TDD Example:
         - Visible state: The user is presented with 4 options for the size of the grid: 9x9 (default), 4x4, 6x6, and 12x12 in the settings.
         - User action: The user choose 12x12.
@@ -192,11 +195,24 @@
         - User action: The user starts a new game.
         - System response: The application releases a new game, the overall grid will be divided into rectanglesof 12 cells each (3x4).
     <br>
-    <img src = "https://i.imgur.com/7fJDQmp.png" title = "mockup13: imgur.com" height="400"/>
-    <img src = "https://i.imgur.com/LraCeFq.png" title = "mockup13: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/R1vPCob.png" title = "mockup13: imgur.com" height="400"/>
+    <img src = "https://i.imgur.com/6D0cRs3.png" title = "mockup13: imgur.com" height="400"/>
     <br>
-
-
+14. As a student who wants to practice my understanding of spoken words in the language that I am learning, I want a listening comprehension mode.
+<br> Status: Complete ✅
+    - TDD Example:
+        - Visible state: The user is presented with a setting button in the main menu / game page.
+        - User Action: The user clicks on the setting button.
+        - Visible state: In the settings page, there is an option to turn on listening comprehension mode or not
+        - User Action: The user chooses “On”.
+        - System Response: The checkbox next to “On” is filled.
+        - User Action: The user starts a new game
+        - Visible state: When user is in a game, numbers will appear in the prefilled cells.
+        - User action: The user presses the number
+        - System response: the corresponding word in the language that the user is learning will be read out to him. The user can then test his listening comprehension by selecting from the menu the correct English translation of the word.
+    <br>
+    <img src = "https://i.imgur.com/84tOYY6.png" title = "mockup14: imgur.com" height="400"/>
+    <br>
 
     
 
