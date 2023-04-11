@@ -167,15 +167,15 @@ public class board_GamePlay {
 
     public String readOutLoud_text(int language) {
 
-        if(this.selected_row != -1 && this.selected_column != -1) {
-            if (language == 1) {
-                String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[1];
-                return text;
-            } else {
-                String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[0];
-                return text;
+            if (this.selected_row != -1 && this.selected_column != -1) {
+                if (language == 1) {
+                    String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[1];
+                    return text;
+                } else {
+                    String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[0];
+                    return text;
+                }
             }
-        }
         return null;
     }
 

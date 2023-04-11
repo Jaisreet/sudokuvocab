@@ -184,9 +184,11 @@ public class MainActivity extends AppCompatActivity {
         Listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String word =  gameBoardGamePlay.readOutLoud_text(language);
-
-                t1.speak(word, TextToSpeech.QUEUE_FLUSH,null);
+                if (gameBoardGamePlay.readOutLoud_text(language) != null) {
+                    String word = gameBoardGamePlay.readOutLoud_text(language);
+                    System.out.print("\nour word is " + word + "\n");
+                    t1.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+                }
             }
         });
 
