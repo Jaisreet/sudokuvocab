@@ -27,7 +27,6 @@ public class board_GamePlay {
     public int selected_column;
     public static HashMap<Integer, String[]> gameWords;
 
-
     public static boolean listenCheck;
 
     public board_GamePlay(int difficulty, int size, int lang, boolean check){
@@ -135,6 +134,8 @@ public class board_GamePlay {
         }
 
     }
+
+
 
     //getting indexes of boxes with 0 (empty boxes)
     public void getEmptyBoxIndexs(){
