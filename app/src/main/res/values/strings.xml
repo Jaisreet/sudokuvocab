@@ -26,7 +26,7 @@
     <string name="intermediate">Intermediate</string>
     <string name="hard">Hard</string>
     <string name="On">On</string>
-    <string name="instructions">1.) Create a Sudoku grid with blank spaces. \n \n 2.) Choose a vocabulary word and write it in the grid. \n \n 3.) Fill in the blank spaces with random letters from the alphabet.\n \n 4.) Complete the Sudoku grid using only the letters from the chosen word.\n \n 5.) Each letter can only be used once in each row, column, and box.\n \n 6.) Repeat steps 2-5 for each vocabulary word.\n \n Have fun and challenge yourself with new words!</string>
+    <string name="instructions">1.) Create a Sudoku grid with blank spaces by choosing the grid size, difficulty and language you want to practice. \n \n 2.) Choose grid cell where you want to write the word and press the button with word. \n \n 3.) Fill in all the blank spaces with words using the buttons .\n \n 4.) Complete the Sudoku grid and check your answers using check button.\n \n 5.) Repeat steps 2-4 to complete the game.\n \n 6.) You can use Listening mode to practice understanding of spoken words of the language.\n \n 7.)In Listening mode select the pre filled cell with number and click on Listen button to listen to the word. \n \n Have fun and challenge yourself with new words! </string>
 
 
 </resources>
