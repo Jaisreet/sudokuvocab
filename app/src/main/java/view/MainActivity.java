@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR)
-                    
+
                     if (language == 1) {
                         t1.setLanguage(Locale.ENGLISH);
                     } else {
@@ -482,19 +482,20 @@ public class MainActivity extends AppCompatActivity {
         for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
             int r = (int) letter.get(0);
             int c = (int) letter.get(1);
-            if (gameBoardGamePlay.getBoard()[r][c] != gameBoardGamePlay.getSolutionBoard()[r][c]) {
+            if (gameBoardGamePlay.getCheckArray()[r][c] != gameBoardGamePlay.getSolutionBoard()[r][c]) {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
+                gameBoardGamePlay.getCheckArray()[r][c] = 0;
             }
         }
 
-        if(Arrays.deepEquals(gameBoardGamePlay.getBoard(),gameBoardGamePlay.getSolutionBoard())){
+        if(Arrays.deepEquals(gameBoardGamePlay.getCheckArray(),gameBoardGamePlay.getSolutionBoard())){
             System.out.print("\n");
             onPause();
             AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
             alert.setTitle("Game Complete");
             alert.setMessage("Congratulations!! You finished the game successfully in " + time
-            + "\n Do you want to start a new game?");
+                    + "\n Do you want to start a new game?");
             alert.setPositiveButton("Okay",
                     (dialog, which) -> {
                         backToMain();
@@ -503,7 +504,7 @@ public class MainActivity extends AppCompatActivity {
 
             alert.show();
         }
-   }
+    }
 
     //opens the hint dialog box
     public void openDialog() {
