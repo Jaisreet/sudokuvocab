@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
     boolean listenCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -96,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR)
-                    
+
                     if (language == 1) {
                         t1.setLanguage(Locale.ENGLISH);
                     } else {
@@ -139,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            System.out.println(listenCheck+" hello");
+            //System.out.println(listenCheck+" hello");
             gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize, language, listenCheck);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
@@ -184,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         Listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (gameBoardGamePlay.readOutLoud_text(language) != null) {
                     String word = gameBoardGamePlay.readOutLoud_text(language);
                     System.out.print("\nour word is " + word + "\n");
@@ -484,19 +482,20 @@ public class MainActivity extends AppCompatActivity {
         for(ArrayList<Object> letter : gameBoardGamePlay.getEmptyBoxIndex()) {
             int r = (int) letter.get(0);
             int c = (int) letter.get(1);
-            if (gameBoardGamePlay.getBoard()[r][c] != gameBoardGamePlay.getSolutionBoard()[r][c]) {
+            if (gameBoardGamePlay.getCheckArray()[r][c] != gameBoardGamePlay.getSolutionBoard()[r][c]) {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
+                gameBoardGamePlay.getCheckArray()[r][c] = 0;
             }
         }
 
-        if(Arrays.deepEquals(gameBoardGamePlay.getBoard(),gameBoardGamePlay.getSolutionBoard())){
+        if(Arrays.deepEquals(gameBoardGamePlay.getCheckArray(),gameBoardGamePlay.getSolutionBoard())){
             System.out.print("\n");
             onPause();
             AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
             alert.setTitle("Game Complete");
             alert.setMessage("Congratulations!! You finished the game successfully in " + time
-            + "\n Do you want to start a new game?");
+                    + "\n Do you want to start a new game?");
             alert.setPositiveButton("Okay",
                     (dialog, which) -> {
                         backToMain();
@@ -505,7 +504,7 @@ public class MainActivity extends AppCompatActivity {
 
             alert.show();
         }
-   }
+    }
 
     //opens the hint dialog box
     public void openDialog() {

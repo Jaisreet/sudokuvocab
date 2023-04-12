@@ -178,35 +178,60 @@ public class drawBoard extends View implements Serializable {
 
             int r = (int)letter.get(0);
             int c = (int)letter.get(1);
-            if(board_GamePlay.getBoard()[r][c] != 0 ) {
-                String text;  // board_GamePlay.getWordBoard()[r][c];
-
-                if(board_GamePlay.getListenCheck()) {
-                    text = Integer.toString(board_GamePlay.getBoard()[r][c]);
-                }else{
+            if (board_GamePlay.getListenCheck()){
+                if(board_GamePlay.getListenArray()[r][c] == 1 ) {
+                    String text;
                     text = (board_GamePlay.getWordBoard()[r][c]);
-                }
 
-                float width, height;
+                    float width, height;
 
-                letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
-                width = letterPaint.measureText(text);
-                height = letterPaintBounds.height();
-
-                float modifiedTextSize = originalTextSize;
-                // If the text is too wide, decrease the text size until it fits
-                while(width > cellsize - 10) {
-                    modifiedTextSize--;
-                    letterPaint.setTextSize(modifiedTextSize);
                     letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
                     width = letterPaint.measureText(text);
-                }
+                    height = letterPaintBounds.height();
 
-                canvas.drawText(text, (c * cellsize) + ((cellsize - width) / 2),
-                        (r * cellsize + cellsize) - ((cellsize - height) / 2),
-                        letterPaint);
-                letterPaint.setTextSize(originalTextSize); // Reset the text size
+                    float modifiedTextSize = originalTextSize;
+                    // If the text is too wide, decrease the text size until it fits
+                    while(width > cellsize - 10) {
+                        modifiedTextSize--;
+                        letterPaint.setTextSize(modifiedTextSize);
+                        letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
+                        width = letterPaint.measureText(text);
+                    }
+
+                    canvas.drawText(text, (c * cellsize) + ((cellsize - width) / 2),
+                            (r * cellsize + cellsize) - ((cellsize - height) / 2),
+                            letterPaint);
+                    letterPaint.setTextSize(originalTextSize); // Reset the text size
+                }
             }
+            else {
+                if (board_GamePlay.getBoard()[r][c] != 0) {
+                    String text;  // board_GamePlay.getWordBoard()[r][c];
+
+                    text = (board_GamePlay.getWordBoard()[r][c]);
+
+                    float width, height;
+
+                    letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
+                    width = letterPaint.measureText(text);
+                    height = letterPaintBounds.height();
+
+                    float modifiedTextSize = originalTextSize;
+                    // If the text is too wide, decrease the text size until it fits
+                    while (width > cellsize - 10) {
+                        modifiedTextSize--;
+                        letterPaint.setTextSize(modifiedTextSize);
+                        letterPaint.getTextBounds(text, 0, text.length(), letterPaintBounds);
+                        width = letterPaint.measureText(text);
+                    }
+
+                    canvas.drawText(text, (c * cellsize) + ((cellsize - width) / 2),
+                            (r * cellsize + cellsize) - ((cellsize - height) / 2),
+                            letterPaint);
+                    letterPaint.setTextSize(originalTextSize); // Reset the text size
+                }
+            }
+
         }
         // reset the color of the letterPaint object to letterColor
         letterPaint.setColor(letterColor);
