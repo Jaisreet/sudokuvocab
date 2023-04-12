@@ -59,8 +59,30 @@ public class board_GamePlay {
         for(int r=0; r<N; r++) {
             // for every colomn
             for(int c=0;c<N;c++) {
-                board[r][c] = input.getArr_gameBoard()[r][c];
+                if(listenCheck){
+                    board[r][c] = input.getArr_solutionBoard()[r][c];
+                    flag[r][c]=0;
+                    wordBoard[r][c] = null;
+                }else {
+                    board[r][c] = input.getArr_gameBoard()[r][c];
+                    // if the board at that spot is not empty, set the flag to one
+                    if(board[r][c] != 0){
+                        flag[r][c] = 1;
+                        String[] values = gameWords.get(board[r][c]);
+                        if(lang == 1){
+                            wordBoard[r][c] = values[1];
+                        }else{
+                            wordBoard[r][c] = values[0];
+                        }
+                    }
+                    else{
+                        // if this square is empty, set the flag to zero
+                        flag[r][c]=0;
+                        wordBoard[r][c] = null;
+                    }
+                }
 
+                /*
                 if(board[r][c] == 0){
                     wordBoard[r][c] = null;
                 }
@@ -72,7 +94,7 @@ public class board_GamePlay {
                         wordBoard[r][c] = values[0];
                     }
 
-                }
+                }*/
 
                 solutionBoard[r][c] = input.getArr_solutionBoard()[r][c];
                 if(lang == 1){
@@ -81,14 +103,6 @@ public class board_GamePlay {
                     solutionWordBoard[r][c]= gameWords.get(solutionBoard[r][c])[0];
                 }
 
-                // if the board at that spot is not empty, set the flag to one
-                if(board[r][c] != 0){
-                    flag[r][c] = 1;
-                }
-                else{
-                    // if this square is empty, set the flag to zero
-                    flag[r][c]=0;
-                }
 
             }
         }
@@ -152,12 +166,24 @@ public class board_GamePlay {
     //set the value of selected column to given value (num)
     public void setNumberPos(int num, int lang){
         if(this.selected_row != -1 && this.selected_column != -1){
-            if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
-                this.board[this.selected_row - 1][this.selected_column - 1] = num;
-                if(lang == 1){
-                    this.wordBoard[this.selected_row-1][this.selected_column-1] = gameWords.get(num)[1];
-                }else {
-                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
+            if(listenCheck){
+                if(this.board[this.selected_row-1][this.selected_column-1] == num){
+                    if (lang == 1) {
+                        this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[1];
+                    } else {
+                        this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
+                    }
+                    this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+                }
+            }
+            else {
+                if (this.board[this.selected_row - 1][this.selected_column - 1] == 0 && this.flag[this.selected_row - 1][this.selected_column - 1] == 0) {
+                    this.board[this.selected_row - 1][this.selected_column - 1] = num;
+                    if (lang == 1) {
+                        this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[1];
+                    } else {
+                        this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
+                    }
                 }
             }
 
@@ -168,15 +194,17 @@ public class board_GamePlay {
     public String readOutLoud_text(int language) {
 
             if (this.selected_row != -1 && this.selected_column != -1) {
-                if (language == 1) {
-                    String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[1];
-                    return text;
-                } else {
-                    String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[0];
-                    return text;
+                if (this.board[this.selected_row - 1][this.selected_column - 1] != 0) {
+                    if (language == 1) {
+                        String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[1];
+                        return text;
+                    } else {
+                        String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[0];
+                        return text;
+                    }
                 }
             }
-        return null;
+            return null;
     }
 
 

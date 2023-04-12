@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
     boolean listenCheck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -139,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
-            System.out.println(listenCheck+" hello");
+            //System.out.println(listenCheck+" hello");
             gameBoardGamePlay = new board_GamePlay(difficultyLevel, gridSize, language, listenCheck);
             gameBoard.setBoardFill(gameBoardGamePlay);
             gameBoardGamePlay.getEmptyBoxIndexs();
@@ -184,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         Listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (gameBoardGamePlay.readOutLoud_text(language) != null) {
                     String word = gameBoardGamePlay.readOutLoud_text(language);
                     System.out.print("\nour word is " + word + "\n");
