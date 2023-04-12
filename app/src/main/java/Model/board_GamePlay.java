@@ -27,6 +27,8 @@ public class board_GamePlay {
     public int selected_column;
     public static HashMap<Integer, String[]> gameWords;
 
+    int[][] listenArray;
+    int[][] checkArray;
 
     public static boolean listenCheck;
 
@@ -41,6 +43,8 @@ public class board_GamePlay {
         board = new int[N][N];  // main working board
         flag = new int[N][N];   // flag to keep track of pre-filled squares
         solutionBoard = new int[N][N];
+        listenArray = new int[N][N];
+        checkArray = new int[N][N];
         wordBoard = new String [N][N];
         solutionWordBoard = new String[N][N];
         listenCheck = check;
@@ -60,18 +64,21 @@ public class board_GamePlay {
             // for every colomn
             for(int c=0;c<N;c++) {
                 board[r][c] = input.getArr_gameBoard()[r][c];
+                checkArray[r][c] = input.getArr_gameBoard()[r][c];
 
-                if(board[r][c] == 0){
-                    wordBoard[r][c] = null;
-                }
-                else{
+                if(board[r][c] != 0){
+                    flag[r][c] = 1;
                     String[] values = gameWords.get(board[r][c]);
                     if(lang == 1){
                         wordBoard[r][c] = values[1];
                     }else{
                         wordBoard[r][c] = values[0];
                     }
-
+                }
+                else{
+                    // if this square is empty, set the flag to zero
+                    flag[r][c]=0;
+                    wordBoard[r][c] = null;
                 }
 
                 solutionBoard[r][c] = input.getArr_solutionBoard()[r][c];
@@ -81,14 +88,11 @@ public class board_GamePlay {
                     solutionWordBoard[r][c]= gameWords.get(solutionBoard[r][c])[0];
                 }
 
-                // if the board at that spot is not empty, set the flag to one
-                if(board[r][c] != 0){
-                    flag[r][c] = 1;
+                if(listenCheck){
+                    listenArray[r][c] = 0;
+
                 }
-                else{
-                    // if this square is empty, set the flag to zero
-                    flag[r][c]=0;
-                }
+
 
             }
         }
@@ -140,10 +144,18 @@ public class board_GamePlay {
     public void getEmptyBoxIndexs(){
         for(int r=0; r<N; r++){
             for(int c= 0; c<N; c++){
-                if(this.flag[r][c]==0){
-                    this.emptyBoxIndex.add(new ArrayList<>());
-                    this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(r);
-                    this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(c);
+                if(listenCheck){
+                    if(this.listenArray[r][c]==0){
+                        this.emptyBoxIndex.add(new ArrayList<>());
+                        this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(r);
+                        this.emptyBoxIndex.get(this.emptyBoxIndex.size()-1).add(c);
+                    }
+                }else {
+                    if (this.flag[r][c] == 0) {
+                        this.emptyBoxIndex.add(new ArrayList<>());
+                        this.emptyBoxIndex.get(this.emptyBoxIndex.size() - 1).add(r);
+                        this.emptyBoxIndex.get(this.emptyBoxIndex.size() - 1).add(c);
+                    }
                 }
             }
         }
@@ -152,32 +164,51 @@ public class board_GamePlay {
     //set the value of selected column to given value (num)
     public void setNumberPos(int num, int lang){
         if(this.selected_row != -1 && this.selected_column != -1){
-            if(this.board[this.selected_row-1][this.selected_column-1]== 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
-                this.board[this.selected_row - 1][this.selected_column - 1] = num;
-                if(lang == 1){
-                    this.wordBoard[this.selected_row-1][this.selected_column-1] = gameWords.get(num)[1];
-                }else {
+            if(this.board[this.selected_row-1][this.selected_column-1] == num && listenCheck){
+                if (lang == 1) {
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[1];
+                } else {
                     this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
                 }
+                this.listenArray[this.selected_row - 1][this.selected_column - 1] = 1;
+                this.board[this.selected_row - 1][this.selected_column - 1] = 0;
             }
+            if (this.board[this.selected_row - 1][this.selected_column - 1] == 0 && this.flag[this.selected_row - 1][this.selected_column - 1] == 0) {
 
+                if (lang == 1) {
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[1];
+                } else {
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
+                }
+                if(!listenCheck){
+                    this.board[this.selected_row - 1][this.selected_column - 1] = num;
+                    this.checkArray[this.selected_row - 1][this.selected_column - 1] = num;
+                }
+                else {
+                    this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+                    this.listenArray[this.selected_row - 1][this.selected_column - 1] = 1;
+                    this.checkArray[this.selected_row - 1][this.selected_column - 1] = num;
+                }
+            }
         }
 
     }
 
+
+
     public String readOutLoud_text(int language) {
 
-            if (this.selected_row != -1 && this.selected_column != -1) {
-                if (this.board[this.selected_row - 1][this.getSelected_column() - 1] != 0) {
-                    if (language == 1) {
-                        String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[1];
-                        return text;
-                    } else {
-                        String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[0];
-                        return text;
-                    }
+        if (this.selected_row != -1 && this.selected_column != -1) {
+            if (this.board[this.selected_row - 1][this.selected_column - 1] != 0) {
+                if (language == 1) {
+                    String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[1];
+                    return text;
+                } else {
+                    String text = gameWords.get(this.board[this.selected_row - 1][this.selected_column - 1])[0];
+                    return text;
                 }
             }
+        }
         return null;
     }
 
@@ -185,9 +216,19 @@ public class board_GamePlay {
     //set the value of selected column to 0 which is equal to erase
     public void eraseNumber() {
         if(this.selected_row != -1 && this.selected_column != -1){
-            if(this.board[this.selected_row-1][this.selected_column-1]!= 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
-                this.board[this.selected_row-1][this.selected_column-1] = 0;
-                this.wordBoard[this.selected_row-1][this.selected_column-1] = null;
+            if(!listenCheck) {
+                if (this.board[this.selected_row - 1][this.selected_column - 1] != 0 && this.flag[this.selected_row - 1][this.selected_column - 1] == 0) {
+                    this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = null;
+                    this.checkArray[this.selected_row - 1][this.selected_column - 1]=0;
+                }
+            }else{
+                if (this.checkArray[this.selected_row - 1][this.selected_column - 1] != 0){
+                    this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+                    this.checkArray[this.selected_row - 1][this.selected_column - 1]=0;
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = null;
+                }
+
             }
         }
     }
@@ -207,6 +248,14 @@ public class board_GamePlay {
     }
     public String[][] getWordBoard(){
         return this.wordBoard;
+    }
+
+    public int[][] getListenArray(){
+        return this.listenArray;
+    }
+
+    public int[][] getCheckArray(){
+        return this.checkArray;
     }
 
     //return the solution board
