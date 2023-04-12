@@ -179,7 +179,7 @@ public class drawBoard extends View implements Serializable {
             int r = (int)letter.get(0);
             int c = (int)letter.get(1);
             if (board_GamePlay.getListenCheck()){
-                if(board_GamePlay.getListenArray()[r][c] == 1 ) {
+                if(board_GamePlay.getListenArray()[r][c] == 1 && board_GamePlay.getWordBoard()[r][c] != null) {
                     String text;
                     text = (board_GamePlay.getWordBoard()[r][c]);
 

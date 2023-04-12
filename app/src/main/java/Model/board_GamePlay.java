@@ -164,35 +164,35 @@ public class board_GamePlay {
     //set the value of selected column to given value (num)
     public void setNumberPos(int num, int lang){
         if(this.selected_row != -1 && this.selected_column != -1){
-                if(this.board[this.selected_row-1][this.selected_column-1] == num && listenCheck){
-                    if (lang == 1) {
-                        this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[1];
-                    } else {
-                        this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
-                    }
-                    this.listenArray[this.selected_row - 1][this.selected_column - 1] = 1;
-                    this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+            if(this.board[this.selected_row-1][this.selected_column-1] == num && listenCheck){
+                if (lang == 1) {
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[1];
+                } else {
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
                 }
-                if (this.board[this.selected_row - 1][this.selected_column - 1] == 0 && this.flag[this.selected_row - 1][this.selected_column - 1] == 0) {
+                this.listenArray[this.selected_row - 1][this.selected_column - 1] = 1;
+                this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+            }
+            if (this.board[this.selected_row - 1][this.selected_column - 1] == 0 && this.flag[this.selected_row - 1][this.selected_column - 1] == 0) {
 
-                    if (lang == 1) {
-                        this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[1];
-                    } else {
-                        this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
-                    }
-                    if(!listenCheck){
-                        this.board[this.selected_row - 1][this.selected_column - 1] = num;
-                        this.checkArray[this.selected_row - 1][this.selected_column - 1] = num;
-                    }
-                    else {
-                        this.board[this.selected_row - 1][this.selected_column - 1] = 0;
-                        this.listenArray[this.selected_row - 1][this.selected_column - 1] = 1;
-                        this.checkArray[this.selected_row - 1][this.selected_column - 1] = num;
-                    }
+                if (lang == 1) {
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[1];
+                } else {
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = gameWords.get(num)[0];
+                }
+                if(!listenCheck){
+                    this.board[this.selected_row - 1][this.selected_column - 1] = num;
+                    this.checkArray[this.selected_row - 1][this.selected_column - 1] = num;
+                }
+                else {
+                    this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+                    this.listenArray[this.selected_row - 1][this.selected_column - 1] = 1;
+                    this.checkArray[this.selected_row - 1][this.selected_column - 1] = num;
                 }
             }
-
         }
+
+    }
 
 
 
@@ -216,9 +216,19 @@ public class board_GamePlay {
     //set the value of selected column to 0 which is equal to erase
     public void eraseNumber() {
         if(this.selected_row != -1 && this.selected_column != -1){
-            if(this.board[this.selected_row-1][this.selected_column-1]!= 0 && this.flag[this.selected_row-1][this.selected_column-1] == 0){
-                this.board[this.selected_row-1][this.selected_column-1] = 0;
-                this.wordBoard[this.selected_row-1][this.selected_column-1] = null;
+            if(!listenCheck) {
+                if (this.board[this.selected_row - 1][this.selected_column - 1] != 0 && this.flag[this.selected_row - 1][this.selected_column - 1] == 0) {
+                    this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = null;
+                    this.checkArray[this.selected_row - 1][this.selected_column - 1]=0;
+                }
+            }else{
+                if (this.checkArray[this.selected_row - 1][this.selected_column - 1] != 0){
+                    this.board[this.selected_row - 1][this.selected_column - 1] = 0;
+                    this.checkArray[this.selected_row - 1][this.selected_column - 1]=0;
+                    this.wordBoard[this.selected_row - 1][this.selected_column - 1] = null;
+                }
+
             }
         }
     }

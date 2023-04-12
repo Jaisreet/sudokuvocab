@@ -485,6 +485,7 @@ public class MainActivity extends AppCompatActivity {
             if (gameBoardGamePlay.getCheckArray()[r][c] != gameBoardGamePlay.getSolutionBoard()[r][c]) {
                 gameBoardGamePlay.getBoard()[r][c] = 0;
                 gameBoardGamePlay.getCheckArray()[r][c] = 0;
+                gameBoardGamePlay.getWordBoard()[r][c]= null;
             }
         }
 
