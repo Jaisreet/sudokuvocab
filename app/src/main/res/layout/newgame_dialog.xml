@@ -63,7 +63,7 @@
 
             <RadioButton
                 android:id="@+id/easyButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/easy"
@@ -80,7 +80,7 @@
 
             <RadioButton
                 android:id="@+id/hardButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hard"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -103,7 +103,7 @@
 
             <RadioButton
                 android:id="@+id/ninebynine"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="9x9"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -111,7 +111,7 @@
 
             <RadioButton
                 android:id="@+id/fourbyfour"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="4x4"
@@ -120,7 +120,7 @@
 
             <RadioButton
                 android:id="@+id/sixbysix"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="6x6"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"

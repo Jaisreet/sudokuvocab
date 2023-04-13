@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.RemoteException;
 
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
@@ -128,4 +129,23 @@ public class setting_pageTest {
                 resourceId(SUDOKU + ":id/twelvebytwelve"));
         twelve.click();
     }
+
+    @Test
+    public void testRotation() throws UiObjectNotFoundException, RemoteException {
+
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.setOrientationLeft();
+        device.setOrientationNatural();
+        device.setOrientationRight();
+
+    }
+
+    @Test
+    public void listening() throws UiObjectNotFoundException {
+        UiObject listening = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU + ":id/checkBox"));
+        listening.click();
+
+    }
+
 }

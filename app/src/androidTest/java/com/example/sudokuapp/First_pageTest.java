@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.RemoteException;
 
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
@@ -100,11 +101,86 @@ public class First_pageTest {
     }
 
     @Test
+    public void newGameDialogButtons() throws UiObjectNotFoundException {
+
+        UiObject startGame = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/startGame")
+        );
+
+        UiObject Mode_english = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/english")
+        );
+
+        UiObject Mode_french = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/French")
+        );
+
+        UiObject difficulty_easy = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/easyButton")
+        );
+
+        UiObject difficulty_medium = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/mediumButton")
+        );
+
+        UiObject difficulty_hard = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/hardButton")
+        );
+
+        UiObject grid_9x9 = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/ninebynine")
+        );
+
+        UiObject grid_4x4 = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/fourbyfour")
+        );
+
+        UiObject grid_6x6 = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/sixbysix")
+        );
+
+        UiObject grid_12x12 = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/twelvebytwelve")
+        );
+
+        UiObject listening_mode = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/checkBox")
+        );
+
+        UiObject newGame = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/button12")
+        );
+
+        newGame.click();
+        Mode_english.click();
+        Mode_french.click();
+        difficulty_easy.click();
+        difficulty_medium.click();
+        difficulty_hard.click();
+        grid_9x9.click();
+        grid_4x4.click();
+        grid_6x6.click();
+        grid_12x12.click();
+        listening_mode.click();
+        startGame.click();
+    }
+
+    @Test
     public void settingPage() throws UiObjectNotFoundException {
         UiObject Settings = mDevice.findObject(new UiSelector()
                 .resourceId("com.example.sudokuapp:id/textView2")
         );
         Settings.click();
+    }
+
+    @Test
+    public void testRotation() throws UiObjectNotFoundException, RemoteException {
+
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.setOrientationLeft();
+        device.setOrientationNatural();
+        device.setOrientationRight();
+
     }
 
 

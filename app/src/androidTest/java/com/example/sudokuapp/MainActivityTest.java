@@ -8,10 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.RemoteException;
+import android.view.KeyEvent;
 
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+
+import androidx.annotation.NonNull;
 import androidx.test.filters.SdkSuppress;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.uiautomator.By;
@@ -25,6 +29,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+
+import view.MainActivity;
 
 /**
  * Basic sample for unbundled UiAutomator.
@@ -45,6 +51,7 @@ public class MainActivityTest {
     private static final String STRING_TO_BE_TYPED = "UiAutomator";
 
     private UiDevice mDevice;
+
 
     @Before
     public void startMainActivityFromHomeScreen() throws UiObjectNotFoundException {
@@ -197,7 +204,31 @@ public class MainActivityTest {
                 resourceId(SUDOKU+":id/hint"));
         dialog.click();
     }
+
+    @Test
+    public void testRotation() throws UiObjectNotFoundException, RemoteException {
+
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.setOrientationLeft();
+        device.setOrientationNatural();
+        device.setOrientationRight();
+
+    }
+
+    @Test
+    public void testVoice() throws UiObjectNotFoundException, RemoteException {
+
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        UiObject listen = mDevice.findObject(new UiSelector().
+                resourceId(SUDOKU+":id/ListeningComprehension"));
+        listen.click();
+    }
+
+
 }
+
+
+
 
 
 
