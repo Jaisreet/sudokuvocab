@@ -84,7 +84,22 @@ public class MainActivityTest {
         UiObject startGame = mDevice.findObject(new UiSelector()
                 .resourceId("com.example.sudokuapp:id/startGame")
         );
-        startGame.click();
+
+        UiObject listening_mode = mDevice.findObject(new UiSelector()
+                .resourceId("com.example.sudokuapp:id/checkBox")
+        );
+
+        if (listening_mode.isChecked())
+        {
+            startGame.click();
+        } else {
+            listening_mode.click();
+            startGame.click();
+        }
+
+
+
+
     }
 
     /**
